@@ -1,0 +1,14 @@
+.Editor-content {
+  border: 1px solid grey;
+  height: 200px;
+}
+
+.Editor-content p {
+  margin: 0;
+  padding: 0;
+}
+
+.Editor-content h1, h2 {
+  margin: 0;
+  padding: 0;
+}
