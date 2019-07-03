@@ -155,7 +155,6 @@ export default class Editor extends React.Component {
 
   componentDidMount() {
     const content = this.contentRef.current
-    content.contentEditable = true
 
     // TODO: refactor / extract to separate place
     const actionbar = this.actionbarRef.current
@@ -200,6 +199,8 @@ export default class Editor extends React.Component {
           {this.actionbarButtons}
         </div>
         <div
+          contentEditable='true'
+          spellCheck='true'
           className={classes.content}
           ref={this.contentRef}
           onInput={this.handleInput}

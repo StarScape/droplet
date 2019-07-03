@@ -20,6 +20,7 @@
 - Pagination (with on/off)
   - Page breaks
 - Projects with chapters
+  - Project specific dictionaries
 - Dashboard
 - 💎 Footnotes
 
