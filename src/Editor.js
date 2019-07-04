@@ -1,7 +1,8 @@
 import React from 'react'
-import { shortcutSwitch } from './shortcut'
+import { shortcutSwitch } from './utils/shortcuts'
+import { setEditorComponent } from './state/actions'
 
-import './Editor.css'
+import './styles/Editor.css'
 
 const defaultParagraphSeparatorString = 'defaultParagraphSeparator'
 const formatBlock = 'formatBlock'
@@ -111,13 +112,16 @@ export default class Editor extends React.Component {
   }
   
   constructor(props) {
-    super(props);
+    super(props)
 
     // We need access to the actual contenteditable DOM elements
-    this.contentRef = React.createRef();
-    this.actionbarRef = React.createRef();
+    this.contentRef = React.createRef()
+    this.actionbarRef = React.createRef()
+
+    this.store = props.store
   }
 
+  // remove?
   handleTextChange(content) {}
 
   handleInput = (event) => {
@@ -186,6 +190,7 @@ export default class Editor extends React.Component {
       appendChild(actionbar, button)
     })
 
+    this.store.dispatch(setEditorComponent(this))
     exec(defaultParagraphSeparatorString, defaultParagraphSeparator)
   }
 

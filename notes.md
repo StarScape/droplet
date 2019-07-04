@@ -8,6 +8,7 @@
 - Move pell code into Editor component ✔️
 - Nice interface for keyboard shortcuts ✔️
 - 💎 Save / load markdown
+  - Set up Redux store
 
 # Sprint 2 - Advanced Text Editing
 - Automatic list formatting

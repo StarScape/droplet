@@ -1,17 +1,19 @@
-import React from 'react';
+import React from 'react'
+import { Provider } from 'react-redux'
+import { initStore } from './state/store'
 import Editor from './Editor'
-import './App.css';
 
-require('electron').ipcRenderer.on('filesave', (event, message) => {
-  console.log('hello:');
-  console.log(message);
-})
+import './styles/App.css';
+
+const store = initStore()
 
 function App() {
   return (
-    <div className="App">
-      <Editor/>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <Editor store={store}/>
+      </div>
+    </Provider>
   );
 }
 
