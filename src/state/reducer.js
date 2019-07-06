@@ -7,8 +7,6 @@ const defaultState = {
 const reducer = (state = defaultState, action) => {
   switch(action.type) {
     case Types.SET_EDITOR_COMPONENT:
-      console.log("set editor component!");
-      console.log(action);
       return {
         ...state,
         editorComponent: action.payload

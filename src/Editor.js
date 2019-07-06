@@ -121,16 +121,20 @@ export default class Editor extends React.Component {
     this.store = props.store
   }
 
-  // remove?
-  handleTextChange(content) {}
-
   handleInput = (event) => {
     const content = this.contentRef.current
 
     const { target: { firstChild } } = event
     if (firstChild && firstChild.nodeType === 3) exec(formatBlock, `<${defaultParagraphSeparator}>`)
     else if (content.innerHTML === '<br>') content.innerHTML = ''
-    this.handleTextChange(content.innerHTML)
+  }
+
+  get content() {
+    return this.contentRef.current.innerHTML
+  }
+
+  setContent(content) {
+    this.contentRef.current.innerHTML = content
   }
 
   handleKeyDown = (event) => {

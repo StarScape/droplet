@@ -7,8 +7,9 @@
 - Alignment ✔️
 - Move pell code into Editor component ✔️
 - Nice interface for keyboard shortcuts ✔️
-- 💎 Save / load markdown
-  - Set up Redux store
+- 💎 Save ✔️ / load markdown ✔️
+  - Set up Redux store ✔️
+  - Replace editor component when loading new file ❗
 
 # Sprint 2 - Advanced Text Editing
 - Automatic list formatting
@@ -30,6 +31,7 @@
   - Font
   - Colors
 - Bottom toolbar
+  - Break into separate component
   - Make buttons for everything
   - Light up buttons when italics/bold/whatever is on
 - 💎 Distraction-free (fullscreen) mode
@@ -43,6 +45,7 @@
 - Subscript/superscript?
 - Fix paste (try pasting from the Lorem ipsum generator - it copys a span in)
 - Find and replace
+- Control+Enter goes to new line
 
 # Sprint 6 - Program Behavior
 - Export/import as .docx (could be a beast...)
@@ -57,6 +60,13 @@
 - Version control
 - Drafts (split screen maybe, or highlight and press a button to see the differences between )
 - Mobile apps
+- Reading mode
+
+## Key
+✔️ = done
+❌ = cancelled
+❗= delayed (don't forget)
+💎 = milestone :)
 
 ## Reminders to self
 

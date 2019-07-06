@@ -1,6 +1,6 @@
-const { app, BrowserWindow, Menu } = require('electron');
-const path = require('path');
-const isDev = require('electron-is-dev');
+const { app, BrowserWindow, Menu, dialog } = require('electron')
+const path = require('path')
+const isDev = require('electron-is-dev')
 
 let mainWindow
 let mainMenu
@@ -13,14 +13,15 @@ const createMenu = (window) => {
         {
           label: 'Save',
           accelerator: 'CmdOrCtrl+S',
-          click: () =>
-            window.webContents.send('filesave')
+          click: () => {
+            window.webContents.send('filesave', path.join(app.getPath('userData'), 'story.md'))
+          }
         },
         {
           label: 'Open',
           accelerator: 'CmdOrCtrl+O',
           click: () =>
-            window.webContents.send('filesave')
+            window.webContents.send('fileopen', path.join(app.getPath('userData'), 'story.md'))
         },
 
         { role: 'Quit' }
