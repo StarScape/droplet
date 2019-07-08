@@ -12,8 +12,11 @@
   - Replace editor component when loading new file ❗
 
 # Sprint 2 - Advanced Text Editing
+- Break actionbar into separate component ✔️
+- Put commands into Editor.js, ¿expose in globalActions?
+- Buttons and state for justification
 - Automatic list formatting
-- Persist editing state after hitting enter (e.g. while typing a header)
+- Persist editing state after hitting enter (e.g. while typing a header) ❌
 - Word count
 - Spellcheck
 - 💎 Don't spellcheck capitalized words
@@ -31,7 +34,6 @@
   - Font
   - Colors
 - Bottom toolbar
-  - Break into separate component
   - Make buttons for everything
   - Light up buttons when italics/bold/whatever is on
 - 💎 Distraction-free (fullscreen) mode
@@ -52,6 +54,7 @@
 - Settings screen
   - Text justification
   - Font size
+- Remember the size and location user left window at
 - 💎 Themes (or maybe just option for light/dark mode?)
 
 # Future (out of scope of fall semester)
@@ -61,6 +64,11 @@
 - Drafts (split screen maybe, or highlight and press a button to see the differences between )
 - Mobile apps
 - Reading mode
+
+## Todos (independent of the roadmap, but need to get done at some point)
+
+# Architecture
+- Make an interface for global actions
 
 ## Key
 ✔️ = done

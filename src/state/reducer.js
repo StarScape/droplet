@@ -1,7 +1,20 @@
 import { Types } from './actions'
 
 const defaultState = {
-  editorComponent: {}
+  // Editor currently in use
+  editorComponent: {},
+
+  // Editor commands active ATM
+  activeCommands: {
+    bold: false,
+    italic: false,
+    underline: false,
+    strikethrough: false,
+    heading1: false,
+    heading2: false,
+    olist: false,
+    ulist: false,
+  },
 }
 
 const reducer = (state = defaultState, action) => {
@@ -10,6 +23,16 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         editorComponent: action.payload
+      }
+    case Types.SET_COMMAND_STATE:
+      const { payload } = action
+      const activeCommands = {
+        ...state.activeCommands,
+        [payload.name]: payload.state,
+      }
+      return {
+        ...state,
+        activeCommands,
       }
     default:
       return state
