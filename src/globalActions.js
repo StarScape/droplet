@@ -25,7 +25,7 @@ const heading2 = () => getState().editorComponent.heading2()
 const justifyLeft = () => getState().editorComponent.justifyLeft()
 const justifyCenter = () => getState().editorComponent.justifyCenter()
 const justifyRight = () => getState().editorComponent.justifyRight()
-const isActive = (command) => getState().editorComponent.isActive(command)
+const isActive = command => getState().editorComponent.isActive(command)
 
 export default {
   bold,

@@ -1,5 +1,7 @@
 import { Types } from './actions'
 
+// Here mostly for reference, to show what the
+// shape of the application state should look like
 const defaultState = {
   // Editor currently in use
   editorComponent: {},
