@@ -10,6 +10,7 @@ import { getState } from './state/store'
  * 
  *  Globally exposed editor commands are:
  *    bold(), italic(), underline(), strikethrough(), heading1(), heading2(), olist(), ulist()
+ *    justifyLeft(), justifyCenter(), justifyRight(), which all do what they sound like they do,
  *  AND:
  *    isActive(), which checks if a command is active
  */
@@ -21,6 +22,9 @@ const olist = () => getState().editorComponent.olist()
 const ulist = () => getState().editorComponent.ulist()
 const heading1 = () => getState().editorComponent.heading1()
 const heading2 = () => getState().editorComponent.heading2()
+const justifyLeft = () => getState().editorComponent.justifyLeft()
+const justifyCenter = () => getState().editorComponent.justifyCenter()
+const justifyRight = () => getState().editorComponent.justifyRight()
 const isActive = (command) => getState().editorComponent.isActive(command)
 
 export default {
@@ -33,4 +37,7 @@ export default {
   olist,
   ulist,
   isActive,
+  justifyLeft,
+  justifyCenter,
+  justifyRight,
 }

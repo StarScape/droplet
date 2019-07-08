@@ -14,6 +14,9 @@ const defaultState = {
     heading2: false,
     olist: false,
     ulist: false,
+    justifyLeft: false,
+    justifyCenter: false,
+    justifyRight: false,
   },
 }
 

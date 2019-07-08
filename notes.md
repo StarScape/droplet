@@ -18,7 +18,7 @@
   - Remove dispatch import from Actionbar ✔️
   - Change src/actions.js to globalActions.js ✔️
   - Prevent default for keyboard shortcuts and call editor function ✔️
-- Buttons and state for justification
+- Buttons and state for justification ✔️
 - Automatic list formatting
 - Persist editing state after hitting enter (e.g. while typing a header) ❌
 - Word count
@@ -41,6 +41,8 @@
 - Bottom toolbar
   - Make buttons for everything
   - Light up buttons when italics/bold/whatever is on
+  - Maybe make the justification buttons *underline* instead of highlighting
+
 - 💎 Distraction-free (fullscreen) mode
 
 # Sprint 5 - Really Super Duper Fancy Text Editing

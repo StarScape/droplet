@@ -4,6 +4,7 @@ import { setEditorComponent, setCommandState } from '../state/actions'
 
 import '../styles/Editor.css'
 
+// CSS classes
 const classes = {
   actionbar: 'Editor-actionbar',
   button: 'Editor-button',
@@ -46,6 +47,10 @@ export default class Editor extends React.Component {
   ulist = () => this.exec('insertUnorderedList')
   heading1 = () => this._heading('1')
   heading2 = () => this._heading('2')
+  justifyLeft = () => this._justify('left')
+  justifyCenter = () => this._justify('center')
+  justifyRight = () => this._justify('right')
+
   isActive = (commandName) => this.store.getState().activeCommands[commandName]
 
   // Due to an utterly bizzare bug, sometimes turning the heading on
@@ -68,6 +73,16 @@ export default class Editor extends React.Component {
     }
   }
 
+  _justify = (dir) => {
+    const capitalized = dir.charAt(0).toUpperCase() + dir.slice(1)
+    if (this.isActive(`justify${capitalized}`)) {
+      this.exec('justifyLeft')
+    }
+    else {
+      this.exec(`justify${capitalized}`)
+    }
+  }
+
   // We keep track of what commands are applied (e.g. bold, italic, heading)
   // inside the Redux store. This every time exec() is called our the input changed
   // to ensure that those values stay in sync with the actual document.
@@ -76,12 +91,16 @@ export default class Editor extends React.Component {
       this.store.dispatch(setCommandState(name, document.queryCommandState(name)))
     }
 
-    this.store.dispatch(setCommandState('ulist', document.queryCommandState('insertUnorderedList')))
-    this.store.dispatch(setCommandState('olist', document.queryCommandState('insertOrderedList')))
-
     const blockType = document.queryCommandValue('formatBlock')
     this.store.dispatch(setCommandState('heading1', blockType === 'h1'))
     this.store.dispatch(setCommandState('heading2', blockType === 'h2'))
+    this.store.dispatch(setCommandState('ulist', document.queryCommandState('insertUnorderedList')))
+    this.store.dispatch(setCommandState('olist', document.queryCommandState('insertOrderedList')))
+    this.store.dispatch(setCommandState('justifyCenter', document.queryCommandState('justifyCenter')))
+    this.store.dispatch(setCommandState('justifyRight', document.queryCommandState('justifyRight')))
+
+    // Currently turned off bc it's ugly af. Uncommenting will fix it
+    // this.store.dispatch(setCommandState('justifyLeft', document.queryCommandState('justifyLeft')))
   }
 
   handleInput = (event) => {
@@ -119,15 +138,15 @@ export default class Editor extends React.Component {
         e.preventDefault()
         this.heading2()
       },
-      'ctrl+shift+e': (e) => {
-        this.exec('justifyCenter')
-      },
       'ctrl+shift+l': (e) => {
-        this.exec('justifyLeft')
+        this.justifyLeft()
+      },
+      'ctrl+shift+e': (e) => {
+        this.justifyCenter()
       },
       'ctrl+shift+r': (e) => {
         e.preventDefault()
-        this.exec('justifyRight')
+        this.justifyRight()
       },
 
       'tab': (e) => {

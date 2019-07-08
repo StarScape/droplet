@@ -43,6 +43,22 @@ const buttons = [
     action: 'ulist',
     icon: '&#8226;',
   },
+  {
+    title: 'Left Align',
+    action: 'justifyLeft',
+    icon: '←',
+  },
+  {
+    title: 'Center Align',
+    action: 'justifyCenter',
+    icon: '↔',
+  },
+  {
+    title: 'Right Align',
+    action: 'justifyRight',
+    icon: '→',
+  },
+
 ]
 
 export default function Actionbar({ store }) {
