@@ -12,8 +12,8 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Editor store={store}/>
-        <Actionbar/>
+        <Editor store={store} />
+        <Actionbar store={store} />
       </div>
     </Provider>
   );

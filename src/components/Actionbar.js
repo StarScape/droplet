@@ -1,7 +1,6 @@
 import React from 'react'
 import Button from './ActionbarButton'
-import globalActions from '../actions'
-import { dispatch } from '../state/store'
+import globalActions from '../globalActions'
 
 const buttons = [
   {
@@ -46,7 +45,7 @@ const buttons = [
   },
 ]
 
-export default function Actionbar() {
+export default function Actionbar({ store }) {
 
   return (
     <div className='Actionbar'>
@@ -57,7 +56,7 @@ export default function Actionbar() {
           icon={icon}
           onClick={globalActions[action]}
           isActive={false}
-          dispatch={dispatch}
+          dispatch={store.dispatch}
           key={i}
         />
       )}

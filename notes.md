@@ -13,7 +13,11 @@
 
 # Sprint 2 - Advanced Text Editing
 - Break actionbar into separate component ✔️
-- Put commands into Editor.js, ¿expose in globalActions?
+- Cleanup
+  - Put commands into Editor.js ✔️, expose in globalActions ✔️
+  - Remove dispatch import from Actionbar ✔️
+  - Change src/actions.js to globalActions.js ✔️
+  - Prevent default for keyboard shortcuts and call editor function ✔️
 - Buttons and state for justification
 - Automatic list formatting
 - Persist editing state after hitting enter (e.g. while typing a header) ❌
@@ -27,6 +31,7 @@
 - Projects with chapters
   - Project specific dictionaries
 - Dashboard
+- Autosave
 - 💎 Footnotes
 
 # Sprint 4 - Aesthetics
@@ -68,7 +73,9 @@
 ## Todos (independent of the roadmap, but need to get done at some point)
 
 # Architecture
-- Make an interface for global actions
+- Make an interface for global actions ✔️
+- Better interface for opening/closing files
+- Throw out contenteditable and write your own
 
 ## Key
 ✔️ = done
