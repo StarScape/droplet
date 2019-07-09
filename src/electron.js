@@ -38,6 +38,109 @@ const createMenu = (window) => {
         { role: 'delete' },
       ]
     },
+    {
+      label: 'Format',
+      submenu: [
+        {
+          label: 'Italic',
+          accelerator: 'CmdOrCtrl+I',
+          click: () => {
+            window.webContents.focus()
+            console.log(window.isFocused());
+            window.webContents.send('italic')
+          }
+        },
+        {
+          label: 'Bold',
+          accelerator: 'CmdOrCtrl+B',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('bold')
+          }
+        },
+        {
+          label: 'Underline',
+          accelerator: 'CmdOrCtrl+U',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('underline')
+          }
+        },
+        {
+          label: 'Strikethrough',
+          accelerator: 'CmdOrCtrl+T',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('strikethrough')
+          }
+        },
+        
+        { type: 'separator' },
+        
+        {
+          label: 'Heading 1',
+          accelerator: 'CmdOrCtrl+1',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('heading1')
+          }
+        },
+        {
+          label: 'Heading 2',
+          accelerator: 'CmdOrCtrl+2',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('heading2')
+          }
+        },
+        
+        { type: 'separator' },
+        
+        {
+          label: 'Bulleted List',
+          accelerator: 'CmdOrCtrl+Shift+B',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('ulist')
+          }
+        },
+        {
+          label: 'Numbered List',
+          accelerator: 'CmdOrCtrl+Shift+N',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('olist')
+          }
+        },
+
+        { type: 'separator' },
+        
+        {
+          accelerator: 'CmdOrCtrl+Shift+L',
+          label: 'Align Left',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('justifyLeft')
+          }
+        },
+        {
+          accelerator: 'CmdOrCtrl+Shift+E',
+          label: 'Center Align',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('justifyCenter')
+          }
+        },
+        {
+          accelerator: 'CmdOrCtrl+Shift+R',
+          label: 'Right Align',
+          click: () => {
+            window.webContents.focus()
+            window.webContents.send('justifyRight')
+          }
+        },
+      ]
+    },
   ]
 
   if (isDev) {

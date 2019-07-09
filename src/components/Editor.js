@@ -121,6 +121,7 @@ export default class Editor extends React.Component {
       'ctrl+b': (e) => {
         e.preventDefault()
         this.bold()
+        console.log('ctrl+b');
       },
       'ctrl+u': (e) => {
         e.preventDefault()
@@ -137,6 +138,14 @@ export default class Editor extends React.Component {
       'ctrl+2': (e) => {
         e.preventDefault()
         this.heading2()
+      },
+      'ctrl+shift+b': (e) => {
+        e.preventDefault()
+        this.ulist()
+      },
+      'ctrl+shift+n': (e) => {
+        e.preventDefault()
+        this.olist()
       },
       'ctrl+shift+l': (e) => {
         this.justifyLeft()

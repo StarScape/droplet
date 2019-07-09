@@ -19,6 +19,7 @@
   - Change src/actions.js to globalActions.js ✔️
   - Prevent default for keyboard shortcuts and call editor function ✔️
 - Buttons and state for justification ✔️
+- Format/edit menu buttons
 - Automatic list formatting
 - Persist editing state after hitting enter (e.g. while typing a header) ❌
 - Word count

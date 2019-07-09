@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import './fileService'
+import './electronBridge'
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
