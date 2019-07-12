@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { initStore } from './state/store'
 import Editor from './components/Editor'
 import Actionbar from './components/Actionbar'
+import WordCount from './components/WordCount'
 
 import './styles/App.css';
 
@@ -14,6 +15,7 @@ function App() {
       <div className="App">
         <Editor store={store} />
         <Actionbar store={store} />
+        <WordCount store={store} />
       </div>
     </Provider>
   );

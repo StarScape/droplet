@@ -6,6 +6,9 @@ const defaultState = {
   // Editor currently in use
   editorComponent: {},
 
+  // Word count of current document
+  wordCount: 0,
+
   // Editor commands active ATM
   activeCommands: {
     bold: false,
@@ -22,6 +25,7 @@ const defaultState = {
   },
 }
 
+// Clean up with some { destructuring }
 const reducer = (state = defaultState, action) => {
   switch(action.type) {
     case Types.SET_EDITOR_COMPONENT:
@@ -38,6 +42,11 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         activeCommands,
+      }
+    case Types.SET_WORD_COUNT:
+      return {
+        ...state,
+        wordCount: action.payload,
       }
     default:
       return state

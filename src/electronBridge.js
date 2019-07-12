@@ -18,7 +18,7 @@ ipcRenderer.on('fileopen', (event, fname) => {
 
   fs.readFile(fname, 'utf8', (err, data) => {
     if (err) console.warn(`File error:\n${err}`)
-    editor.setContent(data)
+    editor.content = data
   })
 })
 

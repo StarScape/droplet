@@ -1,6 +1,7 @@
 import React from 'react'
 import { shortcutSwitch } from '../utils/shortcuts'
-import { setEditorComponent, setCommandState } from '../state/actions'
+import { getText, wordCount } from '../utils/wordcount'
+import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
 
 import '../styles/Editor.css'
 
@@ -103,12 +104,18 @@ export default class Editor extends React.Component {
     // this.store.dispatch(setCommandState('justifyLeft', document.queryCommandState('justifyLeft')))
   }
 
-  handleInput = (event) => {
-    const content = this.contentRef.current
+  updateWordCount = (content) => {
+    const words = wordCount(getText(this.contentRef.current))
+    this.store.dispatch(setWordCount(words))
+  }
 
+  handleInput = (event) => {
+    const content = this.content
     const { target: { firstChild } } = event
     if (firstChild && firstChild.nodeType === 3) this.exec('formatBlock', '<p>')
     else if (content.innerHTML === '<br>') content.innerHTML = ''
+
+    this.updateWordCount()
   }
 
   handleKeyDown = (event) => {
@@ -151,6 +158,7 @@ export default class Editor extends React.Component {
         this.justifyLeft()
       },
       'ctrl+shift+e': (e) => {
+        e.preventDefault()
         this.justifyCenter()
       },
       'ctrl+shift+r': (e) => {
