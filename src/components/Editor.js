@@ -128,7 +128,6 @@ export default class Editor extends React.Component {
       'ctrl+b': (e) => {
         e.preventDefault()
         this.bold()
-        console.log('ctrl+b');
       },
       'ctrl+u': (e) => {
         e.preventDefault()

@@ -24,9 +24,11 @@
 - Persist editing state after hitting enter (e.g. while typing a header) ❌
 - Word count
   - Basic functionality ✔️
-  - Where to put it?
+  - Where to put it? ✔️
   - Word count component, real time ✔️
+  - Fix bug where word count won't go back to zero ✔️
   - Use mapDispatchToProps
+  - Fix bugginess ❗
 - Spellcheck
 - 💎 Don't spellcheck capitalized words
 
