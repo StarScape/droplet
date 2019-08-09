@@ -1,8 +1,20 @@
 import { store } from './state/store'
 import globalActions from './globalActions'
 const { ipcRenderer } = require('electron')
-const fs = require('fs')
+const fs = require('fs');
+const { webFrame } = require('electron')
 
+// Set custom spellcheck provider
+webFrame.setSpellCheckProvider('en-US', {
+  spellCheck (words, callback) {
+    setTimeout(() => {
+      // const spellchecker = require('spellchecker')
+      // const misspelled = words.filter(x => spellchecker.isMisspelled(x))
+      // TODO: implement spellcheck
+      callback(misspelled)
+    }, 0)
+  }
+})
 // Turn this into a global action
 ipcRenderer.on('filesave', (event, fname) => {
   const contents = store.getState().editorComponent.content

@@ -29,7 +29,7 @@
   - Fix bug where word count won't go back to zero ✔️
   - Use mapDispatchToProps
   - Fix bugginess ❗
-- Spellcheck
+- Spellcheck ❗(*this is going to require a custom solution*)
 - 💎 Don't spellcheck capitalized words
 
 # Sprint 3 - Meta Features
