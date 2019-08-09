@@ -1,6 +1,7 @@
-const { app, BrowserWindow, Menu, dialog } = require('electron')
+const { app, BrowserWindow, Menu, dialog, ipcMain } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
+const { isMisspelled } = require('apis')
 
 let mainWindow
 let mainMenu
@@ -190,3 +191,9 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+// Apis refuses to work in the renderer process for
+// reasons I can't quite fathom. IPC is the workaround.
+ipcMain.on('misspelled', (event, words) => {
+  event.reply(words.filter(w => isMisspelled(w)))
+})

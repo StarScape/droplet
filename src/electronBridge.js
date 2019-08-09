@@ -1,16 +1,13 @@
 import { store } from './state/store'
 import globalActions from './globalActions'
-const { ipcRenderer } = require('electron')
+const { webFrame, ipcRenderer } = require('electron')
 const fs = require('fs');
-const { webFrame } = require('electron')
 
 // Set custom spellcheck provider
 webFrame.setSpellCheckProvider('en-US', {
   spellCheck (words, callback) {
     setTimeout(() => {
-      // const spellchecker = require('spellchecker')
-      // const misspelled = words.filter(x => spellchecker.isMisspelled(x))
-      // TODO: implement spellcheck
+      const misspelled = ipcRenderer.sendSync('misspelled', words)
       callback(misspelled)
     }, 0)
   }
