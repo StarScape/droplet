@@ -31,7 +31,7 @@
   - Fix bugginess ❗
 - 💎 Spellcheck
   - Basics ✔️
-  - Don't spellcheck capitalized words
+  - Don't spellcheck capitalized words ❗
 
 # Sprint 3 - Meta Features
 - Pagination (with on/off)

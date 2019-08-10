@@ -12,6 +12,7 @@ webFrame.setSpellCheckProvider('en-US', {
     }, 0)
   }
 })
+
 // Turn this into a global action
 ipcRenderer.on('filesave', (event, fname) => {
   const contents = store.getState().editorComponent.content

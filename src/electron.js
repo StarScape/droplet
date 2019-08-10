@@ -195,5 +195,5 @@ app.on('activate', () => {
 // Apis refuses to work in the renderer process for
 // reasons I can't quite fathom. IPC is the workaround.
 ipcMain.on('misspelled', (event, words) => {
-  event.reply(words.filter(w => isMisspelled(w)))
+  event.returnValue = words.filter(w => isMisspelled(w))
 })
