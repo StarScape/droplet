@@ -2,6 +2,7 @@ export const Types = {
   SET_EDITOR_COMPONENT: "SET_EDITOR_COMPONENT",
   SET_COMMAND_STATE: "SET_COMMAND_STATE",
   SET_WORD_COUNT: "SET_WORD_COUNT",
+  SET_PROJECTS: "SET_PROJECT_DATA",
 }
 
 // Global editor component
@@ -21,9 +22,8 @@ export const setWordCount = (count) => ({
   payload: count,
 })
 
-export default {
-  setEditorComponent,
-  setCommandState,
-  setWordCount,
-  Types,
-}
+// Set project metadata (title, chapterlist, etc.)
+export const setProjects = (projects) => ({
+  type: Types.SET_PROJECTS,
+  payload: projects,
+})

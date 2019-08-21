@@ -47,7 +47,6 @@ const createMenu = (window) => {
           accelerator: 'CmdOrCtrl+I',
           click: () => {
             window.webContents.focus()
-            console.log(window.isFocused());
             window.webContents.send('italic')
           }
         },

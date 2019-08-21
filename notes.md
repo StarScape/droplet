@@ -1,3 +1,9 @@
+## Notes
+
+New idea for the whole metadata mess. In the redux store, have an object called `projectData` or something along those lines. Every time the user changes around their projects, we just modify that in the standard redux way. The trick is to save it to the file system every so often (Maybe use redux-persist? Not sure if that will work with only part of the store). To start with, we can JUST save it on app exit. Don't bother with loading the actual text for each chapter into the store, that can be read from the file system every time we open a doc.
+
+On the other hand, maybe we can just use redux-persist for the whole damn thing?
+
 ## Roadmap
 
 # Sprint 1 - Basics
@@ -34,9 +40,14 @@
   - Don't spellcheck capitalized words ❗
 
 # Sprint 3 - Meta Features
-- Pagination (with on/off)
+- Pagination (with on/off) ❗
   - Page breaks
 - Projects with chapters
+  - Basic functionality
+  - Create/delete projects
+  - Create/delete chapters
+  - Ordered/unordered chapters
+  - Cache project data on exit and reload on open
   - Project specific dictionaries
 - Dashboard
 - Autosave

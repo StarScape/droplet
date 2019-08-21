@@ -5,6 +5,8 @@ import { setEditorComponent, setCommandState, setWordCount } from '../state/acti
 
 import '../styles/Editor.css'
 
+const fs = require('fs')
+
 // CSS classes
 const classes = {
   actionbar: 'Editor-actionbar',
@@ -19,6 +21,7 @@ export default class Editor extends React.Component {
     super(props)
     this.store = props.store
     this.contentRef = React.createRef()
+    this.file = props.file
   }
 
   get content() {
@@ -182,7 +185,30 @@ export default class Editor extends React.Component {
     this.exec('defaultParagraphSeparator', 'p')
     this.contentRef.current.focus()
     this.store.dispatch(setEditorComponent(this))
+    
+    if (this.file) {
+      this.openFile()
+    }
   }
+
+  // Remove global editor component when we navigate away
+  componentWillUnmount() {
+    this.store.dispatch(setEditorComponent(null));
+  }
+
+  openFile() {
+    fs.readFile(this.file, 'utf8', (err, data) => {
+      if (err) console.warn(`File error:\n${err}`)
+      this.content = data
+    })
+  }
+
+  saveFile() {
+    fs.writeFile(this.file, this.content, { flag: 'w' }, (err) => {
+      if (err) console.warn(`File error:\n${err}`)
+    })
+  }
+
 
   render() {
     return (

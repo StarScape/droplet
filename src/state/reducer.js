@@ -6,6 +6,9 @@ const defaultState = {
   // Editor currently in use
   editorComponent: {},
 
+  // Projects on dashboard
+  projects: [],
+
   // Word count of current document
   wordCount: 0,
 
@@ -47,6 +50,11 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         wordCount: action.payload,
+      }
+    case Types.SET_PROJECTS:
+      return {
+        ...state,
+        projects: action.payload,
       }
     default:
       return state

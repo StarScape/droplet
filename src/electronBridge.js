@@ -1,7 +1,5 @@
-import { store } from './state/store'
 import globalActions from './globalActions'
 const { webFrame, ipcRenderer } = require('electron')
-const fs = require('fs');
 
 // Set custom spellcheck provider
 webFrame.setSpellCheckProvider('en-US', {
@@ -13,24 +11,9 @@ webFrame.setSpellCheckProvider('en-US', {
   }
 })
 
-// Turn this into a global action
-ipcRenderer.on('filesave', (event, fname) => {
-  const contents = store.getState().editorComponent.content
-
-  fs.writeFile(fname, contents, { flag: 'w' }, (err) => {
-    if (err) console.warn(`File error:\n${err}`)
-  })
-})
-
-// Turn this into a global action
-ipcRenderer.on('fileopen', (event, fname) => {
-  const editor = store.getState().editorComponent
-
-  fs.readFile(fname, 'utf8', (err, data) => {
-    if (err) console.warn(`File error:\n${err}`)
-    editor.content = data
-  })
-})
+// File actions - rethink open later in regards to how projects work
+ipcRenderer.on('filesave', (event, fname) => globalActions.saveFile())
+ipcRenderer.on('fileopen', (event, fname) => globalActions.openFile())
 
 // Format actions
 ipcRenderer.on('italic', (event, fname) => globalActions.italic())

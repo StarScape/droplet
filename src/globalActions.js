@@ -12,7 +12,7 @@ import { getState } from './state/store'
  *    bold(), italic(), underline(), strikethrough(), heading1(), heading2(), olist(), ulist()
  *    justifyLeft(), justifyCenter(), justifyRight(), which all do what they sound like they do,
  *  AND:
- *    isActive(), which checks if a command is active
+ *    isActive(), which checks if a command is active, as well as saveFile() and openFile()
  */
 const italic = () => getState().editorComponent.italic()
 const bold = () => getState().editorComponent.bold()
@@ -25,6 +25,8 @@ const heading2 = () => getState().editorComponent.heading2()
 const justifyLeft = () => getState().editorComponent.justifyLeft()
 const justifyCenter = () => getState().editorComponent.justifyCenter()
 const justifyRight = () => getState().editorComponent.justifyRight()
+const saveFile = () => getState().editorComponent.saveFile()
+const openFile = () => getState().editorComponent.openFile()
 const isActive = command => getState().editorComponent.isActive(command)
 
 export default {
@@ -36,8 +38,10 @@ export default {
   heading2,
   olist,
   ulist,
-  isActive,
   justifyLeft,
   justifyCenter,
   justifyRight,
+  saveFile,
+  openFile,
+  isActive,
 }
