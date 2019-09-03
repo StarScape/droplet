@@ -6,6 +6,8 @@ const defaultState = {
   // Editor currently in use
   editorComponent: {},
 
+  projectData: {foo: "bar"},
+
   // Projects on dashboard
   projects: [],
 

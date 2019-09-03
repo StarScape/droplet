@@ -1,6 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
+
 import { initStore } from './state/store'
 import { setProjects } from './state/actions'
 import { loadProjectInfo } from './files'
