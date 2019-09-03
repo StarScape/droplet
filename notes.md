@@ -43,7 +43,7 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 - Pagination (with on/off) ❗
   - Page breaks
 - Projects with chapters
-  - Basic functionality
+  - Basic functionality ✔️
   - Create/delete projects
   - Create/delete chapters
   - Ordered/unordered chapters
@@ -55,7 +55,7 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 
 # Sprint 4 - Aesthetics
 - Make it pretty!
-  - Font
+  - Typography
   - Colors
 - Bottom toolbar
   - Make buttons for everything
