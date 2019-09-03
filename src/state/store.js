@@ -3,6 +3,7 @@ import { AsyncNodeStorage } from 'redux-persist-node-storage'
 import { persistStore, persistReducer } from 'redux-persist'
 
 import reducer from './reducer'
+const { app } = require('electron').remote
 
 // Middleware?
 export let store
@@ -11,12 +12,11 @@ export let dispatch
 export let getState
 export let subscribe
 
-
-const storage = new AsyncNodeStorage('/tmp/storageDir')
+const storage = new AsyncNodeStorage(app.getPath('userData'))
 
 const persistConfig = {
   key: 'project-data',
-  whitelist: ['projectData'],
+  whitelist: ['projects'],
   storage,
 }
 
@@ -32,7 +32,7 @@ export function initStore() {
 
   window.getState = getState // For debugging
 
-  return store
+  return { store, persistor }
 }
 
 export default {

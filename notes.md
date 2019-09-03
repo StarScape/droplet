@@ -49,6 +49,7 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
   - Ordered/unordered chapters
   - Cache project data on exit and reload on open
   - Project specific dictionaries
+  - Delete `files.js`
 - Dashboard
 - Autosave
 - 💎 Footnotes

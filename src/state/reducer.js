@@ -6,8 +6,6 @@ const defaultState = {
   // Editor currently in use
   editorComponent: {},
 
-  projectData: {foo: "bar"},
-
   // Projects on dashboard
   projects: [],
 
@@ -32,14 +30,15 @@ const defaultState = {
 
 // Clean up with some { destructuring }
 const reducer = (state = defaultState, action) => {
+  const { payload } = action
+
   switch(action.type) {
     case Types.SET_EDITOR_COMPONENT:
       return {
         ...state,
-        editorComponent: action.payload
+        editorComponent: payload
       }
     case Types.SET_COMMAND_STATE:
-      const { payload } = action
       const activeCommands = {
         ...state.activeCommands,
         [payload.name]: payload.state,
@@ -51,12 +50,30 @@ const reducer = (state = defaultState, action) => {
     case Types.SET_WORD_COUNT:
       return {
         ...state,
-        wordCount: action.payload,
+        wordCount: payload,
       }
-    case Types.SET_PROJECTS:
+    case Types.ADD_PROJECT:
+      const { projects } = state
+      const newProjectName = payload
+
+      if (projects[newProjectName]) {
+        throw new Error("Project with this name already exists")
+      }
+
       return {
         ...state,
-        projects: action.payload,
+        projects: {
+          ...state.projects,
+          [newProjectName]: {},
+        },
+      }
+    case Types.DELETE_PROJECT:
+      const projectsUpdated = { ...state.projects }
+      delete projectsUpdated[payload]
+
+      return {
+        ...state,
+        projects: projectsUpdated,
       }
     default:
       return state

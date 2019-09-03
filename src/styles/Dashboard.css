@@ -1,0 +1,7 @@
+.project-link {
+  display: inline-block;
+  width: 15vw;
+  height: 15vw;
+  margin: 10px;
+  border: 1px solid black;
+}
