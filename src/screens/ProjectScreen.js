@@ -2,8 +2,6 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { loadChaptersInfo } from '../files'
-
 function ProjectScreen({ chapters, location }) {
   return (
     <div>
@@ -27,10 +25,8 @@ function ProjectScreen({ chapters, location }) {
 
 // Don't need this, remove!
 const mapStateToProps = (state, { match, location }) => {
-  const { project } = location.state
-
   return {
-    chapters: loadChaptersInfo(project)
+    chapters: []
   }
 }
 

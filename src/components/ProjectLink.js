@@ -1,16 +1,30 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { deleteProject } from '../state/actions'
+import { connect } from 'react-redux'
 
-export default function ProjectLink({ name, project }) {
+function ProjectLink({ project, deleteProject }) {
   return (
-    <Link class='project-link' to={{
-        pathname: '/projects',
-        state: { project: project }
-      }}>
+    <div className='project-link'>
+      <Link to={{
+          pathname: '/projects',
+          state: { project: project }
+        }}>
 
-      <div class='project-link-content'>{name}</div>
+        <div className='project-link-content'>
+          <h4>{project.name}</h4>
+        </div>
+      </Link>
 
-    </Link>
+      <button onClick={deleteProject}>
+        Delete
+      </button>
+    </div>
   )
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  deleteProject: () => { dispatch(deleteProject(ownProps.project.name)) }
+})
+
+export default connect(null, mapDispatchToProps)(ProjectLink)

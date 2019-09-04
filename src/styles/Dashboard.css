@@ -1,7 +1,17 @@
 .project-link {
   display: inline-block;
-  width: 15vw;
-  height: 15vw;
+
+  /* Change width and height to be responsive */
+  width:  200px;
+  height: 200px;
   margin: 10px;
   border: 1px solid black;
+}
+
+.project-link h4 {
+  text-align: center;
+}
+
+.project-create-error {
+  color: red;
 }

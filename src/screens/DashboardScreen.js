@@ -1,15 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { addProject } from '../state/actions'
 import ProjectLink from '../components/ProjectLink'
+import NewProject from '../components/NewProject'
 
 import '../styles/Dashboard.css'
 
 class DashboardScreen extends React.Component {
+  state = {
+    newProject: false
+  }
+
   handleNewProject = () => {
-    const title = 'Story Number #3'
-    this.props.store.dispatch(addProject(title))
+    this.setState({ newProject: {}})
+  }
+
+  handleNewProjectSaved = () => {
+    this.setState({ newProject: null })
   }
 
   render() {
@@ -21,9 +28,15 @@ class DashboardScreen extends React.Component {
           <button onClick={this.handleNewProject}>PROJECT +</button>
         </div>
 
-        <div class='projects-container'>
-          {Object.keys(projects).map((name, i) =>
-            <ProjectLink key={name} name={name} project={projects[name]} />
+        <div className='projects-container'>
+          {this.state.newProject ?
+            <NewProject dispatch={this.props.dispatch}
+                        project={this.state.newProject} 
+                        handleSaved={this.handleNewProjectSaved} />
+          : null }
+
+          {projects.map((project) =>
+            <ProjectLink key={project.name} project={project} />
           )}
         </div>
 

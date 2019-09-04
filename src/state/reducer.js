@@ -56,21 +56,21 @@ const reducer = (state = defaultState, action) => {
       const { projects } = state
       const newProjectName = payload
 
-      if (projects[newProjectName]) {
+      if (projects.find(({ name }) => name === newProjectName)) {
         throw new Error("Project with this name already exists")
       }
 
       return {
         ...state,
-        projects: {
+        projects: [
           ...state.projects,
-          [newProjectName]: {},
-        },
+          {
+            name: newProjectName,
+          },
+        ],
       }
     case Types.DELETE_PROJECT:
-      const projectsUpdated = { ...state.projects }
-      delete projectsUpdated[payload]
-
+      const projectsUpdated = state.projects.filter(({ name }) => name !== payload)
       return {
         ...state,
         projects: projectsUpdated,
