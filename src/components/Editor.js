@@ -6,6 +6,8 @@ import { setEditorComponent, setCommandState, setWordCount } from '../state/acti
 import '../styles/Editor.css'
 
 const fs = require('fs')
+const path = require('path')
+const { app } = require('electron').remote
 
 // CSS classes
 const classes = {
@@ -187,7 +189,10 @@ export default class Editor extends React.Component {
     this.store.dispatch(setEditorComponent(this))
     
     if (this.file) {
-      this.openFile()
+      this.filePath = path.join(app.getPath('userData'), 'files', this.file)
+      if (fs.existsSync(this.filePath)) {
+        this.openFile()
+      }
     }
   }
 
@@ -197,14 +202,14 @@ export default class Editor extends React.Component {
   }
 
   openFile() {
-    fs.readFile(this.file, 'utf8', (err, data) => {
+    fs.readFile(this.filePath, 'utf8', (err, data) => {
       if (err) console.warn(`File error:\n${err}`)
       this.content = data
     })
   }
 
   saveFile() {
-    fs.writeFile(this.file, this.content, { flag: 'w' }, (err) => {
+    fs.writeFile(this.filePath, this.content, { flag: 'w' }, (err) => {
       if (err) console.warn(`File error:\n${err}`)
     })
   }

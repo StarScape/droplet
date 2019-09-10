@@ -15,7 +15,7 @@ function ChapterLink(props) {
         to={{
           pathname: '/editor',
           state: {
-            file: chapter.path,
+            file: chapter.id,
             project: project
           }
         }}>
