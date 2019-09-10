@@ -9,6 +9,11 @@ class ProjectScreen extends React.Component {
     newChapter: false,
   }
 
+  constructor(props) {
+    super(props)
+    this.highestChapter = 1
+  }
+
   handleNewChapter = () => {
     this.setState({ newChapter: true })
   }
@@ -33,16 +38,22 @@ class ProjectScreen extends React.Component {
               dispatch={this.props.dispatch}
               project={project}
               handleSaved={this.handleNewChapterSaved}
+              placeholder={`Chapter ${this.highestChapter + 1}`}
               />
           : null }
 
-          {chapters.ordered.map((chapter, i) =>
-            <ChapterLink
-              key={`chapter-${i}`}
-              project={project}
-              chapter={chapter}
-              number={i}
-              />
+          {chapters.ordered.map((chapter, i) => {
+            this.highestChapter = i + 1
+
+            return (
+              <ChapterLink
+                key={`chapter-${i}`}
+                project={project}
+                chapter={chapter}
+                number={i}
+                />
+            )
+          }
           )}
         </div>
 

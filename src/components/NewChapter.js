@@ -4,9 +4,12 @@ import { connect } from 'react-redux'
 import { Chapter } from '../models/Chapters'
 
 class NewChapter extends React.Component {
-  state = {
-    title: '',
-    error: null,
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: props.placeholder || '',
+      error: false,
+    }
   }
 
   handleSave = () => {

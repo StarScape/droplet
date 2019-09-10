@@ -49,8 +49,9 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
     - Fix layout bug ✔️
   - Create/delete chapters ✔️
   - Open correct file when going from chapter to editor ✔️
-  - Create chapters folder if doesn't already exist
-  - Chapter name autofill
+  - Create chapters folder if doesn't already exist ✔️
+  - Chapter name autofill ✔️
+  - Autosave
   - Sort projects by most recently modified
   - Ordered/unordered chapters w/ drag and drop
   - Cache project data on exit and reload on open
