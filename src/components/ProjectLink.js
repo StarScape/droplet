@@ -3,15 +3,17 @@ import { Link } from 'react-router-dom'
 import { deleteProject } from '../state/actions'
 import { connect } from 'react-redux'
 
-function ProjectLink({ project, deleteProject }) {
+import '../styles/Grid.css'
+
+function ProjectLink({ project, deleteProject, children }) {
   return (
-    <div className='project-link'>
+    <div className='grid-item'>
       <Link to={{
           pathname: '/projects',
           state: { project: project }
         }}>
 
-        <div className='project-link-content'>
+        <div className='grid-item-content'>
           <h4>{project.name}</h4>
         </div>
       </Link>

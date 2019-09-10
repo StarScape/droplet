@@ -12,11 +12,11 @@ class DashboardScreen extends React.Component {
   }
 
   handleNewProject = () => {
-    this.setState({ newProject: {}})
+    this.setState({ newProject: true })
   }
 
   handleNewProjectSaved = () => {
-    this.setState({ newProject: null })
+    this.setState({ newProject: false })
   }
 
   render() {
@@ -28,15 +28,16 @@ class DashboardScreen extends React.Component {
           <button onClick={this.handleNewProject}>PROJECT +</button>
         </div>
 
-        <div className='projects-container'>
+        <div className='grid-container'>
           {this.state.newProject ?
-            <NewProject dispatch={this.props.dispatch}
-                        project={this.state.newProject} 
-                        handleSaved={this.handleNewProjectSaved} />
+            <NewProject
+              dispatch={this.props.dispatch}
+              handleSaved={this.handleNewProjectSaved}
+              />
           : null }
 
-          {projects.map((project) =>
-            <ProjectLink key={project.name} project={project} />
+          {Object.keys(projects).map((projectName) =>
+            <ProjectLink key={projectName} project={projects[projectName]} />
           )}
         </div>
 

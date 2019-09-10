@@ -1,34 +1,23 @@
 import React from 'react'
-import { addProject } from '../state/actions'
+import { addChapter } from '../state/actions'
 import { connect } from 'react-redux'
+import { Chapter } from '../models/Chapters'
 
-class NewProject extends React.Component {
+class NewChapter extends React.Component {
   state = {
     title: '',
     error: null,
   }
 
   handleSave = () => {
-    try {
-      this.props.addProject(this.state.title)
-      this.props.handleSaved()
-    }
-    catch {
-      this.duplicateNameError()
-    }
+    console.log(this.state.title);
+    this.props.addChapter(this.state.title)
+    this.props.handleSaved()
   }
 
   handleTitleChange = (e) => {
     this.setState({
       title: e.target.value,
-    })
-  }
-
-  duplicateNameError() {
-    this.setState({
-      error: true,
-      errorMessage: `You already have a project named ${this.state.title}`,
-      title: '',
     })
   }
 
@@ -48,8 +37,8 @@ class NewProject extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  addProject: (title) => dispatch(addProject(title))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  addChapter: (title) => dispatch(addChapter(ownProps.project.name, new Chapter(title)))
 })
 
-export default connect(null, mapDispatchToProps)(NewProject)
+export default connect(null, mapDispatchToProps)(NewChapter)

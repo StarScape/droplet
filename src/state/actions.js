@@ -4,6 +4,8 @@ export const Types = {
   SET_WORD_COUNT: "SET_WORD_COUNT",
   ADD_PROJECT: "ADD_PROJECT",
   DELETE_PROJECT: "DELETE_PROJECT",
+  ADD_CHAPTER: "ADD_CHAPTER",
+  DELETE_CHAPTER: "DELETE_CHAPTER",
 }
 
 // Global editor component
@@ -31,4 +33,14 @@ export const addProject = (projectName) => ({
 export const deleteProject = (projectName) => ({
   type: Types.DELETE_PROJECT,
   payload: projectName,
+})
+
+export const addChapter = (projectName, chapter, ordered=true) => ({
+  type: Types.ADD_CHAPTER,
+  payload: { projectName, chapter, ordered },
+})
+
+export const deleteChapter = (projectName, id) => ({
+  type: Types.DELETE_CHAPTER,
+  payload: { projectName, id },
 })

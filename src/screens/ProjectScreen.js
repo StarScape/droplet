@@ -1,32 +1,60 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import ChapterLink from '../components/ChapterLink'
+import NewChapter from '../components/NewChapter'
 
-function ProjectScreen({ chapters, location }) {
-  return (
-    <div>
-      {chapters.map((chapter, i) =>
-        <Link
-            key={`chapter-${i}`}
-            to={{
-              pathname: '/editor',
-              state: {
-                file: chapter.path,
-                project: location.state.project
-              }
-            }}>
-          <div>Chapter {chapter.number}</div>
-        </Link>
-      )}
-      <Link to='/dashboard'>Back</Link>
-    </div>
-  )
+class ProjectScreen extends React.Component {
+  state = {
+    newChapter: false,
+  }
+
+  handleNewChapter = () => {
+    this.setState({ newChapter: true })
+  }
+
+  handleNewChapterSaved = () => {
+    this.setState({ newChapter: false })
+  }
+
+  render() {
+    const { location, chapters } = this.props
+    const { project } = location.state
+
+    return (
+      <div>
+        <div>
+          <button onClick={this.handleNewChapter}>CHAPTER +</button>
+        </div>
+
+        <div className='grid-container'>
+          {this.state.newChapter ?
+            <NewChapter
+              dispatch={this.props.dispatch}
+              project={project}
+              handleSaved={this.handleNewChapterSaved}
+              />
+          : null }
+
+          {chapters.ordered.map((chapter, i) =>
+            <ChapterLink
+              key={`chapter-${i}`}
+              project={project}
+              chapter={chapter}
+              number={i}
+              />
+          )}
+        </div>
+
+        <Link to='/dashboard'>Back</Link>
+      </div>
+    )
+  }
 }
 
-// Don't need this, remove!
 const mapStateToProps = (state, { match, location }) => {
   return {
-    chapters: []
+    chapters: state.chapters[location.state.project.name]
   }
 }
 

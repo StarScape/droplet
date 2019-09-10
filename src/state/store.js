@@ -16,7 +16,7 @@ const storage = new AsyncNodeStorage(app.getPath('userData'))
 
 const persistConfig = {
   key: 'project-data',
-  whitelist: ['projects'],
+  whitelist: ['projects', 'chapters'],
   storage,
 }
 
