@@ -121,6 +121,8 @@ export default class Editor extends React.Component {
     else if (content.innerHTML === '<br>') content.innerHTML = ''
 
     this.updateWordCount()
+    this.props.onUpdate()
+    this.checkAutosave()
   }
 
   handleKeyDown = (event) => {
@@ -218,9 +220,18 @@ export default class Editor extends React.Component {
           console.warn(`Umm, this appears to be a REAL error:\n${err}`)
         }
       }
+      this.props.onSave()
     })
   }
 
+  checkAutosave() {
+    if (this.autosaveTimeout) {
+      clearTimeout(this.autosaveTimeout)
+    }
+    this.autosaveTimeout = setTimeout(() => {
+      this.saveFile()
+    }, 750)
+  }
 
   render() {
     return (

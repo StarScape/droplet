@@ -16,7 +16,8 @@ function ChapterLink(props) {
           pathname: '/editor',
           state: {
             file: chapter.id,
-            project: project
+            project: project,
+            chapter: chapter,
           }
         }}>
 

@@ -52,6 +52,7 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
   - Create chapters folder if doesn't already exist ✔️
   - Chapter name autofill ✔️
   - Autosave
+  - Save before going back
   - Sort projects by most recently modified
   - Ordered/unordered chapters w/ drag and drop
   - Cache project data on exit and reload on open
