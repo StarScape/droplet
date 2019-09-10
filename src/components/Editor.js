@@ -23,7 +23,7 @@ export default class Editor extends React.Component {
     super(props)
     this.store = props.store
     this.contentRef = React.createRef()
-    this.file = props.file
+    this.filePath = path.join(app.getPath('userData'), 'files', props.file)
   }
 
   get content() {
@@ -188,11 +188,8 @@ export default class Editor extends React.Component {
     this.contentRef.current.focus()
     this.store.dispatch(setEditorComponent(this))
     
-    if (this.file) {
-      this.filePath = path.join(app.getPath('userData'), 'files', this.file)
-      if (fs.existsSync(this.filePath)) {
-        this.openFile()
-      }
+    if (this.props.file && fs.existsSync(this.filePath)) {
+      this.openFile()
     }
   }
 
