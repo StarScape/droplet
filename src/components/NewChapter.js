@@ -10,7 +10,6 @@ class NewChapter extends React.Component {
   }
 
   handleSave = () => {
-    console.log(this.state.title);
     this.props.addChapter(this.state.title)
     this.props.handleSaved()
   }

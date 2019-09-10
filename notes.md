@@ -47,8 +47,8 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
   - Create/delete projects
     - Prompt user for new project name when button clicked ✔️
     - Fix layout bug ✔️
-  - Create/delete chapters
-    - Separate Grid into vanilla components
+  - Create/delete chapters ✔️
+  - Open correct file when going from chapter to editor
   - Ordered/unordered chapters w/ drag and drop
   - Cache project data on exit and reload on open
   - Project specific dictionaries
