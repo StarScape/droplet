@@ -210,7 +210,17 @@ export default class Editor extends React.Component {
 
   saveFile() {
     fs.writeFile(this.filePath, this.content, { flag: 'w' }, (err) => {
-      if (err) console.warn(`File error:\n${err}`)
+      // If files directory doesn't exist, create it and try again
+      if (err) {
+        const filesDir = path.join(app.getPath('userData'), 'files')
+        if (!fs.existsSync(filesDir)) {
+          fs.mkdirSync(filesDir)
+          this.saveFile()
+        }
+        else {
+          console.warn(`Umm, this appears to be a REAL error:\n${err}`)
+        }
+      }
     })
   }
 
