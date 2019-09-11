@@ -1,6 +1,7 @@
 import React from 'react'
 import { addProject } from '../state/actions'
 import { connect } from 'react-redux'
+import Project from '../models/Project'
 
 class NewProject extends React.Component {
   state = {
@@ -49,7 +50,7 @@ class NewProject extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addProject: (title) => dispatch(addProject(title))
+  addProject: (title) => dispatch(addProject(new Project(title)))
 })
 
 export default connect(null, mapDispatchToProps)(NewProject)

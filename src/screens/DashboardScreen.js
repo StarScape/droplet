@@ -19,6 +19,13 @@ class DashboardScreen extends React.Component {
     this.setState({ newProject: false })
   }
 
+  // Returns project list as an array, sorted by last modified date
+  get projects() {
+    return Object.keys(this.props.projects).map((name) =>
+      this.props.projects[name]
+    ).concat().sort((a, b) => b.date - a.date)
+  }
+
   render() {
     const { projects } = this.props
 
@@ -36,8 +43,8 @@ class DashboardScreen extends React.Component {
               />
           : null }
 
-          {Object.keys(projects).map((projectName) =>
-            <ProjectLink key={projectName} project={projects[projectName]} />
+          {this.projects.map(project =>
+            <ProjectLink key={project.name} project={project} />
           )}
         </div>
 

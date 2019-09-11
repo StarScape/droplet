@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
+import { setProjectProperty } from '../state/actions'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
 
-function EditorScreen({ store, location, history }) {
+function EditorScreen({ store, updateModified, location, history }) {
   const [saved, setSaved] = useState(true)
 
   return (
@@ -14,7 +16,10 @@ function EditorScreen({ store, location, history }) {
         store={store}
         file={location.state.file}
         onUpdate={() => setSaved(false)}
-        onSave={() => setSaved(true)}
+        onSave={() => {
+          setSaved(true)
+          updateModified()
+        }}
       />
       <Actionbar store={store} />
       <WordCount store={store} />
@@ -32,4 +37,12 @@ function EditorScreen({ store, location, history }) {
   )
 }
 
-export default withRouter(EditorScreen)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { project } = ownProps.location.state
+  return {
+    // Update the modified date each time on the project each time the file is changed
+    updateModified: () => dispatch(setProjectProperty(project.name, 'date', Date.now()))
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(EditorScreen))

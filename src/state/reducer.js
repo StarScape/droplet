@@ -71,8 +71,8 @@ const reducer = (state = defaultState, action) => {
         wordCount: payload,
       }
     case Types.ADD_PROJECT: {
-      const newProjectName = payload
-      if (state.projects[newProjectName]) {
+      const newProject = payload
+      if (state.projects[newProject.name]) {
         throw new Error("Project with this name already exists")
       }
 
@@ -80,17 +80,28 @@ const reducer = (state = defaultState, action) => {
         ...state,
         projects: {
           ...state.projects,
-          [newProjectName]: {
-            name: newProjectName,
-          },
+          [newProject.name]: newProject
         },
         chapters: {
           ...state.chapters,
-          [newProjectName]: {
+          [newProject.name]: {
             ordered: [],
             unordered: [],
           }
         }
+      }
+    }
+    case Types.SET_PROJECT_PROPERTY: {
+      const { projectName, prop, val } = payload
+      const projectUpdated = { ...state.projects[projectName] }
+      projectUpdated[prop] = val
+
+      return {
+        ...state,
+        projects: {
+          ...state.projects,
+          [projectName]: projectUpdated,
+        },
       }
     }
     case Types.DELETE_PROJECT: {

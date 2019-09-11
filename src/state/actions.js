@@ -3,6 +3,7 @@ export const Types = {
   SET_COMMAND_STATE: "SET_COMMAND_STATE",
   SET_WORD_COUNT: "SET_WORD_COUNT",
   ADD_PROJECT: "ADD_PROJECT",
+  SET_PROJECT_PROPERTY: "SET_PROJECT_PROPERTY",
   DELETE_PROJECT: "DELETE_PROJECT",
   ADD_CHAPTER: "ADD_CHAPTER",
   DELETE_CHAPTER: "DELETE_CHAPTER",
@@ -25,9 +26,14 @@ export const setWordCount = (count) => ({
   payload: count,
 })
 
-export const addProject = (projectName) => ({
+export const addProject = (project) => ({
   type: Types.ADD_PROJECT,
-  payload: projectName,
+  payload: project,
+})
+
+export const setProjectProperty = (projectName, prop, val) => ({
+  type: Types.SET_PROJECT_PROPERTY,
+  payload: { projectName, prop, val },
 })
 
 export const deleteProject = (projectName) => ({
