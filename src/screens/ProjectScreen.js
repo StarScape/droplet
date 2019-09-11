@@ -1,17 +1,17 @@
 import React from 'react'
+import Sortable from 'react-sortablejs';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import ChapterLink from '../components/ChapterLink'
 import NewChapter from '../components/NewChapter'
 
 class ProjectScreen extends React.Component {
-  state = {
-    newChapter: false,
-  }
-
   constructor(props) {
     super(props)
-    this.highestChapter = 1
+    this.state = {
+      newChapter: false,
+      chapters: props.chapters,
+    }
   }
 
   handleNewChapter = () => {
@@ -22,8 +22,21 @@ class ProjectScreen extends React.Component {
     this.setState({ newChapter: false })
   }
 
+  handleSortChange = (indexes) => {
+    const { ordered } = this.state.chapters
+    this.setState({
+      newChapter: false,
+      chapters: {
+        ...this.state.chapters,
+        ordered: indexes.map(i => ordered[Number(i)])
+      }
+    })
+
+    // TODO: dispatch and save rearrangement
+  }
+
   render() {
-    const { location, chapters } = this.props
+    const { location } = this.props
     const { project } = location.state
 
     return (
@@ -32,30 +45,42 @@ class ProjectScreen extends React.Component {
           <button onClick={this.handleNewChapter}>CHAPTER +</button>
         </div>
 
-        <div className='grid-container'>
+        <Sortable
+          // Sortable options (https://github.com/RubaXa/Sortable#options)
+          className='grid-container'
+          options={{
+            animation: 150,
+            ghostClass: 'sortable-ghost',
+            dragClass: 'sortable-drag',
+            filter: '.new-chapter',
+
+            // Necessary to allow opacity: 1. HTML5 DnD provides no mechanism for this.
+            forceFallback: true,
+
+            // Auto-close new chapter dialog
+            onStart: () => this.setState({ newChapter: false })
+          }}
+          onChange={this.handleSortChange}
+        >
           {this.state.newChapter ?
             <NewChapter
               dispatch={this.props.dispatch}
               project={project}
               handleSaved={this.handleNewChapterSaved}
-              placeholder={`Chapter ${this.highestChapter + 1}`}
+              placeholder={`Chapter ${this.state.chapters.ordered.length + 1}`}
               />
           : null }
 
-          {chapters.ordered.map((chapter, i) => {
-            this.highestChapter = i + 1
-
-            return (
-              <ChapterLink
-                key={`chapter-${i}`}
-                project={project}
-                chapter={chapter}
-                number={i}
-                />
-            )
-          }
+          {this.state.chapters.ordered.map((chapter, i) =>
+            <ChapterLink
+              key={`chapter-${i}`}
+              data-id={i}
+              project={project}
+              chapter={chapter}
+              number={i}
+            />
           )}
-        </div>
+        </Sortable>
 
         <Link to='/dashboard'>Back</Link>
       </div>

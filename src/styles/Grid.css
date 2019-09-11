@@ -7,6 +7,14 @@
   grid-gap: 1rem 1rem;
 }
 
+.sortable-ghost {
+  visibility: hidden;
+}
+
+.sortable-drag {
+  opacity: 1 !important;
+}
+
 .grid-item {
   border: 1px solid grey;
 }

@@ -58,11 +58,16 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
     - Project Model ✔️
     - Sort on dashboard accordingly ✔️
   - Reorder chapters w/ drag and drop
-    - Take a look at Sortable.js
+    - Take a look at Sortable.js ✔️
+    - Don't allow dragging of new chapter div
+    - Clean up CSS
+    - Dispatch on re-sort
+  - Reorganize dates and any other funcs into utils 
+  - Cancel creation of project/chapter
   - Ordered / unordered chapters? ❗
-  - Reload where you left off
-  - Project specific dictionaries
   - Delete `files.js`
+- Reload where you left off
+- Project specific dictionaries
 - Dashboard ✔️
 - Autosave ✔️
 - 💎 Footnotes

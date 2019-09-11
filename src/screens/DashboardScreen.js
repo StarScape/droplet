@@ -8,7 +8,7 @@ import '../styles/Dashboard.css'
 
 class DashboardScreen extends React.Component {
   state = {
-    newProject: false
+    newProject: false,
   }
 
   handleNewProject = () => {

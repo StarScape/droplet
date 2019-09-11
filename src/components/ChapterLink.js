@@ -6,10 +6,10 @@ import { connect } from 'react-redux'
 import '../styles/Grid.css'
 
 function ChapterLink(props) {
-  const { chapter, project, number, deleteChapter } = props
+  const { chapter, project, number, deleteChapter, ...rest } = props
 
   return (
-    <div className='grid-item'>
+    <div className='grid-item' {...rest}>
       <Link
         key={`chapter-${number}`}
         to={{
