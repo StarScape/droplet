@@ -53,16 +53,17 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
   - Chapter name autofill ✔️
   - Autosave ✔️
   - Save before going back ❗
-  - Sort projects by most recently modified
+  - Sort projects by most recently modified ✔️
     - Reducer to set project property ✔️
     - Project Model ✔️
     - Sort on dashboard accordingly ✔️
-  - Ordered/unordered chapters w/ drag and drop
-  - Cache project data on exit and reload on open
+  - Reorder chapters w/ drag and drop
+  - Ordered / unordered chapters? ❗
+  - Reload where you left off 
   - Project specific dictionaries
   - Delete `files.js`
-- Dashboard
-- Autosave
+- Dashboard ✔️
+- Autosave ✔️
 - 💎 Footnotes
 
 # Sprint 4 - Aesthetics
