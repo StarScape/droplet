@@ -12,7 +12,8 @@ class NewChapter extends React.Component {
     }
   }
 
-  handleSave = () => {
+  handleSave = (e) => {
+    e.preventDefault()
     this.props.addChapter(this.state.title)
     this.props.handleSaved()
   }
@@ -28,7 +29,7 @@ class NewChapter extends React.Component {
       <div className='grid-item'>
         <div className='grid-item-content'>
           <form onSubmit={this.handleSave}>
-            <input type='text' size='10' value={this.state.title} onChange={this.handleTitleChange} />
+            <input autoFocus type='text' size='10' value={this.state.title} onChange={this.handleTitleChange} />
             <input type='submit' value='Save' />
           </form>
 

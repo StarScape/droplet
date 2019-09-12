@@ -74,7 +74,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "clear-persist": "rm ~/.config/capstone/persist%3Aproject-data"
   },
   "eslintConfig": {
     "extends": "react-app"

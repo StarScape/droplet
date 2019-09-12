@@ -9,7 +9,8 @@ class NewProject extends React.Component {
     error: null,
   }
 
-  handleSave = () => {
+  handleSave = (e) => {
+    e.preventDefault()
     try {
       this.props.addProject(this.state.title)
       this.props.handleSaved()
