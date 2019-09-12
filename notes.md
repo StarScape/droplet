@@ -59,9 +59,11 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
     - Sort on dashboard accordingly ✔️
   - Reorder chapters w/ drag and drop
     - Take a look at Sortable.js ✔️
-    - Don't allow dragging of new chapter div
-    - Clean up CSS
-    - Dispatch on re-sort
+    - Don't allow dragging of new chapter div ✔️
+    - Clean up CSS ✔️
+    - Dispatch on re-sort ✔️
+    - Focus on text area when creating & enable enter
+    - Can't select textarea after creating >2 chapters? Fix.
   - Reorganize dates and any other funcs into utils 
   - Cancel creation of project/chapter
   - Ordered / unordered chapters? ❗

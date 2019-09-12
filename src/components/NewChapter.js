@@ -27,8 +27,10 @@ class NewChapter extends React.Component {
     return (
       <div className='grid-item new-chapter'>
         <div className='grid-item-content'>
-          <input type='text' size='10' value={this.state.title} onChange={this.handleTitleChange} />
-          <input type='submit' value='Save' onClick={this.handleSave} />
+          <form onSubmit={this.handleSave}>
+            <input type='text' size='10' value={this.state.title} onChange={this.handleTitleChange} />
+            <input type='submit' value='Save' />
+          </form>
 
           {this.state.error ?
             <div className='grid-create-error'>{this.state.errorMessage}</div>

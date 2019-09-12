@@ -2,6 +2,7 @@ import React from 'react'
 import Sortable from 'react-sortablejs';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { reorderChapters, setProjectProperty } from '../state/actions'
 import ChapterLink from '../components/ChapterLink'
 import NewChapter from '../components/NewChapter'
 
@@ -10,7 +11,6 @@ class ProjectScreen extends React.Component {
     super(props)
     this.state = {
       newChapter: false,
-      chapters: props.chapters,
     }
   }
 
@@ -23,16 +23,10 @@ class ProjectScreen extends React.Component {
   }
 
   handleSortChange = (indexes) => {
-    const { ordered } = this.state.chapters
-    this.setState({
-      newChapter: false,
-      chapters: {
-        ...this.state.chapters,
-        ordered: indexes.map(i => ordered[Number(i)])
-      }
-    })
-
-    // TODO: dispatch and save rearrangement
+    const { ordered } = this.props.chapters
+    const reordered = indexes.map(i => ordered[Number(i)])
+    this.props.reorderChapters(reordered)
+    this.props.updateModified()
   }
 
   render() {
@@ -67,11 +61,11 @@ class ProjectScreen extends React.Component {
               dispatch={this.props.dispatch}
               project={project}
               handleSaved={this.handleNewChapterSaved}
-              placeholder={`Chapter ${this.state.chapters.ordered.length + 1}`}
+              placeholder={`Chapter ${this.props.chapters.ordered.length + 1}`}
               />
           : null }
 
-          {this.state.chapters.ordered.map((chapter, i) =>
+          {this.props.chapters.ordered.map((chapter, i) =>
             <ChapterLink
               key={`chapter-${i}`}
               data-id={i}
@@ -88,10 +82,16 @@ class ProjectScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state, { match, location }) => {
+const mapStateToProps = (state, { match, location }) => ({
+  chapters: state.chapters[location.state.project.name]
+})
+
+const mapDispatchToProps = (dispatch, { location }) => {
+  const { project } = location.state
   return {
-    chapters: state.chapters[location.state.project.name]
+    reorderChapters: reordered => dispatch(reorderChapters(project.name, reordered)),
+    updateModified: () => dispatch(setProjectProperty(project.name, 'date', Date.now()))
   }
 }
 
-export default withRouter(connect(mapStateToProps)(ProjectScreen))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProjectScreen))

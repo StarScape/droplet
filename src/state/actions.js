@@ -6,6 +6,7 @@ export const Types = {
   SET_PROJECT_PROPERTY: "SET_PROJECT_PROPERTY",
   DELETE_PROJECT: "DELETE_PROJECT",
   ADD_CHAPTER: "ADD_CHAPTER",
+  REORDER_CHAPTERS: "REORDER_CHAPTERS",
   DELETE_CHAPTER: "DELETE_CHAPTER",
 }
 
@@ -44,6 +45,11 @@ export const deleteProject = (projectName) => ({
 export const addChapter = (projectName, chapter, ordered=true) => ({
   type: Types.ADD_CHAPTER,
   payload: { projectName, chapter, ordered },
+})
+
+export const reorderChapters = (projectName, reordered) => ({
+  type: Types.REORDER_CHAPTERS,
+  payload: { projectName, reordered },
 })
 
 export const deleteChapter = (projectName, id) => ({

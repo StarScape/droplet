@@ -121,14 +121,26 @@ const reducer = (state = defaultState, action) => {
       const chapterListUpdated = { ...state.chapters[projectName] }
       chapterListUpdated[ordered ? 'ordered' : 'unordered'].push(chapter)
 
-      console.log(chapterListUpdated);
-
       return {
         ...state,
         chapters: {
           ...state.chapters,
           [projectName]: chapterListUpdated
         },
+      }
+    }
+    case Types.REORDER_CHAPTERS: {
+      const { projectName, reordered } = payload
+
+      return {
+        ...state,
+        chapters: {
+          ...state.chapters,
+          [projectName]: {
+            ...state.chapters[projectName],
+            ordered: reordered
+          }
+        }
       }
     }
     case Types.DELETE_CHAPTER: {
