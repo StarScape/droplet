@@ -46,7 +46,7 @@ class ProjectScreen extends React.Component {
             animation: 150,
             ghostClass: 'sortable-ghost',
             dragClass: 'sortable-drag',
-            filter: '.new-chapter',
+            draggable: '.chapter-link',
 
             // Necessary to allow opacity: 1. HTML5 DnD provides no mechanism for this.
             forceFallback: true,

@@ -25,7 +25,7 @@ class NewChapter extends React.Component {
 
   render() {
     return (
-      <div className='grid-item new-chapter'>
+      <div className='grid-item'>
         <div className='grid-item-content'>
           <form onSubmit={this.handleSave}>
             <input type='text' size='10' value={this.state.title} onChange={this.handleTitleChange} />

@@ -9,7 +9,7 @@ function ChapterLink(props) {
   const { chapter, project, number, deleteChapter, ...rest } = props
 
   return (
-    <div className='grid-item' {...rest}>
+    <div className='grid-item chapter-link' {...rest}>
       <Link
         key={`chapter-${number}`}
         to={{
