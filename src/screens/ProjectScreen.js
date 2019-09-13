@@ -40,8 +40,9 @@ class ProjectScreen extends React.Component {
         </div>
 
         <Sortable
-          // Sortable options (https://github.com/RubaXa/Sortable#options)
           className='grid-container'
+
+          // Sortable options (https://github.com/RubaXa/Sortable#options)
           options={{
             animation: 150,
             ghostClass: 'sortable-ghost',
@@ -51,7 +52,7 @@ class ProjectScreen extends React.Component {
             // Necessary to allow opacity: 1. HTML5 DnD provides no mechanism for this.
             forceFallback: true,
 
-            // Auto-close new chapter dialog
+            // Auto-close new chapter dialog when dragging
             onStart: () => this.setState({ newChapter: false })
           }}
           onChange={this.handleSortChange}

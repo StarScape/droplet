@@ -65,6 +65,7 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
     - Focus on text area when creating & enable enter ✔️
     - Can't select textarea after creating >2 chapters? Fix. Might be the Sortable.js filter? ✔️
   - Reorganize dates and any other funcs into utils 
+  - Reorganize reducer so that modified date is automatically updated when anything to do with a project is changed
   - Cancel creation of project/chapter
   - Ordered / unordered chapters? ❗
   - Delete `files.js`

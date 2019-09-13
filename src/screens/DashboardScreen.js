@@ -19,11 +19,11 @@ class DashboardScreen extends React.Component {
     this.setState({ newProject: false })
   }
 
-  // Returns project list as an array, sorted by last modified date
+  // Returns project list as an array, sorted by most recently modified
   get projects() {
     return Object.keys(this.props.projects).map((name) =>
       this.props.projects[name]
-    ).concat().sort((a, b) => b.date - a.date)
+    ).concat().sort((a, b) => b.dateModified - a.dateModified)
   }
 
   render() {
@@ -38,7 +38,7 @@ class DashboardScreen extends React.Component {
             <NewProject
               dispatch={this.props.dispatch}
               handleSaved={this.handleNewProjectSaved}
-              />
+            />
           : null }
 
           {this.projects.map(project =>
