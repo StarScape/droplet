@@ -67,9 +67,9 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
   - Reorganize dates and any other funcs into utils ✔️
   - Reorganize reducer so that modified date is automatically updated when anything to do with a project is changed
   - Look into bound action creators ✔️
-  - Cancel creation of project/chapter
+  - Cancel creation of project/chapter ✔️
   - Ordered / unordered chapters? ❗
-  - Delete `files.js`
+  - Delete `files.js` ✔️
 - Reload where you left off
 - Project specific dictionaries
 - Dashboard ✔️
