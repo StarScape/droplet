@@ -19,6 +19,10 @@ class DashboardScreen extends React.Component {
     this.setState({ newProject: false })
   }
 
+  cancelProject = () => {
+    this.setState({ newProject: false })
+  }
+
   // Returns project list as an array, sorted by most recently modified
   get projects() {
     return Object.keys(this.props.projects).map((name) =>
@@ -28,7 +32,7 @@ class DashboardScreen extends React.Component {
 
   render() {
     return (
-      <div>
+      <div onKeyDown={this.handleKeyDown}>
         <div>
           <button onClick={this.handleNewProject}>PROJECT +</button>
         </div>
@@ -38,8 +42,9 @@ class DashboardScreen extends React.Component {
             <NewProject
               dispatch={this.props.dispatch}
               handleSaved={this.handleNewProjectSaved}
+              handleCancel={this.cancelProject}
             />
-          : null }
+          : null}
 
           {this.projects.map(project =>
             <ProjectLink key={project.name} project={project} />

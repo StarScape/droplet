@@ -7,37 +7,37 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 ## Roadmap
 
 # Sprint 1 - Basics
-- Italics ✔️, bold ✔️, underline ✔️
-- Headings ✔️
-- Split into paragraphs based on indentation ✔️
-- Alignment ✔️
-- Move pell code into Editor component ✔️
-- Nice interface for keyboard shortcuts ✔️
-- 💎 Save ✔️ / load markdown ✔️
-  - Set up Redux store ✔️
-  - Replace editor component when loading new file ❗
+  - Italics ✔️, bold ✔️, underline ✔️
+  - Headings ✔️
+  - Split into paragraphs based on indentation ✔️
+  - Alignment ✔️
+  - Move pell code into Editor component ✔️
+  - Nice interface for keyboard shortcuts ✔️
+  - 💎 Save ✔️ / load markdown ✔️
+    - Set up Redux store ✔️
+    - Replace editor component when loading new file ❗
 
 # Sprint 2 - Advanced Text Editing
-- Break actionbar into separate component ✔️
-- Cleanup
-  - Put commands into Editor.js ✔️, expose in globalActions ✔️
-  - Remove dispatch import from Actionbar ✔️
-  - Change src/actions.js to globalActions.js ✔️
-  - Prevent default for keyboard shortcuts and call editor function ✔️
-- Buttons and state for justification ✔️
-- Format/edit menu buttons ✔️
-- Automatic list formatting
-- Persist editing state after hitting enter (e.g. while typing a header) ❌
-- Word count
-  - Basic functionality ✔️
-  - Where to put it? ✔️
-  - Word count component, real time ✔️
-  - Fix bug where word count won't go back to zero ✔️
-  - Use mapDispatchToProps
-  - Fix bugginess ❗
-- 💎 Spellcheck
-  - Basics ✔️
-  - Don't spellcheck capitalized words ❗
+  - Break actionbar into separate component ✔️
+  - Cleanup
+    - Put commands into Editor.js ✔️, expose in globalActions ✔️
+    - Remove dispatch import from Actionbar ✔️
+    - Change src/actions.js to globalActions.js ✔️
+    - Prevent default for keyboard shortcuts and call editor function ✔️
+  - Buttons and state for justification ✔️
+  - Format/edit menu buttons ✔️
+  - Automatic list formatting
+  - Persist editing state after hitting enter (e.g. while typing a header) ❌
+  - Word count
+    - Basic functionality ✔️
+    - Where to put it? ✔️
+    - Word count component, real time ✔️
+    - Fix bug where word count won't go back to zero ✔️
+    - Use mapDispatchToProps
+    - Fix bugginess ❗
+  - 💎 Spellcheck
+    - Basics ✔️
+    - Don't spellcheck capitalized words ❗
 
 # Sprint 3 - Meta Features
 - Pagination (with on/off) ❗
@@ -64,8 +64,9 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
     - Dispatch on re-sort ✔️
     - Focus on text area when creating & enable enter ✔️
     - Can't select textarea after creating >2 chapters? Fix. Might be the Sortable.js filter? ✔️
-  - Reorganize dates and any other funcs into utils 
+  - Reorganize dates and any other funcs into utils ✔️
   - Reorganize reducer so that modified date is automatically updated when anything to do with a project is changed
+  - Look into bound action creators ✔️
   - Cancel creation of project/chapter
   - Ordered / unordered chapters? ❗
   - Delete `files.js`
