@@ -1,4 +1,5 @@
 import React from 'react'
+import InputHistory from '../utils/InputHistory'
 import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
@@ -24,6 +25,9 @@ export default class Editor extends React.Component {
     this.store = props.store
     this.contentRef = React.createRef()
     this.filePath = path.join(app.getPath('userData'), 'files', props.file)
+
+    this.inputHistory = new InputHistory(10)
+    this.autocompleteActive = true
   }
 
   get content() {
@@ -114,12 +118,54 @@ export default class Editor extends React.Component {
     this.store.dispatch(setWordCount(words))
   }
 
+  // Move cursor by n (positive or negative) chars in documents
+  // Shamelessly stolen from: https://stackoverflow.com/questions/6249095
+  moveCursor(n) {
+    const range = document.createRange()
+    const sel = window.getSelection()
+    range.setStart(sel.focusNode, sel.focusOffset+n)
+    range.collapse(true)
+    sel.removeAllRanges()
+    sel.addRange(range)
+  }
+
+  // Deletes the last n chars in the document and replaces them with replacement
+  // Example use case: '-- ' is replaced with '—' (em dash)
+  deleteAndReplace (n, replacement) {
+    // Turn off autocomplete so that these operations don't get triggered as events...
+    this.autocompleteActive = false
+
+    for (let i = 0; i < n; i++) {
+      this.exec('delete')
+    }
+
+    this.exec('insertText', replacement)
+
+    // ...And turn it back on again when we're done
+    this.autocompleteActive = true
+  }
+
+  checkAutocomplete (event) {
+    if (this.autocompleteActive) {
+      this.inputHistory.push(event.data)
+
+      if (this.inputHistory.lastTypedWas('-', '-', ' ')) {
+        this.deleteAndReplace(3, '—')
+      }
+      else if (this.inputHistory.lastTypedWas('-', '-', ' ', null)) {
+        this.deleteAndReplace(1, '--')
+      }
+
+    }
+  }
+
   handleInput = (event) => {
     const content = this.content
     const { target: { firstChild } } = event
     if (firstChild && firstChild.nodeType === 3) this.exec('formatBlock', '<p>')
     else if (content.innerHTML === '<br>') content.innerHTML = ''
 
+    this.checkAutocomplete(event.nativeEvent)
     this.updateWordCount()
     this.props.onUpdate()
     this.checkAutosave()
