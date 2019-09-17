@@ -22,6 +22,10 @@ class ProjectScreen extends React.Component {
     this.setState({ newChapter: false })
   }
 
+  cancelChapter = () => {
+    this.setState({ newChapter: false })
+  }
+
   handleSortChange = (indexes) => {
     const { ordered } = this.props.chapters
     const reordered = indexes.map(i => ordered[Number(i)])
@@ -62,6 +66,7 @@ class ProjectScreen extends React.Component {
               dispatch={this.props.dispatch}
               project={project}
               handleSaved={this.handleNewChapterSaved}
+              handleCancel={this.cancelChapter}
               placeholder={`Chapter ${this.props.chapters.ordered.length + 1}`}
               />
           : null }

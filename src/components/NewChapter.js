@@ -24,12 +24,24 @@ class NewChapter extends React.Component {
     })
   }
 
+  // Cancel new chapter creation on ESC pressed
+  handleKeyDown = (e) => {
+    if (e.keyCode === 27) {
+      this.props.handleCancel()
+    }
+  }
+
   render() {
     return (
-      <div className='grid-item'>
+      <div className='grid-item' onKeyDown={this.handleKeyDown}>
         <div className='grid-item-content'>
           <form onSubmit={this.handleSave}>
-            <input autoFocus type='text' size='10' value={this.state.title} onChange={this.handleTitleChange} />
+            <input autoFocus type='text' size='15' value={this.state.title} onChange={this.handleTitleChange} />
+            <input
+              type='button'
+              onClick={this.props.handleCancel}
+              value='Cancel'
+            />
             <input type='submit' value='Save' />
           </form>
 
