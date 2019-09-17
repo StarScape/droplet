@@ -114,11 +114,6 @@ export default class Editor extends React.Component {
     this.store.dispatch(setWordCount(words))
   }
 
-  // Updates the last date the project was modified
-  updateProjectModified = () => {
-
-  }
-
   handleInput = (event) => {
     const content = this.content
     const { target: { firstChild } } = event
@@ -126,7 +121,6 @@ export default class Editor extends React.Component {
     else if (content.innerHTML === '<br>') content.innerHTML = ''
 
     this.updateWordCount()
-    this.updateProjectModified()
     this.props.onUpdate()
     this.checkAutosave()
   }

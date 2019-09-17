@@ -1,5 +1,5 @@
 import React from 'react'
-import { addChapter } from '../state/actions'
+import { addChapter, updateProjectModified } from '../state/actions'
 import { connect } from 'react-redux'
 import { Chapter } from '../models/Chapters'
 
@@ -55,7 +55,10 @@ class NewChapter extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addChapter: (title) => dispatch(addChapter(ownProps.project.name, new Chapter(title)))
+  addChapter: (title) => {
+    dispatch(addChapter(ownProps.project.name, new Chapter(title)))
+    dispatch(updateProjectModified(ownProps.project.name))
+  }
 })
 
 export default connect(null, mapDispatchToProps)(NewChapter)

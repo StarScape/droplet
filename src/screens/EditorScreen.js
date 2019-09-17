@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { setProjectProperty } from '../state/actions'
+import { updateProjectModified } from '../state/actions'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const { project } = ownProps.location.state
   return {
     // Update the modified date each time on the project each time the file is changed
-    updateModified: () => dispatch(setProjectProperty(project.name, 'date', Date.now()))
+    updateModified: () => dispatch(updateProjectModified(project.name))
   }
 }
 

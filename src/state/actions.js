@@ -56,3 +56,7 @@ export const deleteChapter = (projectName, id) => ({
   type: Types.DELETE_CHAPTER,
   payload: { projectName, id },
 })
+
+// Update the project last modified date with current date
+export const updateProjectModified = (projectName, date) =>
+  setProjectProperty(projectName, 'dateModified', Date.now())

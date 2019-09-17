@@ -2,7 +2,7 @@ import React from 'react'
 import Sortable from 'react-sortablejs';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { reorderChapters, setProjectProperty } from '../state/actions'
+import { reorderChapters, updateProjectModified } from '../state/actions'
 import ChapterLink from '../components/ChapterLink'
 import NewChapter from '../components/NewChapter'
 
@@ -96,7 +96,7 @@ const mapDispatchToProps = (dispatch, { location }) => {
   const { project } = location.state
   return {
     reorderChapters: reordered => dispatch(reorderChapters(project.name, reordered)),
-    updateModified: () => dispatch(setProjectProperty(project.name, 'date', Date.now()))
+    updateModified: () => dispatch(updateProjectModified(project.name))
   }
 }
 

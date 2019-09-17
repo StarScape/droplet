@@ -94,6 +94,7 @@ const reducer = (state = defaultState, action) => {
     case Types.SET_PROJECT_PROPERTY: {
       const { projectName, prop, val } = payload
       const projectUpdated = { ...state.projects[projectName] }
+
       projectUpdated[prop] = val
 
       return {
