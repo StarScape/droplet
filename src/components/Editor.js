@@ -118,6 +118,27 @@ export default class Editor extends React.Component {
     this.store.dispatch(setWordCount(words))
   }
 
+  // Returns char n spaces before the cursor
+  charBeforeCursor(n=1) {
+    const sel = window.getSelection()
+    if (!sel.isCollapsed) return null
+
+    const { anchorNode, anchorOffset } = sel
+    if (anchorOffset-n > -1) {
+      return anchorNode.wholeText[anchorOffset-n]
+    }
+    return '\n'
+  }
+
+  // Returns char after the cursor
+  charAfterCursor() {
+    const sel = window.getSelection()
+    if (!sel.isCollapsed) return null
+
+    const { focusNode, focusOffset } = sel
+    return focusNode.wholeText[focusOffset]
+  }
+
   // Move cursor by n (positive or negative) chars in documents
   // Shamelessly stolen from: https://stackoverflow.com/questions/6249095
   moveCursor(n) {
@@ -217,7 +238,19 @@ export default class Editor extends React.Component {
         this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_DQUOTE)
       }
 
-      // We don't auto-close single-quotes, bc that's also an apostrophe...and that would be madness.
+      // We only auto-close ' if the element before the cursor is a space, em space, or newline
+      else if (this.inputHistory.lastTypedWas("'")) {
+        const twoBefore = this.charBeforeCursor(2)
+        if (twoBefore === ' ' || twoBefore === '\n' || twoBefore === '\u2003') {
+          this.addAfterCursor("'")
+          this.inputHistory.push(InputTypes.AUTOCLOSE_SQUOTE)
+        }
+      }
+      else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_SQUOTE, InputTypes.BACKSPACE)) {
+        this.removeAround()
+        this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_SQUOTE)
+      }
+
     }
   }
 
