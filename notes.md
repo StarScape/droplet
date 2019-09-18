@@ -89,8 +89,8 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 
 # Sprint 5 - Really Super Duper Fancy Text Editing
 - Links (mostly down here because I don't care that much)
-- Autocomplete certain chars (-- to em dash)
-  - Undo autocomplete on backspace
+- Autocomplete certain chars (-- to em dash) ✔️
+  - Undo autocomplete on backspace ✔️
 - Press ", (, ' etc on selection automatically encapsulates it
 - Pressings enter at the end of a paragraph automatically enter-tabs you down into next one (POSSIBLY depending on whether you are using that paragraph style. Check MS/GDocs behavior for guidance.)
 - Smallcaps
@@ -100,6 +100,7 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 - Control+Enter goes to new line
 
 # Sprint 6 - Program Behavior
+- Fix nasty document layout
 - Export/import as .docx (could be a beast...)
 - Settings screen
   - Text justification
