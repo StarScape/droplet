@@ -1,5 +1,5 @@
 import React from 'react'
-import InputHistory from '../utils/InputHistory'
+import { InputHistory, InputTypes } from '../utils/InputHistory'
 import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
@@ -121,12 +121,47 @@ export default class Editor extends React.Component {
   // Move cursor by n (positive or negative) chars in documents
   // Shamelessly stolen from: https://stackoverflow.com/questions/6249095
   moveCursor(n) {
+    // This might still work? Test when you don't want to die from stupidity
+
     const range = document.createRange()
     const sel = window.getSelection()
-    range.setStart(sel.focusNode, sel.focusOffset+n)
-    range.collapse(true)
+    range.setStart(sel.anchorNode, sel.anchorOffset+n)
     sel.removeAllRanges()
     sel.addRange(range)
+
+    // Backup solution just in case
+    // let sel = window.getSelection();
+    // let offset = sel.focusOffset;
+    // let focus = sel.focusNode;
+
+    // focus.textContent += ")"; //setting div's innerText directly creates new
+    // //nodes, which invalidate our selections, so we modify the focusNode directly
+
+    // let range = document.createRange();
+    // range.selectNode(focus);
+    // range.setStart(focus, offset);
+
+    // range.collapse(true);
+    // sel.removeAllRanges();
+    // sel.addRange(range);
+  }
+
+  // Adds specified string and moves cursor back to before it
+  // Used for autocompleting parens, quotes, etc
+  addAfterCursor(str) {
+    this.autocompleteActive = false
+    this.exec('insertText', str)
+    this.moveCursor(-str.length)
+    this.autocompleteActive = true
+  }
+
+  // Remove the char after AND before the cursor. E.g. if the
+  // user types () and then backspaces, it will delete both
+  removeAround() {
+    this.autocompleteActive = false
+    this.exec('forwardDelete')
+    // this.exec('delete') // this works somehow...?
+    this.autocompleteActive = true
   }
 
   // Deletes the last n chars in the document and replaces them with replacement
@@ -146,16 +181,43 @@ export default class Editor extends React.Component {
   }
 
   checkAutocomplete (event) {
+    // To prevent a syntax highlighting error...
+    const OPEN_PAREN = '('
+
     if (this.autocompleteActive) {
       this.inputHistory.push(event.data)
 
+      // -, -, space becomes —
       if (this.inputHistory.lastTypedWas('-', '-', ' ')) {
         this.deleteAndReplace(3, '—')
+        this.inputHistory.push(InputTypes.EXPAND_EM_DASH)
       }
-      else if (this.inputHistory.lastTypedWas('-', '-', ' ', null)) {
+      // ...and backspacing immediately after will undo
+      else if (this.inputHistory.lastTypedWas(InputTypes.EXPAND_EM_DASH, InputTypes.BACKSPACE)) {
         this.deleteAndReplace(1, '--')
       }
+      // ( autcompletes to () with cursor in between
+      else if (this.inputHistory.lastTypedWas(OPEN_PAREN)) {
+        this.addAfterCursor(')')
+        this.inputHistory.push(InputTypes.AUTOCLOSE_PAREN)
+      }
+      // ...and backspacing immediately will delete both
+      else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_PAREN, InputTypes.BACKSPACE)) {
+        this.removeAround()
+        this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_PARENS)
+      }
 
+      // ...and do the same thing for "
+      else if (this.inputHistory.lastTypedWas('"')) {
+        this.addAfterCursor('"')
+        this.inputHistory.push(InputTypes.AUTOCLOSE_DQUOTE)
+      }
+      else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_DQUOTE, InputTypes.BACKSPACE)) {
+        this.removeAround()
+        this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_DQUOTE)
+      }
+
+      // We don't auto-close single-quotes, bc that's also an apostrophe...and that would be madness.
     }
   }
 
@@ -223,6 +285,19 @@ export default class Editor extends React.Component {
         this.exec('insertHTML', "&emsp;")
       },
     })
+
+    if (event.key === 'ArrowRight') {
+      this.inputHistory.push(InputTypes.RIGHT)
+    }
+    else if (event.key === 'ArrowLeft') {
+      this.inputHistory.push(InputTypes.LEFT)
+    }
+    else if (event.key === 'ArrowUp') {
+      this.inputHistory.push(InputTypes.UP)
+    }
+    else if (event.key === 'ArrowDown') {
+      this.inputHistory.push(InputTypes.DOWN)
+    }
 
     // Unsure what this is for, too afraid to delete. TODO: averiguar pa que sirve
     if (event.key === 'Enter' && document.queryCommandValue('formatBlock') === 'blockquote') {

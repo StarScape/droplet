@@ -1,17 +1,38 @@
-export default class InputHistory {
+// It's useful to keep track of what of auto-completions as
+// well, and have an easy way to identify them. We may only want
+// to do something, for example, if the second to last event was a certain autoreplacement
+export const InputTypes = {
+  BACKSPACE: 'BACKSPACE',
+  LEFT: 'LEFT',
+  RIGHT: 'RIGHT',
+  UP: 'UP',
+  DOWN: 'DOWN',
+  EXPAND_EM_DASH: 'EXPAND_EM_DASH',
+  AUTOCLOSE_PAREN: 'AUTOCLOSE_PAREN',
+  AUTOCLOSE_SQUOTE: 'AUTOCLOSE_SQUOTE',
+  AUTOCLOSE_DQUOTE: 'AUTOCLOSE_DQUOTE',
+  REMOVE_AUTOCLOSED_PAREN: 'REMOVE_AUTOCLOSED_PAREN',
+  REMOVE_AUTOCLOSED_DQUOTE: 'REMOVE_AUTOCLOSED_DQUOTE',
+  REMOVE_AUTOCLOSED_SQUOTE: 'REMOVE_AUTOCLOSED_SQUOTE',
+}
+
+export class InputHistory {
   constructor(length) {
     this.length = length
-    this.history = [] //Object.seal(new Array(length))
-    this.items = 0
+    this.history = []
   }
 
   push(item) {
-    if (this.items === this.length) {
+    if (this.history.length === this.length) {
       this.history.shift()
     }
 
-    this.history.push(item)
-    this.items++
+    if (item !== null) {
+      this.history.push(item)
+    }
+    else {
+      this.history.push(InputTypes.BACKSPACE)
+    }
   }
 
   // Returns true if the last typed characters match a list of provided chars
@@ -23,19 +44,12 @@ export default class InputHistory {
     let hIdx = this.history.length-1
 
     for (let i = chars.length-1; i >= 0; i--) {
-      // console.log(`char at: ${i} = ${chars[i]}`);
-      // console.log(`h at: ${hIdx} = ${this.history[hIdx]}`);
-      // console.log(chars[i]);
       if (chars[i] !== this.history[hIdx]) {
         return false
       }
 
       hIdx--
     }
-
-    // console.log()
-    // console.log("<br>")
-    // console.log()
 
     return true
   }
