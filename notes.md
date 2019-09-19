@@ -116,6 +116,14 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 - Mobile apps
 - Reading mode
 
+## Bugs
+
+- Auto-close: currently it relies on input history. Add a mouse click to input history. so that shit isn't fucked
+
+- Pressing tab when italic is active undones italic.
+
+- Opening a file and immediately on the first line hitting ctrl+i and then typing results in a raw `<i>` not wrapped in a paragraph element. POSSIBLE SOLUTION: check for no-enclosing-p on EVERY command. This could be done easily with a lil wrapper function. ANOTHER SOLUTION: the `if (firstChild && firstChild.nodeType === 3)...` line in `handleInput` is calling `formatBlock` if the firstChild is a textNode. Check for italics, bold, etc as well. Either of these should work, you'll have to decide which works better.
+
 ## Todos (independent of the roadmap, but need to get done at some point)
 
 # Architecture

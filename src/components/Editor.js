@@ -2,6 +2,7 @@ import React from 'react'
 import { InputHistory, InputTypes } from '../utils/InputHistory'
 import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
+import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem } from '../utils/other'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
 
 import '../styles/Editor.css'
@@ -53,8 +54,18 @@ export default class Editor extends React.Component {
   bold = () => this.exec('bold')
   underline = () => this.exec('underline')
   strikethrough = () => this.exec('strikeThrough')
-  olist = () => this.exec('insertOrderedList')
-  ulist = () => this.exec('insertUnorderedList')
+  olist = () => {
+    this.exec('insertOrderedList')
+    if (!getEnclosingP(getSelectedElem())) {
+      this.exec('formatBlock', 'p')
+    }
+  }
+  ulist = () => {
+    this.exec('insertUnorderedList')
+    if (!getEnclosingP(getSelectedElem())) {
+      this.exec('formatBlock', 'p')
+    }
+  }
   heading1 = () => this._heading('1')
   heading2 = () => this._heading('2')
   justifyLeft = () => this._justify('left')
@@ -79,7 +90,7 @@ export default class Editor extends React.Component {
     const boldOnNow = document.queryCommandState('bold')
 
     if (boldOnBefore !== boldOnNow) {
-      this.exec('bold')
+      this.bold()
     }
   }
 
@@ -90,6 +101,22 @@ export default class Editor extends React.Component {
     }
     else {
       this.exec(`justify${capitalized}`)
+    }
+  }
+
+  newParagraph() {
+    this.exec('insertParagraph')
+    const range = window.getSelection().getRangeAt(0)
+
+    // This is to deal with a rather bizarre bug where, if currently editing a
+    // list, pressing enter twice will result in editing a new, non-list paragraph,
+    // but one that is INSIDE the same <p> element as the <ul> we were previously editing.
+    // This solves it by checking if the new <p> is inside another <p> (which should never
+    // happen), and shifting it appropriately if so
+    const newParagraph = getEnclosingP(range.startContainer)
+    if (newParagraph.parentNode.nodeName === 'P') {
+      const moved = makeSiblingOf(newParagraph, newParagraph.parentNode)
+      moveCaretToElem(moved)
     }
   }
 
@@ -250,24 +277,36 @@ export default class Editor extends React.Component {
         this.removeAround()
         this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_SQUOTE)
       }
-
     }
   }
 
-  handleInput = (event) => {
-    const content = this.content
-    const { target: { firstChild } } = event
-    if (firstChild && firstChild.nodeType === 3) this.exec('formatBlock', '<p>')
-    else if (content.innerHTML === '<br>') content.innerHTML = ''
-
-    this.checkAutocomplete(event.nativeEvent)
-    this.updateWordCount()
-    this.props.onUpdate()
-    this.checkAutosave()
+  // Add enter, arrow, etc to input history
+  logControlKeys(event) {
+    switch(event.key) {
+      case 'ArrowRight':
+        this.inputHistory.push(InputTypes.RIGHT)
+        break
+      case 'ArrowLeft':
+        this.inputHistory.push(InputTypes.LEFT)
+        break
+      case 'ArrowUp':
+        this.inputHistory.push(InputTypes.UP)
+        break
+      case 'ArrowDown':
+        this.inputHistory.push(InputTypes.DOWN)
+        break
+      case 'Enter':
+        this.inputHistory.push(InputTypes.ENTER)
+        break
+      case 'Backspace':
+        this.inputHistory.push(InputTypes.BACKSPACE)
+        break
+      default: break;
+    }
   }
 
-  handleKeyDown = (event) => {
-    // Keyboard shortcuts
+  // Keyboard shortcuts
+  checkShortcuts (event) {
     shortcutSwitch(event, {
       'ctrl+i': (e) => {
         e.preventDefault()
@@ -318,19 +357,28 @@ export default class Editor extends React.Component {
         this.exec('insertHTML', "&emsp;")
       },
     })
+  }
 
-    if (event.key === 'ArrowRight') {
-      this.inputHistory.push(InputTypes.RIGHT)
+  handleInput = (event) => {
+    const content = this.content
+    const { target: { firstChild } } = event
+    if (firstChild && firstChild.nodeType === 3) this.exec('formatBlock', '<p>')
+    else if (content.innerHTML === '<br>') content.innerHTML = ''
+
+    this.checkAutocomplete(event.nativeEvent)
+    this.updateWordCount()
+    this.props.onUpdate()
+    this.checkAutosave()
+  }
+
+  handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      event.preventDefault()
+      this.newParagraph()
     }
-    else if (event.key === 'ArrowLeft') {
-      this.inputHistory.push(InputTypes.LEFT)
-    }
-    else if (event.key === 'ArrowUp') {
-      this.inputHistory.push(InputTypes.UP)
-    }
-    else if (event.key === 'ArrowDown') {
-      this.inputHistory.push(InputTypes.DOWN)
-    }
+
+    this.checkShortcuts(event)
+    this.logControlKeys(event)
 
     // Unsure what this is for, too afraid to delete. TODO: averiguar pa que sirve
     if (event.key === 'Enter' && document.queryCommandValue('formatBlock') === 'blockquote') {

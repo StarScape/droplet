@@ -3,6 +3,7 @@
 // to do something, for example, if the second to last event was a certain autoreplacement
 export const InputTypes = {
   BACKSPACE: 'BACKSPACE',
+  ENTER: 'ENTER',
   LEFT: 'LEFT',
   RIGHT: 'RIGHT',
   UP: 'UP',
@@ -29,9 +30,6 @@ export class InputHistory {
 
     if (item !== null) {
       this.history.push(item)
-    }
-    else {
-      this.history.push(InputTypes.BACKSPACE)
     }
   }
 

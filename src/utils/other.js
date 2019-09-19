@@ -32,3 +32,33 @@ export const formatModifiedDate = d => {
   return `${years} ${pluralize(years, 'years')} ago`
 }
 
+// Finds the closest parent element of elem which is a <p>
+// If elem is a paragraph, returns elem
+export const getEnclosingP = (elem) => {
+  let e = elem
+  while (e !== null && e.nodeName !== 'P') {
+    e = e.parentNode
+  }
+  if (e && e.nodeName !== 'P') {
+    return null
+  }
+  return e
+}
+
+// Makes a elem1 the next sibling of elem2
+export const makeSiblingOf = (elem1, elem2) => {
+  const parent = elem2.parentNode
+  return parent.insertBefore(elem1, elem2.nextSibling)
+}
+
+export const getSelectedElem = () => window.getSelection().getRangeAt(0).startContainer
+
+// Moves the caret to the given eleme
+export const moveCaretToElem = (elem) => {
+  const range = document.createRange()
+  const sel = window.getSelection()
+  range.setStart(elem, 0)
+  range.collapse(true)
+  sel.removeAllRanges()
+  sel.addRange(range)
+}
