@@ -1,9 +1,3 @@
-## Notes
-
-New idea for the whole metadata mess. In the redux store, have an object called `projectData` or something along those lines. Every time the user changes around their projects, we just modify that in the standard redux way. The trick is to save it to the file system every so often (Maybe use redux-persist? Not sure if that will work with only part of the store). To start with, we can JUST save it on app exit. Don't bother with loading the actual text for each chapter into the store, that can be read from the file system every time we open a doc.
-
-On the other hand, maybe we can just use redux-persist for the whole damn thing?
-
 ## Roadmap
 
 # Sprint 1 - Basics
@@ -15,7 +9,6 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
   - Nice interface for keyboard shortcuts ✔️
   - 💎 Save ✔️ / load markdown ✔️
     - Set up Redux store ✔️
-    - Replace editor component when loading new file ❗
 
 # Sprint 2 - Advanced Text Editing
   - Break actionbar into separate component ✔️
@@ -26,9 +19,9 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
     - Prevent default for keyboard shortcuts and call editor function ✔️
   - Buttons and state for justification ✔️
   - Format/edit menu buttons ✔️
-  - Automatic list formatting
+  - Automatic list formatting ✔️
   - Persist editing state after hitting enter (e.g. while typing a header) ❌
-  - Word count
+  - Word count ✔️
     - Basic functionality ✔️
     - Where to put it? ✔️
     - Word count component, real time ✔️
@@ -88,23 +81,33 @@ On the other hand, maybe we can just use redux-persist for the whole damn thing?
 - 💎 Distraction-free (fullscreen) mode
 
 # Sprint 5 - Really Super Duper Fancy Text Editing
-- Links (mostly down here because I don't care that much)
-- Autocomplete certain chars (-- to em dash) ✔️
+- Autocompletion
+  - (-- to em dash) ✔️
+  - Auto-close (, ", ' (' when not apostrophe) ✔️
   - Undo autocomplete on backspace ✔️
-- Press ", (, ' etc on selection automatically encapsulates it
-- Pressings enter at the end of a paragraph automatically enter-tabs you down into next one (POSSIBLY depending on whether you are using that paragraph style. Check MS/GDocs behavior for guidance.)
+  - Autocomplete unordered lists on "* " ✔️
+  - Autocomplete ordered lists on "1. "
+  - Press ", (, ' with multi-selection automatically encapsulates it
+  - Pressings enter at the end of a paragraph automatically enter-tabs you down into next one (POSSIBLY depending on whether you are using that paragraph style. Check MS/GDocs behavior for guidance.)
+    - Replace em-space with a specially-styled span (maybe?)
+
 - Smallcaps
-- Subscript/superscript?
-- Fix paste (try pasting from the Lorem ipsum generator - it copys a span in)
-- Find and replace
-- Control+Enter goes to new line
+- Subscript/superscript
+- Links (mostly down here because I don't care that much)
+- Control+Enter goes to new line?
 
 # Sprint 6 - Program Behavior
 - Fix nasty document layout
-- Export/import as .docx (could be a beast...)
+  - UL bug ✔️
+  - Italics/bold at start bug
+
+- Fix paste (try pasting from the Lorem ipsum generator - it copys a span in)
+- Export/import as .docx
+- Find and replace
 - Settings screen
   - Text justification
   - Font size
+  - Items on bar (fullscreen and not)
 - Remember the size and location user left window at
 - 💎 Themes (or maybe just option for light/dark mode?)
 

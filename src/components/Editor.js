@@ -228,6 +228,7 @@ export default class Editor extends React.Component {
     this.autocompleteActive = true
   }
 
+  // Looks at input history and sees if it should autocomplete something
   checkAutocomplete (event) {
     // To prevent a syntax highlighting error...
     const OPEN_PAREN = '('
@@ -276,6 +277,12 @@ export default class Editor extends React.Component {
       else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_SQUOTE, InputTypes.BACKSPACE)) {
         this.removeAround()
         this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_SQUOTE)
+      }
+
+      else if (this.inputHistory.lastTypedWas('*', ' ')) {
+        this.deleteAndReplace(2, '')
+        this.ulist()
+        this.inputHistory.push(InputTypes.AUTOCOMPLETE_ULIST)
       }
     }
   }

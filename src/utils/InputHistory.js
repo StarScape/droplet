@@ -1,6 +1,5 @@
-// It's useful to keep track of what of auto-completions as
-// well, and have an easy way to identify them. We may only want
-// to do something, for example, if the second to last event was a certain autoreplacement
+// It's useful to keep track of what of auto-completions as well, and have an easy way to identify them.
+// We may only want to do something, for example, if the second to last event was a certain autoreplacement
 export const InputTypes = {
   BACKSPACE: 'BACKSPACE',
   ENTER: 'ENTER',
@@ -15,6 +14,7 @@ export const InputTypes = {
   REMOVE_AUTOCLOSED_PAREN: 'REMOVE_AUTOCLOSED_PAREN',
   REMOVE_AUTOCLOSED_DQUOTE: 'REMOVE_AUTOCLOSED_DQUOTE',
   REMOVE_AUTOCLOSED_SQUOTE: 'REMOVE_AUTOCLOSED_SQUOTE',
+  AUTOCOMPLETE_ULIST: 'AUTOCOMPLETE_ULIST',
 }
 
 export class InputHistory {
