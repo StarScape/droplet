@@ -86,7 +86,7 @@
   - Auto-close (, ", ' (' when not apostrophe) ✔️
   - Undo autocomplete on backspace ✔️
   - Autocomplete unordered lists on "* " ✔️
-  - Autocomplete ordered lists on "1. "
+  - Autocomplete ordered lists on "1. " ✔️
   - Press ", (, ' with multi-selection automatically encapsulates it
   - Pressings enter at the end of a paragraph automatically enter-tabs you down into next one (POSSIBLY depending on whether you are using that paragraph style. Check MS/GDocs behavior for guidance.)
     - Replace em-space with a specially-styled span (maybe?)
@@ -102,7 +102,7 @@
   - Italics/bold at start bug
 
 - Fix paste (try pasting from the Lorem ipsum generator - it copys a span in)
-- Export/import as .docx
+- Export/import as .docx - PANDOC
 - Find and replace
 - Settings screen
   - Text justification
