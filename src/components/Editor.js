@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputHistory, InputTypes } from '../utils/InputHistory'
+import { InputHistory, Inputs } from '../utils/InputHistory'
 import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
 import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem } from '../utils/other'
@@ -235,54 +235,64 @@ export default class Editor extends React.Component {
 
     if (this.autocompleteActive) {
       this.inputHistory.push(event.data)
+      const lastTypedWas = this.inputHistory.lastTypedWas.bind(this.inputHistory)
 
       // -, -, space becomes —
-      if (this.inputHistory.lastTypedWas('-', '-', ' ')) {
+      if (lastTypedWas('-', '-', ' ')) {
         this.deleteAndReplace(3, '—')
-        this.inputHistory.push(InputTypes.EXPAND_EM_DASH)
+        this.inputHistory.push(Inputs.EXPAND_EM_DASH)
       }
       // ...and backspacing immediately after will undo
-      else if (this.inputHistory.lastTypedWas(InputTypes.EXPAND_EM_DASH, InputTypes.BACKSPACE)) {
+      else if (lastTypedWas(Inputs.EXPAND_EM_DASH, Inputs.BACKSPACE)) {
         this.deleteAndReplace(1, '--')
       }
       // ( autcompletes to () with cursor in between
-      else if (this.inputHistory.lastTypedWas(OPEN_PAREN)) {
+      else if (lastTypedWas(OPEN_PAREN)) {
         this.addAfterCursor(')')
-        this.inputHistory.push(InputTypes.AUTOCLOSE_PAREN)
+        this.inputHistory.push(Inputs.AUTOCLOSE_PAREN)
       }
       // ...and backspacing immediately will delete both
-      else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_PAREN, InputTypes.BACKSPACE)) {
+      else if (lastTypedWas(Inputs.AUTOCLOSE_PAREN, Inputs.BACKSPACE)) {
         this.removeAround()
-        this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_PARENS)
+        this.inputHistory.push(Inputs.REMOVE_AUTOCLOSED_PARENS)
       }
 
       // ...and do the same thing for "
-      else if (this.inputHistory.lastTypedWas('"')) {
+      else if (lastTypedWas('"')) {
         this.addAfterCursor('"')
-        this.inputHistory.push(InputTypes.AUTOCLOSE_DQUOTE)
+        this.inputHistory.push(Inputs.AUTOCLOSE_DQUOTE)
       }
-      else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_DQUOTE, InputTypes.BACKSPACE)) {
+      else if (lastTypedWas(Inputs.AUTOCLOSE_DQUOTE, Inputs.BACKSPACE)) {
         this.removeAround()
-        this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_DQUOTE)
+        this.inputHistory.push(Inputs.REMOVE_AUTOCLOSED_DQUOTE)
       }
 
       // We only auto-close ' if the element before the cursor is a space, em space, or newline
-      else if (this.inputHistory.lastTypedWas("'")) {
+      else if (lastTypedWas("'")) {
         const twoBefore = this.charBeforeCursor(2)
         if (twoBefore === ' ' || twoBefore === '\n' || twoBefore === '\u2003') {
           this.addAfterCursor("'")
-          this.inputHistory.push(InputTypes.AUTOCLOSE_SQUOTE)
+          this.inputHistory.push(Inputs.AUTOCLOSE_SQUOTE)
         }
       }
-      else if (this.inputHistory.lastTypedWas(InputTypes.AUTOCLOSE_SQUOTE, InputTypes.BACKSPACE)) {
+      else if (lastTypedWas(Inputs.AUTOCLOSE_SQUOTE, Inputs.BACKSPACE)) {
         this.removeAround()
-        this.inputHistory.push(InputTypes.REMOVE_AUTOCLOSED_SQUOTE)
+        this.inputHistory.push(Inputs.REMOVE_AUTOCLOSED_SQUOTE)
       }
-
-      else if (this.inputHistory.lastTypedWas('*', ' ')) {
+      else if (lastTypedWas('*', ' ')) {
         this.deleteAndReplace(2, '')
         this.ulist()
-        this.inputHistory.push(InputTypes.AUTOCOMPLETE_ULIST)
+        this.inputHistory.push(Inputs.AUTOCOMPLETE_ULIST)
+      }
+      else if  (lastTypedWas('1', '.', ' ')) {
+        const beforeList = this.charBeforeCursor(4)
+
+        // IFF we're on a newline with or without a tab
+        if (beforeList === '\n' || beforeList === '\u2003') {
+          this.inputHistory.push(Inputs.AUTOCOMPLETE_OLIST)
+          this.deleteAndReplace(3, '')
+          this.olist()
+        }
       }
     }
   }
@@ -291,22 +301,22 @@ export default class Editor extends React.Component {
   logControlKeys(event) {
     switch(event.key) {
       case 'ArrowRight':
-        this.inputHistory.push(InputTypes.RIGHT)
+        this.inputHistory.push(Inputs.RIGHT)
         break
       case 'ArrowLeft':
-        this.inputHistory.push(InputTypes.LEFT)
+        this.inputHistory.push(Inputs.LEFT)
         break
       case 'ArrowUp':
-        this.inputHistory.push(InputTypes.UP)
+        this.inputHistory.push(Inputs.UP)
         break
       case 'ArrowDown':
-        this.inputHistory.push(InputTypes.DOWN)
+        this.inputHistory.push(Inputs.DOWN)
         break
       case 'Enter':
-        this.inputHistory.push(InputTypes.ENTER)
+        this.inputHistory.push(Inputs.ENTER)
         break
       case 'Backspace':
-        this.inputHistory.push(InputTypes.BACKSPACE)
+        this.inputHistory.push(Inputs.BACKSPACE)
         break
       default: break;
     }
