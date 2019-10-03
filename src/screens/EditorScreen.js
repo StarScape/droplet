@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { updateProjectModified } from '../state/actions'
+import { updateProjectModified, setLocation } from '../state/actions'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
 
-function EditorScreen({ store, updateModified, location, history }) {
+function EditorScreen({ store, updateModified, updateLocation, location, history }) {
   const [saved, setSaved] = useState(true)
+
+  useEffect(() => {
+    updateLocation()
+  }, [updateLocation])
 
   return (
     <div>
@@ -38,10 +42,11 @@ function EditorScreen({ store, updateModified, location, history }) {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const { project } = ownProps.location.state
+  const { project, chapter } = ownProps.location.state
   return {
     // Update the modified date each time on the project each time the file is changed
-    updateModified: () => dispatch(updateProjectModified(project.name))
+    updateModified: () => dispatch(updateProjectModified(project.name)),
+    updateLocation: () => dispatch(setLocation(project, chapter)),
   }
 }
 

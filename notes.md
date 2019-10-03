@@ -64,6 +64,8 @@
   - Ordered / unordered chapters? ❗
   - Delete `files.js` ✔️
 - Reload where you left off
+  - Reload chapter at left off ✔️
+  - Add decorator and set location for each screen
 - Project specific dictionaries
 - Dashboard ✔️
 - Autosave ✔️

@@ -26,6 +26,8 @@ const defaultState = {
   // in chapters if the project name is changed
   chapters: {},
 
+  location: null,
+
   // Word count of current document
   wordCount: 0,
 
@@ -160,6 +162,12 @@ const reducer = (state = defaultState, action) => {
           ...state.chapters,
           [projectName]: chapterListUpdated,
         },
+      }
+    }
+    case Types.SET_LOCATION: {
+      return {
+        ...state,
+        location: payload,
       }
     }
     default:

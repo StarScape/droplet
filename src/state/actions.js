@@ -8,6 +8,7 @@ export const Types = {
   ADD_CHAPTER: "ADD_CHAPTER",
   REORDER_CHAPTERS: "REORDER_CHAPTERS",
   DELETE_CHAPTER: "DELETE_CHAPTER",
+  SET_LOCATION: "SET_LOCATION",
 }
 
 // Global editor component
@@ -55,6 +56,11 @@ export const reorderChapters = (projectName, reordered) => ({
 export const deleteChapter = (projectName, id) => ({
   type: Types.DELETE_CHAPTER,
   payload: { projectName, id },
+})
+
+export const setLocation = (project, chapter) => ({
+  type: Types.SET_LOCATION,
+  payload: { project, chapter },
 })
 
 // Update the project last modified date with current date
