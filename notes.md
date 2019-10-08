@@ -1,3 +1,13 @@
+## Minimum viable product...
+
+- Finish where-you-left-off issue
+- Fix doc layout bug(s)
+- Fix paste
+- Export docx
+- Remember location and size of window
+- Window title
+- Aesthetics
+
 ## Roadmap
 
 # Sprint 1 - Basics

@@ -31,7 +31,7 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
       <div>{saved ? 'Changes saved' : 'Saving...'}</div>
       <Link
         to={{
-          pathname: '/projects',
+          pathname: '/project',
           state: { project: location.state.project }
         }}
       >
@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     // Update the modified date each time on the project each time the file is changed
     updateModified: () => dispatch(updateProjectModified(project.name)),
-    updateLocation: () => dispatch(setLocation(project, chapter)),
+    updateLocation: () => dispatch(setLocation('editor', { project, chapter })),
   }
 }
 

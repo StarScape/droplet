@@ -10,7 +10,7 @@ function ProjectLink({ project, deleteProject, children }) {
   return (
     <div className='grid-item'>
       <Link to={{
-          pathname: '/projects',
+          pathname: '/project',
           state: { project: project }
         }}>
 

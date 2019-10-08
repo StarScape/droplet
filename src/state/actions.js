@@ -58,9 +58,9 @@ export const deleteChapter = (projectName, id) => ({
   payload: { projectName, id },
 })
 
-export const setLocation = (project, chapter) => ({
+export const setLocation = (path, state) => ({
   type: Types.SET_LOCATION,
-  payload: { project, chapter },
+  payload: { path, state },
 })
 
 // Update the project last modified date with current date

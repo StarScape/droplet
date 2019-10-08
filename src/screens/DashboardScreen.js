@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { setLocation } from '../state/actions'
 import ProjectLink from '../components/ProjectLink'
 import NewProject from '../components/NewProject'
 
@@ -28,6 +29,10 @@ class DashboardScreen extends React.Component {
     return Object.keys(this.props.projects).map((name) =>
       this.props.projects[name]
     ).concat().sort((a, b) => b.dateModified - a.dateModified)
+  }
+
+  componentDidMount() {
+    this.props.updateLocation()
   }
 
   render() {
@@ -60,7 +65,11 @@ class DashboardScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  projects: state.projects
+  projects: state.projects,
 })
 
-export default connect(mapStateToProps)(DashboardScreen)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  updateLocation: () => dispatch(setLocation('/dashboard', {})),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)

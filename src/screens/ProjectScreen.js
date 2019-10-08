@@ -2,7 +2,7 @@ import React from 'react'
 import Sortable from 'react-sortablejs';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { reorderChapters, updateProjectModified } from '../state/actions'
+import { reorderChapters, updateProjectModified, setLocation } from '../state/actions'
 import ChapterLink from '../components/ChapterLink'
 import NewChapter from '../components/NewChapter'
 
@@ -31,6 +31,10 @@ class ProjectScreen extends React.Component {
     const reordered = indexes.map(i => ordered[Number(i)])
     this.props.reorderChapters(reordered)
     this.props.updateModified()
+  }
+
+  componentDidMount() {
+    this.props.updateLocation()
   }
 
   render() {
@@ -96,7 +100,8 @@ const mapDispatchToProps = (dispatch, { location }) => {
   const { project } = location.state
   return {
     reorderChapters: reordered => dispatch(reorderChapters(project.name, reordered)),
-    updateModified: () => dispatch(updateProjectModified(project.name))
+    updateModified: () => dispatch(updateProjectModified(project.name)),
+    updateLocation: () => dispatch(setLocation('project', location.state)),
   }
 }
 
