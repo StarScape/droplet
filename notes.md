@@ -4,8 +4,8 @@
 - Fix doc layout bug(s)
 - Fix paste
 - Export docx
-- Remember location and size of window
-- Window title
+- Remember location and size of window ✔️
+- Window title ✔️
 - Aesthetics
 
 ## Roadmap

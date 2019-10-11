@@ -1,4 +1,5 @@
 const { app, BrowserWindow, Menu, dialog, ipcMain } = require('electron')
+const windowStateKeeper = require('electron-window-state')
 const path = require('path')
 const isDev = require('electron-is-dev')
 const { isMisspelled } = require('apis')
@@ -156,14 +157,29 @@ const createMenu = (window) => {
 
   return Menu.buildFromTemplate(template)
 }
+
 const createWindow = () => {
+  let windowState = windowStateKeeper({
+    defaultWidth: 1200,
+    defaultHeight: 900,
+  })
+
+  console.log(windowState.x);
+  console.log(windowState.y);
+
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 900,
+    x: windowState.x,
+    y: windowState.y,
+    width: windowState.width,
+    height: windowState.height,
+
     webPreferences: {
       nodeIntegration: true,
     }
   });
+
+  if (windowState.isMaximized) mainWindow.maximize()
+
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 
   menu = createMenu(mainWindow)
@@ -174,7 +190,9 @@ const createWindow = () => {
     //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
     mainWindow.webContents.openDevTools();
   }
+
   mainWindow.on('closed', () => mainWindow = null);
+  windowState.manage(mainWindow)
 }
 
 app.on('ready', createWindow);
