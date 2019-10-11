@@ -164,9 +164,6 @@ const createWindow = () => {
     defaultHeight: 900,
   })
 
-  console.log(windowState.x);
-  console.log(windowState.y);
-
   mainWindow = new BrowserWindow({
     x: windowState.x,
     y: windowState.y,
