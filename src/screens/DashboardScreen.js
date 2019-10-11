@@ -1,4 +1,5 @@
 import React from 'react'
+import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setLocation } from '../state/actions'
@@ -37,29 +38,31 @@ class DashboardScreen extends React.Component {
 
   render() {
     return (
-      <div onKeyDown={this.handleKeyDown}>
-        <div>
-          <button onClick={this.handleNewProject}>PROJECT +</button>
-        </div>
+      <DocumentTitle title='Droplet'>
+        <div onKeyDown={this.handleKeyDown}>
+          <div>
+            <button onClick={this.handleNewProject}>PROJECT +</button>
+          </div>
 
-        <div className='grid-container'>
-          {this.state.newProject ?
-            <NewProject
-              dispatch={this.props.dispatch}
-              handleSaved={this.handleNewProjectSaved}
-              handleCancel={this.cancelProject}
-            />
-          : null}
+          <div className='grid-container'>
+            {this.state.newProject ?
+              <NewProject
+                dispatch={this.props.dispatch}
+                handleSaved={this.handleNewProjectSaved}
+                handleCancel={this.cancelProject}
+              />
+            : null}
 
-          {this.projects.map(project =>
-            <ProjectLink key={project.name} project={project} />
-          )}
-        </div>
+            {this.projects.map(project =>
+              <ProjectLink key={project.name} project={project} />
+            )}
+          </div>
 
-        <div>
-          <Link to='editor'><button>Editor</button></Link>
+          <div>
+            <Link to='editor'><button>Editor</button></Link>
+          </div>
         </div>
-      </div>
+      </DocumentTitle>
     )
   }
 }

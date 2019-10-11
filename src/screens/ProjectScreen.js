@@ -1,4 +1,5 @@
 import React from 'react'
+import DocumentTitle from 'react-document-title'
 import Sortable from 'react-sortablejs';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -42,52 +43,54 @@ class ProjectScreen extends React.Component {
     const { project } = location.state
 
     return (
-      <div>
+      <DocumentTitle title={project.name}>
         <div>
-          <button onClick={this.handleNewChapter}>CHAPTER +</button>
-        </div>
+          <div>
+            <button onClick={this.handleNewChapter}>CHAPTER +</button>
+          </div>
 
-        <Sortable
-          className='grid-container'
+          <Sortable
+            className='grid-container'
 
-          // Sortable options (https://github.com/RubaXa/Sortable#options)
-          options={{
-            animation: 150,
-            ghostClass: 'sortable-ghost',
-            dragClass: 'sortable-drag',
-            draggable: '.chapter-link',
+            // Sortable options (https://github.com/RubaXa/Sortable#options)
+            options={{
+              animation: 150,
+              ghostClass: 'sortable-ghost',
+              dragClass: 'sortable-drag',
+              draggable: '.chapter-link',
 
-            // Necessary to allow opacity: 1. HTML5 DnD provides no mechanism for this.
-            forceFallback: true,
+              // Necessary to allow opacity: 1. HTML5 DnD provides no mechanism for this.
+              forceFallback: true,
 
-            // Auto-close new chapter dialog when dragging
-            onStart: () => this.setState({ newChapter: false })
-          }}
-          onChange={this.handleSortChange}
-        >
-          {this.state.newChapter ?
-            <NewChapter
-              dispatch={this.props.dispatch}
-              project={project}
-              handleSaved={this.handleNewChapterSaved}
-              handleCancel={this.cancelChapter}
-              placeholder={`Chapter ${this.props.chapters.ordered.length + 1}`}
+              // Auto-close new chapter dialog when dragging
+              onStart: () => this.setState({ newChapter: false })
+            }}
+            onChange={this.handleSortChange}
+          >
+            {this.state.newChapter ?
+              <NewChapter
+                dispatch={this.props.dispatch}
+                project={project}
+                handleSaved={this.handleNewChapterSaved}
+                handleCancel={this.cancelChapter}
+                placeholder={`Chapter ${this.props.chapters.ordered.length + 1}`}
+                />
+            : null }
+
+            {this.props.chapters.ordered.map((chapter, i) =>
+              <ChapterLink
+                key={`chapter-${i}`}
+                data-id={i}
+                project={project}
+                chapter={chapter}
+                number={i}
               />
-          : null }
+            )}
+          </Sortable>
 
-          {this.props.chapters.ordered.map((chapter, i) =>
-            <ChapterLink
-              key={`chapter-${i}`}
-              data-id={i}
-              project={project}
-              chapter={chapter}
-              number={i}
-            />
-          )}
-        </Sortable>
-
-        <Link to='/dashboard'>Back</Link>
-      </div>
+          <Link to='/dashboard'>Back</Link>
+        </div>
+      </DocumentTitle>
     )
   }
 }

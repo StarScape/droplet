@@ -1,6 +1,6 @@
 ## Minimum viable product...
 
-- Finish where-you-left-off issue
+- Finish where-you-left-off issue ✔️
 - Fix doc layout bug(s)
 - Fix paste
 - Export docx
