@@ -133,7 +133,7 @@
 
 ## Bugs
 
-- Auto-close: currently it relies on input history. Add a mouse click to input history. so that shit isn't fucked
+- Auto-close: currently it relies on input history. Add a mouse click to input history. so that shit isn't fucked ✔️
 
 - Pressing tab when italic is active undones italic.
 

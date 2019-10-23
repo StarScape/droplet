@@ -11,12 +11,8 @@ const fs = require('fs')
 const path = require('path')
 const { app } = require('electron').remote
 
-// CSS classes
 const classes = {
-  actionbar: 'Editor-actionbar',
-  button: 'Editor-button',
   content: 'Editor-content',
-  selected: 'Editor-button-selected'
 }
 
 // Main application text editor. See globalActions for API
@@ -404,6 +400,10 @@ export default class Editor extends React.Component {
     }
   }
 
+  handleClick = (event) => {
+    this.inputHistory.push(Inputs.CLICK)
+  }
+
   componentDidMount() {
     this.exec('defaultParagraphSeparator', 'p')
     this.contentRef.current.focus()
@@ -462,6 +462,7 @@ export default class Editor extends React.Component {
           ref={this.contentRef}
           onInput={this.handleInput}
           onKeyDown={this.handleKeyDown}
+          onClick={this.handleClick}
           onKeyUp={this.updateActiveCommands}
           onMouseUp={this.updateActiveCommands}
           >
