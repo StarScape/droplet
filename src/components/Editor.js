@@ -45,23 +45,23 @@ export default class Editor extends React.Component {
     this.updateActiveCommands()
   }
 
+  // Calls the given contenteditable command and ensures any
+  // element inserted in the process will be properly wrapped in a <p></p>
+  format = (command) => {
+    this.exec(command)
+    if (!getEnclosingP(getSelectedElem())) {
+      this.exec('formatBlock', 'p')
+    }
+  }
+
   // Editor commands, publicly available via globalActions
-  italic = () => this.exec('italic')
-  bold = () => this.exec('bold')
-  underline = () => this.exec('underline')
-  strikethrough = () => this.exec('strikeThrough')
-  olist = () => {
-    this.exec('insertOrderedList')
-    if (!getEnclosingP(getSelectedElem())) {
-      this.exec('formatBlock', 'p')
-    }
-  }
-  ulist = () => {
-    this.exec('insertUnorderedList')
-    if (!getEnclosingP(getSelectedElem())) {
-      this.exec('formatBlock', 'p')
-    }
-  }
+  italic = () => this.format('italic')
+  bold = () => this.format('bold')
+  underline = () => this.format('underline')
+  strikethrough = () => this.format('strikeThrough')
+  olist = () => this.format('insertOrderedList')
+  ulist = () => this.format('insertUnorderedList')
+
   heading1 = () => this._heading('1')
   heading2 = () => this._heading('2')
   justifyLeft = () => this._justify('left')
@@ -71,7 +71,7 @@ export default class Editor extends React.Component {
   isActive = (commandName) => this.store.getState().activeCommands[commandName]
 
   // Due to an utterly bizzare bug, sometimes turning the heading on
-  // will also turn bold on. As far as I can tell it's a problem in Chrome.
+  // will also turn bold on. As far as I can tell it's a problem with Chrome.
   _heading = (num) => {
     const boldOnBefore = document.queryCommandState('bold')
     
