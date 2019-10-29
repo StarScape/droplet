@@ -4,6 +4,7 @@ import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
 import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem } from '../utils/other'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
+import cleanHTML from '../doc/cleanHTML'
 
 import '../styles/Editor.css'
 
@@ -385,6 +386,7 @@ export default class Editor extends React.Component {
   }
 
   handleKeyDown = (event) => {
+    // Override default ENTER
     if (event.keyCode === 13) {
       event.preventDefault()
       this.newParagraph()
@@ -402,6 +404,16 @@ export default class Editor extends React.Component {
 
   handleClick = (event) => {
     this.inputHistory.push(Inputs.CLICK)
+  }
+
+  // Pasting from word can present some issues, so we intercept
+  // the HTML and clean it up before inserting it into the document 
+  overridePaste = (event) => {
+    const html = event.clipboardData.getData('text/html')
+    if (html) {
+      event.preventDefault()
+      this.exec('insertHTML', cleanHTML(html))
+    }
   }
 
   componentDidMount() {
@@ -465,6 +477,7 @@ export default class Editor extends React.Component {
           onClick={this.handleClick}
           onKeyUp={this.updateActiveCommands}
           onMouseUp={this.updateActiveCommands}
+          onPaste={this.overridePaste}
           >
         </div>
       </div>

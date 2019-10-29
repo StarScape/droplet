@@ -3,6 +3,7 @@
 - Finish where-you-left-off issue ✔️
 - Fix doc layout bug(s)
 - Fix paste
+- Overflow not working correctly...
 - Export docx
 - Remember location and size of window ✔️
 - Window title ✔️
@@ -111,7 +112,7 @@
 # Sprint 6 - Program Behavior
 - Fix nasty document layout
   - UL bug ✔️
-  - Italics/bold at start bug
+  - Italics/bold at start bug ✔️
 
 - Fix paste (try pasting from the Lorem ipsum generator - it copys a span in)
 - Export/import as .docx - PANDOC
@@ -120,7 +121,7 @@
   - Text justification
   - Font size
   - Items on bar (fullscreen and not)
-- Remember the size and location user left window at
+- Remember the size and location user left window at ✔️
 - 💎 Themes (or maybe just option for light/dark mode?)
 
 # Future (out of scope of fall semester)
@@ -133,9 +134,9 @@
 
 ## Bugs
 
-- Auto-close: currently it relies on input history. Add a mouse click to input history. so that shit isn't fucked ✔️
+- Auto-closing-char: currently it relies on input history. Add a mouse click to input history. so that shit isn't fucked ✔️
 
-- Pressing tab when italic is active undones italic.
+- Pressing tab when italic is active undones italic. ❌
 
 - Opening a file and immediately on the first line hitting ctrl+i and then typing results in a raw `<i>` not wrapped in a paragraph element. POSSIBLE SOLUTION: check for no-enclosing-p on EVERY command. This could be done easily with a lil wrapper function. ANOTHER SOLUTION: the `if (firstChild && firstChild.nodeType === 3)...` line in `handleInput` is calling `formatBlock` if the firstChild is a textNode. Check for italics, bold, etc as well. Either of these should work, you'll have to decide which works better. ✔️ (done I think?)
 
