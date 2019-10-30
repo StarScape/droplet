@@ -2,7 +2,7 @@
 
 - Finish where-you-left-off issue ✔️
 - Fix doc layout bug(s)
-- Fix paste
+- Fix paste ✔️
 - Overflow not working correctly...
 - Export docx
 - Remember location and size of window ✔️
