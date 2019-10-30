@@ -19,7 +19,10 @@ const cleanHTML = (html) => {
     e.id = ''
   });
 
-  return pasted.innerHTML
+  const openingTagsRemoved = pasted.innerHTML.replace(/<\s*span[^>]*>/gm, '')
+  const closingTagsRemoved = openingTagsRemoved.replace(/<\s*\/\s*span>/gm, '')
+
+  return closingTagsRemoved
 }
 
 const fontWeight = (weight) => {
