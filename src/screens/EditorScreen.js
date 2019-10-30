@@ -7,6 +7,7 @@ import { updateProjectModified, setLocation } from '../state/actions'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
+import exportDoc from '../doc/export'
 
 function EditorScreen({ store, updateModified, updateLocation, location, history }) {
   const [saved, setSaved] = useState(true)
@@ -14,14 +15,14 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
     updateLocation()
   }, [updateLocation])
 
-  const { project, chapter } = location.state
+  const { project, chapter, file } = location.state
 
   return (
     <DocumentTitle title={chapter.title}>
       <div>
         <Editor
           store={store}
-          file={location.state.file}
+          file={file}
           onUpdate={() => setSaved(false)}
           onSave={() => {
             setSaved(true)
@@ -40,6 +41,11 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
         >
           Back
         </Link>
+
+        <br/>
+        <button onClick={() => {
+          exportDoc(file)
+        }}>Export!</button>
       </div>
     </DocumentTitle>
   )
