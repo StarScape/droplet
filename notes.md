@@ -9,6 +9,12 @@
 - Window title ✔️
 - Aesthetics
 
+## DOCX Export Notes
+
+* Convert inline styles to `<b>`/`<i>`/whatever wrappings
+* Convert em-spaces -> tabs before exporting
+
+
 ## Roadmap
 
 # Sprint 1 - Basics

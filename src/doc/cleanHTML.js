@@ -7,9 +7,16 @@ const cleanHTML = (html) => {
     const weight = fontWeight(e.style['font-weight'])
     const style = fontStyle(e.style['font-style'])
 
+    if (weight === 'bold') {
+      e.innerHTML = `<b>${e.innerHTML}</b>`
+    }
+
+    if (style === 'italic') {
+      e.innerHTML = `<i>${e.innerHTML}</i>`
+    }
+
     e.style = ''
-    e.style['font-weight'] = weight
-    e.style['font-style'] = style
+    e.id = ''
   });
 
   return pasted.innerHTML
