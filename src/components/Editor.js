@@ -4,7 +4,7 @@ import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
 import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem } from '../utils/other'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
-import cleanHTML from '../doc/cleanHTML'
+import cleanHTML from '../utils/cleanHTML'
 
 import '../styles/Editor.css'
 

@@ -15,8 +15,8 @@ const cleanHTML = (html) => {
       e.innerHTML = `<i>${e.innerHTML}</i>`
     }
 
-    e.style = ''
-    e.id = ''
+    e.style = null
+    e.id = null
   });
 
   const openingTagsRemoved = pasted.innerHTML.replace(/<\s*span[^>]*>/gm, '')

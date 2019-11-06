@@ -58,7 +58,6 @@ const buttons = [
     action: 'justifyRight',
     icon: '→',
   },
-
 ]
 
 export default function Actionbar({ store }) {

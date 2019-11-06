@@ -7,7 +7,7 @@ import { updateProjectModified, setLocation } from '../state/actions'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
-import exportDoc from '../doc/export'
+import toDocx from '../to_docx'
 
 function EditorScreen({ store, updateModified, updateLocation, location, history }) {
   const [saved, setSaved] = useState(true)
@@ -44,7 +44,8 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
 
         <br/>
         <button onClick={() => {
-          exportDoc(file)
+          const r = document.querySelector('[contenteditable]')
+          toDocx(r)
         }}>Export!</button>
       </div>
     </DocumentTitle>
