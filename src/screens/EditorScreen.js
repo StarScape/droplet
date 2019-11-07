@@ -9,6 +9,10 @@ import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
 import toDocx from '../to_docx'
 
+const { dialog } = require('electron').remote
+const homedir = require("os").homedir()
+const fs = require('fs').promises
+
 function EditorScreen({ store, updateModified, updateLocation, location, history }) {
   const [saved, setSaved] = useState(true)
   useEffect(() => {
@@ -16,6 +20,7 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
   }, [updateLocation])
 
   const { project, chapter, file } = location.state
+  let editorRef // see below
 
   return (
     <DocumentTitle title={chapter.title}>
@@ -28,6 +33,7 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
             setSaved(true)
             updateModified()
           }}
+          giveContentRef={(contentRef) => editorRef = contentRef}
         />
         <Actionbar store={store} />
         <WordCount store={store} />
@@ -43,9 +49,21 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
         </Link>
 
         <br/>
-        <button onClick={() => {
-          const r = document.querySelector('[contenteditable]')
-          toDocx(r)
+        <button onClick={async () => {
+          const pathToSave = dialog.showSaveDialog({
+            title: 'Choose Location To Export',
+            buttonLabel: 'Export',
+            defaultPath: homedir + '/Documents/mydoc.docx',
+          })
+
+          if (pathToSave) {
+            const buffer = await toDocx(editorRef.current)
+            try {
+              await fs.writeFile(pathToSave, buffer)
+            } catch {
+              alert('Error exporting document')
+            }
+          }
         }}>Export!</button>
       </div>
     </DocumentTitle>

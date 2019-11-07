@@ -1,6 +1,5 @@
 import consts from './consts.js'
-// import JSZip from 'jszip'
-const JSZip = require('jszip/dist/jszip')
+import JSZip from 'jszip/dist/jszip.min'
 
 const styleTags = ['B', 'I', 'U', 'STRIKE']
 
@@ -177,10 +176,7 @@ const toDocx = (elem) => {
   docx.file("word/styles.xml", consts.styles)
   docx.file("word/_rels/document.xml.rels", consts.documentRels)
 
-  docx.generateAsync({ type: 'base64' }).then(content => {
-    window.location = "data:application/zip;base64," + content
-    console.log(content);
-  })
+  return docx.generateAsync({ type: 'nodebuffer' })
 }
 
 export default toDocx
