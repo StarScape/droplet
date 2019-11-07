@@ -1,5 +1,19 @@
-import consts from './consts.js'
 import JSZip from 'jszip/dist/jszip.min'
+
+const path = require('path')
+const fs = require('fs').promises
+const { app } = require('electron').remote
+
+const wordFilesPath = path.join(app.getAppPath(), 'src/to_docx/files')
+const wordFiles = [
+  '[Content_Types].xml',
+  '_rels/.rels',
+  'word/fontTable.xml',
+  'word/numbering.xml',
+  'word/settings.xml',
+  'word/styles.xml',
+  'word/_rels/document.xml.rels',
+]
 
 const styleTags = ['B', 'I', 'U', 'STRIKE']
 
@@ -159,23 +173,35 @@ const getDocument = (rootElem) =>
   ${getBody(rootElem)}
 </w:document>`
 
-const toDocx = (elem) => {
-  const documentXML = getDocument(elem)
-
+// Create a ZIP file using JSZip. DOCX files
+// are nothing but zipped folders under the hood
+const buildZIP = async (documentXML) => {
   const docx = new JSZip()
   docx.folder('_rels')
   docx.folder('word')
   docx.folder('word/_rels')
+  docx.file('word/document.xml', documentXML)
 
-  docx.file("[Content_Types].xml", consts.contentTypes)
-  docx.file("_rels/.rels", consts.rels)
-  docx.file("word/document.xml", documentXML)
-  docx.file("word/fontTable.xml", consts.fontTable)
-  docx.file("word/numbering.xml", consts.numbering)
-  docx.file("word/settings.xml", consts.settings)
-  docx.file("word/styles.xml", consts.styles)
-  docx.file("word/_rels/document.xml.rels", consts.documentRels)
+  // Augment returned file contents with paths of files
+  const filePromises = wordFiles.map(fpath =>
+    fs.readFile(path.join(wordFilesPath, fpath), 'utf8').then(contents => ({
+      fpath, contents
+    }))
+  )
 
+  // Add the contents of each file to ZIP file
+  // ex: docx.file('word/number.xml', '<?xml version...')
+  const readFiles = await Promise.all(filePromises)
+  readFiles.forEach(({ fpath, contents }) => {
+    docx.file(fpath, contents)
+  })
+
+  return docx
+}
+
+const toDocx = async (elem) => {
+  const documentXML = getDocument(elem)
+  const docx = await buildZIP(documentXML)
   return docx.generateAsync({ type: 'nodebuffer' })
 }
 

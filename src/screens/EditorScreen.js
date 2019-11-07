@@ -14,13 +14,13 @@ const homedir = require("os").homedir()
 const fs = require('fs').promises
 
 function EditorScreen({ store, updateModified, updateLocation, location, history }) {
+  const { project, chapter, file } = location.state
+
   const [saved, setSaved] = useState(true)
+  const [contentRef, setContentRef] = useState(null)
   useEffect(() => {
     updateLocation()
   }, [updateLocation])
-
-  const { project, chapter, file } = location.state
-  let editorRef // see below
 
   return (
     <DocumentTitle title={chapter.title}>
@@ -33,18 +33,16 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
             setSaved(true)
             updateModified()
           }}
-          giveContentRef={(contentRef) => editorRef = contentRef}
+          setContentRef={setContentRef}
         />
         <Actionbar store={store} />
         <WordCount store={store} />
 
         <div>{saved ? 'Changes saved' : 'Saving...'}</div>
-        <Link
-          to={{
-            pathname: '/project',
-            state: { project: project }
-          }}
-        >
+        <Link to={{
+          pathname: '/project',
+          state: { project: project }
+        }}>
           Back
         </Link>
 
@@ -57,7 +55,7 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
           })
 
           if (pathToSave) {
-            const buffer = await toDocx(editorRef.current)
+            const buffer = await toDocx(contentRef.current)
             try {
               await fs.writeFile(pathToSave, buffer)
             } catch {

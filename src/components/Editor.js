@@ -28,7 +28,7 @@ export default class Editor extends React.Component {
     this.autocompleteActive = true
 
     // Pass content ref back up to EditorScreen
-    this.props.giveContentRef(this.contentRef)
+    this.props.setContentRef(this.contentRef)
   }
 
   get content() {
