@@ -11,10 +11,10 @@
 
 ## DOCX Export - TODO
 
-* Read strings from files instead of using `consts`
-* Async event with 'its done' message somewhere in the UI on export end (promisify will be useful here)
+* Async event with 'its done' message somewhere in the UI on export end (promisify will be useful here) ✔️
 * File selection ✔️
 * In topmenu
+  * Generic interface for setting top menu via React
 
 
 ## Roadmap
