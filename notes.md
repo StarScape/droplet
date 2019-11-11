@@ -3,11 +3,13 @@
 - Finish where-you-left-off issue ✔️
 - Fix doc layout bug(s)
 - Fix paste ✔️
-- Overflow not working correctly...
+- Overflow not working correctly
 - Export docx
 - Remember location and size of window ✔️
 - Window title ✔️
 - Aesthetics
+- Different menus for each screen
+- Open file and add to project
 
 ## DOCX Export - TODO
 
@@ -16,6 +18,9 @@
 * In topmenu
   * Generic interface for setting top menu via React
 
+## Bugs
+
+* Heading 1/2 doesn't work the first time you press it.
 
 ## Roadmap
 

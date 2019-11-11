@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import DocumentTitle from 'react-document-title'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import { updateProjectModified, setLocation } from '../state/actions'
+import editorMenu from './editorMenu'
+import AppScreen from '../components/AppScreen'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import WordCount from '../components/WordCount'
@@ -56,7 +57,9 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
   }, [updateLocation])
 
   return (
-    <DocumentTitle title={chapter.title}>
+    <AppScreen
+      title={chapter.title}
+      menu={editorMenu}>
       <div>
         <Editor
           store={store}
@@ -85,7 +88,7 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
           Export!
         </button>
       </div>
-    </DocumentTitle>
+    </AppScreen>
   )
 }
 

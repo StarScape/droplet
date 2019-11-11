@@ -44,8 +44,8 @@ export default class Editor extends React.Component {
   // Helper method for document.execCommand
   // execCommand should NOT be called directly
   exec = (command, value = null) => {
-    document.execCommand(command, false, value)
     this.focus()
+    document.execCommand(command, false, value)
     this.updateActiveCommands()
   }
 
@@ -59,6 +59,12 @@ export default class Editor extends React.Component {
   }
 
   // Editor commands, publicly available via globalActions
+  undo = () => this.exec('undo')
+  redo = () => this.exec('redo')
+  copy = () => this.exec('copy')
+  cut = () => this.exec('cut')
+  paste = () => this.format('paste')
+  del = () => this.exec('delete')
   italic = () => this.format('italic')
   bold = () => this.format('bold')
   underline = () => this.format('underline')

@@ -1,4 +1,5 @@
 import { getState } from './state/store'
+const { getCurrentWindow } = require('electron').remote
 
 // Make sure we keep track of the editor (see below)
 /*
@@ -14,22 +15,52 @@ import { getState } from './state/store'
  *  AND:
  *    isActive(), which checks if a command is active, as well as saveFile() and openFile()
  */
-const italic = () => getState().editorComponent.italic()
-const bold = () => getState().editorComponent.bold()
-const underline = () => getState().editorComponent.underline()
-const strikethrough = () => getState().editorComponent.strikethrough()
-const olist = () => getState().editorComponent.olist()
-const ulist = () => getState().editorComponent.ulist()
-const heading1 = () => getState().editorComponent.heading1()
-const heading2 = () => getState().editorComponent.heading2()
-const justifyLeft = () => getState().editorComponent.justifyLeft()
-const justifyCenter = () => getState().editorComponent.justifyCenter()
-const justifyRight = () => getState().editorComponent.justifyRight()
-const saveFile = () => getState().editorComponent.saveFile()
-const openFile = () => getState().editorComponent.openFile()
+let editor = null
+let mainWindow = null
+
+const useEditor = (f) => () => {
+  if (!editor) {
+    editor = getState().editorComponent
+  }
+  if (!mainWindow) {
+    mainWindow = getCurrentWindow()
+  }
+
+  mainWindow.webContents.focus()
+  f(editor)
+}
+
+const undo = useEditor((editor) => editor.undo())
+const redo = useEditor((editor) => editor.redo())
+
+const copy = useEditor((editor) => editor.copy())
+const paste = useEditor((editor) => editor.paste())
+const cut = useEditor((editor) => editor.cut())
+const del = useEditor((editor) => editor.del())
+
+const italic = useEditor((editor) => editor.italic())
+const bold = useEditor((editor) => editor.bold())
+const underline = useEditor((editor) => editor.underline())
+const strikethrough = useEditor((editor) => editor.strikethrough())
+const olist = useEditor((editor) => editor.olist())
+const ulist = useEditor((editor) => editor.ulist())
+const heading1 = useEditor((editor) => editor.heading1())
+const heading2 = useEditor((editor) => editor.heading2())
+const justifyLeft = useEditor((editor) => editor.justifyLeft())
+const justifyCenter = useEditor((editor) => editor.justifyCenter())
+const justifyRight = useEditor((editor) => editor.justifyRight())
+const saveFile = useEditor((editor) => editor.saveFile())
+const openFile = useEditor((editor) => editor.openFile())
+
 const isActive = command => getState().editorComponent.isActive(command)
 
 export default {
+  undo,
+  redo,
+  copy,
+  paste,
+  cut,
+  del,
   bold,
   italic,
   underline,
