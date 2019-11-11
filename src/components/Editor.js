@@ -2,7 +2,7 @@ import React from 'react'
 import { InputHistory, Inputs } from '../utils/InputHistory'
 import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
-import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem } from '../utils/other'
+import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem, isProperlyEnclosed } from '../utils/other'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
 import cleanHTML from '../utils/cleanHTML'
 
@@ -53,30 +53,31 @@ export default class Editor extends React.Component {
   // element inserted in the process will be properly wrapped in a <p></p>
   format = (command) => {
     this.exec(command)
-    if (!getEnclosingP(getSelectedElem())) {
+    if (!isProperlyEnclosed(getSelectedElem())) {
+      console.log('not properly enclosed');
       this.exec('formatBlock', 'p')
     }
   }
 
   // Editor commands, publicly available via globalActions
-  undo = () => this.exec('undo')
-  redo = () => this.exec('redo')
-  copy = () => this.exec('copy')
-  cut = () => this.exec('cut')
-  paste = () => this.format('paste')
-  del = () => this.exec('delete')
-  italic = () => this.format('italic')
-  bold = () => this.format('bold')
-  underline = () => this.format('underline')
+  undo          = () => this.exec('undo')
+  redo          = () => this.exec('redo')
+  copy          = () => this.exec('copy')
+  cut           = () => this.exec('cut')
+  paste         = () => this.format('paste')
+  del           = () => this.exec('delete')
+  italic        = () => this.format('italic')
+  bold          = () => this.format('bold')
+  underline     = () => this.format('underline')
   strikethrough = () => this.format('strikeThrough')
-  olist = () => this.format('insertOrderedList')
-  ulist = () => this.format('insertUnorderedList')
+  olist         = () => this.format('insertOrderedList')
+  ulist         = () => this.format('insertUnorderedList')
 
-  heading1 = () => this._heading('1')
-  heading2 = () => this._heading('2')
-  justifyLeft = () => this._justify('left')
+  heading1      = () => this._heading('1')
+  heading2      = () => this._heading('2')
+  justifyLeft   = () => this._justify('left')
   justifyCenter = () => this._justify('center')
-  justifyRight = () => this._justify('right')
+  justifyRight  = () => this._justify('right')
 
   isActive = (commandName) => this.store.getState().activeCommands[commandName]
 
@@ -87,14 +88,15 @@ export default class Editor extends React.Component {
     
     // Toggle heading
     if (this.isActive(`heading${num}`)) {
-      this.exec('formatBlock','<p>')
+      this.exec('formatBlock','p')
     }
     else {
-      this.exec('formatBlock', `<h${num}>`)
+      this.exec('formatBlock', `h${num}`)
     }
 
     const boldOnNow = document.queryCommandState('bold')
 
+    // This should be safe to remove now.
     if (boldOnBefore !== boldOnNow) {
       this.bold()
     }
@@ -385,7 +387,9 @@ export default class Editor extends React.Component {
   handleInput = (event) => {
     const content = this.content
     const { target: { firstChild } } = event
-    if (firstChild && firstChild.nodeType === 3) this.exec('formatBlock', '<p>')
+    if (firstChild && firstChild.nodeType === 3) {
+      this.exec('formatBlock', '<p>')
+    }
     else if (content.innerHTML === '<br>') content.innerHTML = ''
 
     this.checkAutocomplete(event.nativeEvent)

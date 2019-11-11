@@ -1,3 +1,8 @@
 .App {
 
 }
+
+h1, h2 {
+  /* Chrome sets h1 to bold by default */
+  font-weight: normal;
+}

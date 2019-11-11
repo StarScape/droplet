@@ -45,6 +45,21 @@ export const getEnclosingP = (elem) => {
   return e
 }
 
+// Ensures that an element in the document is properly wrapped in
+// one of the top level elements
+export const isProperlyEnclosed = (elem) => {
+  const topLevelElems = ['P', 'H1', 'H2', 'UL', 'OL']
+
+  let e = elem
+  while (e !== null && topLevelElems.includes(e.nodeName)) {
+    e = e.parentNode
+  }
+  if (e && topLevelElems.includes(e.nodeName)) {
+    return false
+  }
+  return true
+}
+
 // Makes a elem1 the next sibling of elem2
 export const makeSiblingOf = (elem1, elem2) => {
   const parent = elem2.parentNode
