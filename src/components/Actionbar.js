@@ -61,7 +61,6 @@ const buttons = [
 ]
 
 export default function Actionbar({ store }) {
-
   return (
     <div className='Actionbar'>
       {buttons.map(({ title, icon, action }, i) =>
