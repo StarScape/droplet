@@ -3,17 +3,24 @@
 - Finish where-you-left-off issue ✔️
 - Fix doc layout bug(s)
 - Fix paste ✔️
-- Overflow not working correctly...
+- Overflow not working correctly
 - Export docx
 - Remember location and size of window ✔️
 - Window title ✔️
 - Aesthetics
+- Different menus for each screen
+- Open file and add to project
 
-## DOCX Export Notes
+## DOCX Export - TODO
 
-* Convert inline styles to `<b>`/`<i>`/whatever wrappings ✔️
-* Convert em-spaces -> tabs before exporting
+* Async event with 'its done' message somewhere in the UI on export end (promisify will be useful here) ✔️
+* File selection ✔️
+* In topmenu
+  * Generic interface for setting top menu via React
 
+## Bugs
+
+* Heading 1/2 doesn't work the first time you press it.
 
 ## Roadmap
 

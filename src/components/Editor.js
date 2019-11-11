@@ -4,7 +4,7 @@ import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
 import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem } from '../utils/other'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
-import cleanHTML from '../doc/cleanHTML'
+import cleanHTML from '../utils/cleanHTML'
 
 import '../styles/Editor.css'
 
@@ -26,6 +26,9 @@ export default class Editor extends React.Component {
 
     this.inputHistory = new InputHistory(10)
     this.autocompleteActive = true
+
+    // Pass content ref back up to EditorScreen
+    this.props.setContentRef(this.contentRef)
   }
 
   get content() {
@@ -41,8 +44,8 @@ export default class Editor extends React.Component {
   // Helper method for document.execCommand
   // execCommand should NOT be called directly
   exec = (command, value = null) => {
-    document.execCommand(command, false, value)
     this.focus()
+    document.execCommand(command, false, value)
     this.updateActiveCommands()
   }
 
@@ -56,6 +59,12 @@ export default class Editor extends React.Component {
   }
 
   // Editor commands, publicly available via globalActions
+  undo = () => this.exec('undo')
+  redo = () => this.exec('redo')
+  copy = () => this.exec('copy')
+  cut = () => this.exec('cut')
+  paste = () => this.format('paste')
+  del = () => this.exec('delete')
   italic = () => this.format('italic')
   bold = () => this.format('bold')
   underline = () => this.format('underline')
