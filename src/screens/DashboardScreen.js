@@ -1,8 +1,8 @@
 import React from 'react'
-import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setLocation } from '../state/actions'
+import AppScreen from '../components/AppScreen'
 import ProjectLink from '../components/ProjectLink'
 import NewProject from '../components/NewProject'
 
@@ -34,11 +34,25 @@ class DashboardScreen extends React.Component {
 
   componentDidMount() {
     this.props.updateLocation()
+    console.log(this.menu);
   }
+
+  // Application menu
+  menu = [
+    {
+      label: 'Projects',
+      submenu: [
+        {
+          label: 'New Project',
+          click: this.handleNewProject,
+        }
+      ]
+    }
+  ]
 
   render() {
     return (
-      <DocumentTitle title='Droplet'>
+      <AppScreen title='Droplet' menu={this.menu}>
         <div onKeyDown={this.handleKeyDown}>
           <div>
             <button onClick={this.handleNewProject}>PROJECT +</button>
@@ -62,7 +76,7 @@ class DashboardScreen extends React.Component {
             <Link to='editor'><button>Editor</button></Link>
           </div>
         </div>
-      </DocumentTitle>
+      </AppScreen>
     )
   }
 }

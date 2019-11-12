@@ -1,9 +1,9 @@
 import React from 'react'
-import DocumentTitle from 'react-document-title'
 import Sortable from 'react-sortablejs';
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { reorderChapters, updateProjectModified, setLocation } from '../state/actions'
+import AppScreen from '../components/AppScreen'
 import ChapterLink from '../components/ChapterLink'
 import NewChapter from '../components/NewChapter'
 
@@ -38,12 +38,25 @@ class ProjectScreen extends React.Component {
     this.props.updateLocation()
   }
 
+  // Application menu
+  menu = [
+    {
+      label: 'Chapters',
+      submenu: [
+        {
+          label: 'New Chapter',
+          click: this.handleNewChapter,
+        }
+      ]
+    }
+  ]
+
   render() {
     const { location } = this.props
     const { project } = location.state
 
     return (
-      <DocumentTitle title={project.name}>
+      <AppScreen title={project.name} menu={this.menu}>
         <div>
           <div>
             <button onClick={this.handleNewChapter}>CHAPTER +</button>
@@ -90,7 +103,7 @@ class ProjectScreen extends React.Component {
 
           <Link to='/dashboard'>Back</Link>
         </div>
-      </DocumentTitle>
+      </AppScreen>
     )
   }
 }
