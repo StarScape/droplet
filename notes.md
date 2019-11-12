@@ -6,10 +6,10 @@
 - Export docx ✔️
 - Remember location and size of window ✔️
 - Window title ✔️
-- Different menus for each screen
-- Aesthetics
-- Overflow not working correctly
-- Open file and add to project?
+- Different menus for each screen ✔️
+- Settings
+- More options for each menu
+- Aesthetics!
 
 ## Bugs
 

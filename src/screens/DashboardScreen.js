@@ -34,7 +34,6 @@ class DashboardScreen extends React.Component {
 
   componentDidMount() {
     this.props.updateLocation()
-    console.log(this.menu);
   }
 
   // Application menu
