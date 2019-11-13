@@ -37,16 +37,6 @@ const buttons = [
     icon: '<b>H<sub>2</sub></b>',
   },
   {
-    title: 'Ordered List',
-    action: 'olist',
-    icon: '&#35;',
-  },
-  {
-    title: 'Unordered List',
-    action: 'ulist',
-    icon: '&#8226;',
-  },
-  {
     title: 'Left Align',
     action: 'justifyLeft',
     icon: '←',
@@ -60,6 +50,16 @@ const buttons = [
     title: 'Right Align',
     action: 'justifyRight',
     icon: '→',
+  },
+  {
+    title: 'Ordered List',
+    action: 'olist',
+    icon: '&#35;',
+  },
+  {
+    title: 'Unordered List',
+    action: 'ulist',
+    icon: '&#8226;',
   },
 ]
 
@@ -91,6 +91,7 @@ function Actionbar({ store, project, saved }) {
             <Button
               title={title}
               icon={icon}
+              action={action}
               onClick={globalActions[action]}
               isActive={false}
               dispatch={store.dispatch}

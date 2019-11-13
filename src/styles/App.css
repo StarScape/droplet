@@ -16,6 +16,10 @@ h1, h2 {
   font-weight: normal;
 }
 
+button {
+  color: inherit;
+}
+
 textarea:focus, input:focus, [contenteditable] {
   outline: none;
 }
