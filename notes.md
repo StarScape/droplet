@@ -16,7 +16,9 @@
 - Image icons for buttons
 - Move export to top bar in Editor page
 - Style buttons
-- Export status fixed
+- Export status fixed position
+- Fix padding for text area
+- Soften colors
 - CAN'T set headings to center-aligned
 
 ## Roadmap
