@@ -67,7 +67,7 @@ const buttons = [
 function Actionbar({ store, project, saved }) {
   return (
     <div className='Actionbar'>
-      <div class='Actionbar-section'>
+      <div className='Actionbar-section'>
         <span>
           <Link to={{
             pathname: '/project',
@@ -82,11 +82,11 @@ function Actionbar({ store, project, saved }) {
         </span>
       </div>
 
-      <div class='Actionbar-section'>
+      <div className='Actionbar-section'>
         <WordCount store={store} />
       </div>
 
-      <div class='Actionbar-section'>
+      <div className='Actionbar-section'>
         <span>
           {buttons.map(({ title, icon, action }, i) =>
             <Button

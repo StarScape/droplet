@@ -20,6 +20,7 @@
 - Fix padding for text area
 - Soften colors
 - CAN'T set headings to center-aligned
+- Fullscreen
 
 ## Roadmap
 
