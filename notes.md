@@ -20,6 +20,10 @@
 - CAN'T set headings to center-aligned
 - Fullscreen
 
+## Thoughts
+
+Maybe a simple border-less window + some darker contrast for the bottom bar would actually look good in light theme?
+
 ## Roadmap
 
 # Sprint 1 - Basics

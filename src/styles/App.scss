@@ -21,7 +21,7 @@ button {
   color: inherit;
 }
 
-textarea:focus, input:focus, [contenteditable] {
+textarea:focus, input:focus, button:focus, [contenteditable] {
   outline: none;
 }
 

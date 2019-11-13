@@ -1,4 +1,5 @@
-import { getState } from './state/store'
+import { setFullscreen } from './state/actions'
+import { dispatch, getState } from './state/store'
 const { getCurrentWindow } = require('electron').remote
 
 // Make sure we keep track of the editor (see below)
@@ -18,7 +19,7 @@ const { getCurrentWindow } = require('electron').remote
 let editor = null
 let mainWindow = null
 
-const useEditor = (f) => () => {
+const action = (f) => () => {
   if (!editor) {
     editor = getState().editorComponent
   }
@@ -27,33 +28,44 @@ const useEditor = (f) => () => {
   }
 
   mainWindow.webContents.focus()
-  f(editor)
+  f(editor, mainWindow)
 }
 
-const undo = useEditor((editor) => editor.undo())
-const redo = useEditor((editor) => editor.redo())
+const undo = action((editor) => editor.undo())
+const redo = action((editor) => editor.redo())
 
-const copy = useEditor((editor) => editor.copy())
-const paste = useEditor((editor) => editor.paste())
-const cut = useEditor((editor) => editor.cut())
-const del = useEditor((editor) => editor.del())
+const copy = action((editor) => editor.copy())
+const paste = action((editor) => editor.paste())
+const cut = action((editor) => editor.cut())
+const del = action((editor) => editor.del())
 
-const italic = useEditor((editor) => editor.italic())
-const bold = useEditor((editor) => editor.bold())
-const underline = useEditor((editor) => editor.underline())
-const strikethrough = useEditor((editor) => editor.strikethrough())
-const olist = useEditor((editor) => editor.olist())
-const ulist = useEditor((editor) => editor.ulist())
-const heading1 = useEditor((editor) => editor.heading1())
-const heading2 = useEditor((editor) => editor.heading2())
-const justifyLeft = useEditor((editor) => editor.justifyLeft())
-const justifyCenter = useEditor((editor) => editor.justifyCenter())
-const justifyRight = useEditor((editor) => editor.justifyRight())
-const saveFile = useEditor((editor) => editor.saveFile())
-const openFile = useEditor((editor) => editor.openFile())
-const exportDocx = useEditor((editor) => editor.exportDocx())
+const italic = action((editor) => editor.italic())
+const bold = action((editor) => editor.bold())
+const underline = action((editor) => editor.underline())
+const strikethrough = action((editor) => editor.strikethrough())
+const olist = action((editor) => editor.olist())
+const ulist = action((editor) => editor.ulist())
+const heading1 = action((editor) => editor.heading1())
+const heading2 = action((editor) => editor.heading2())
+const justifyLeft = action((editor) => editor.justifyLeft())
+const justifyCenter = action((editor) => editor.justifyCenter())
+const justifyRight = action((editor) => editor.justifyRight())
+const saveFile = action((editor) => editor.saveFile())
+const openFile = action((editor) => editor.openFile())
+const exportDocx = action((editor) => editor.exportDocx())
 
 const isActive = command => getState().editorComponent.isActive(command)
+
+const fullscreen = action((editor, win) => {
+  if (win.isFullScreen()) {
+    win.setFullScreen(false)
+    dispatch(setFullscreen(false))
+  }
+  else {
+    win.setFullScreen(true)
+    dispatch(setFullscreen(true))
+  }
+})
 
 export default {
   undo,
@@ -77,4 +89,5 @@ export default {
   openFile,
   exportDocx,
   isActive,
+  fullscreen,
 }

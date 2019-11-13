@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import Button from './ActionbarButton'
 import WordCount from './WordCount'
@@ -64,7 +65,7 @@ const buttons = [
   },
 ]
 
-function Actionbar({ store, project, saved }) {
+function Actionbar({ store, project, saved, fullscreen }) {
   return (
     <div className='Actionbar'>
       <div className='Actionbar-section'>
@@ -78,7 +79,12 @@ function Actionbar({ store, project, saved }) {
               icon='←'
             />
           </Link>
-          <span>{saved ? 'Changes saved' : 'Saving...'}</span>
+          <Button
+            title='Fullscreen'
+            icon={fullscreen ? '⇲' : '⇱'}
+            onClick={globalActions.fullscreen}
+          />
+          <span style={{ marginLeft: '10px' }}>{saved ? 'Changes saved' : 'Saving...'}</span>
         </span>
       </div>
 
@@ -105,4 +111,8 @@ function Actionbar({ store, project, saved }) {
   );
 }
 
-export default withRouter(Actionbar)
+const mapStateToProps = state => ({
+  fullscreen: state.fullscreen
+})
+
+export default withRouter(connect(mapStateToProps)(Actionbar))

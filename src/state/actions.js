@@ -9,6 +9,7 @@ export const Types = {
   REORDER_CHAPTERS: "REORDER_CHAPTERS",
   DELETE_CHAPTER: "DELETE_CHAPTER",
   SET_LOCATION: "SET_LOCATION",
+  SET_FULLSCREEN: "SET_FULLSCREEN",
 }
 
 // Global editor component
@@ -61,6 +62,14 @@ export const deleteChapter = (projectName, id) => ({
 export const setLocation = (path, state) => ({
   type: Types.SET_LOCATION,
   payload: { path, state },
+})
+
+// Set app fullscreen status
+// We COULD just get this info with electron
+// but its useful to store it in redux
+export const setFullscreen = (boolean) => ({
+  type: Types.SET_FULLSCREEN,
+  payload: boolean
 })
 
 // Update the project last modified date with current date

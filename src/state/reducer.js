@@ -45,6 +45,8 @@ const defaultState = {
     justifyCenter: false,
     justifyRight: false,
   },
+
+  fullscreen: false,
 }
 
 // Clean up with some { destructuring }
@@ -168,6 +170,12 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         location: payload,
+      }
+    }
+    case Types.SET_FULLSCREEN: {
+      return {
+        ...state,
+        fullscreen: payload
       }
     }
     default:
