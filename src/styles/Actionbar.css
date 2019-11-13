@@ -20,6 +20,7 @@
 
 .ActionbarButton-active, .ActionbarButton:hover {
   background-color: #bbbbbb;
+  color: rgb(25, 25, 255);
 }
 
 .Actionbar-section {
