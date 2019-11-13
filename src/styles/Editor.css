@@ -4,6 +4,11 @@
 }
 
 @font-face {
+  font-family: Merriweather;
+  src: url('./fonts/Merriweather/Merriweather-Light.ttf') format('truetype');
+}
+
+@font-face {
   font-family: Avenir;
   src: url('./fonts/avenir_next/AvenirNextLTPro-Regular.woff') format('woff');
   font-weight: normal;
@@ -22,20 +27,21 @@
   flex-direction: column;
   overflow-y: scroll;
   /*background-color: rgb(250, 250, 250);*/
-  background-color: #f8f8f8;
+  background-color: #f9f9f9;
 }
 
 .Editor-content {
   flex: 1;
-  max-width: 800px;
+  max-width: 850px;
   margin: 0 auto;
 
-  font-family: Muli;
+  /*font-family: Muli;*/
+  font-family: Merriweather;
   /*font-family: Avenir, sans-serif;*/
-  font-size: 18px;
+  font-size: 19px;
   line-height: 1.7;
 
-  color: #111111;
+  color: rgba(0, 0, 0, 0.84);
 }
 
 .Editor-content ::selection {
@@ -48,6 +54,7 @@
 }
 
 .Editor-content h1, h2 {
+  /*font-family: Muli;*/
   margin: 0;
   padding: 0;
 }

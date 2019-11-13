@@ -35,8 +35,8 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
             updateModified()
           }}
         />
-        <Actionbar store={store} project={project} saved={saved} />
         <ExportStatus status={exportStatus} />
+        <Actionbar store={store} project={project} saved={saved} />
       </div>
     </AppScreen>
   )
