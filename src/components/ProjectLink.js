@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { deleteProject } from '../state/actions'
 import { formatModifiedDate } from '../utils/other'
 
-import '../styles/Grid.css'
+import '../styles/Grid.scss'
 
 function ProjectLink({ project, deleteProject, children }) {
   return (

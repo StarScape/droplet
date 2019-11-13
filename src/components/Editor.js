@@ -7,8 +7,6 @@ import { setEditorComponent, setCommandState, setWordCount } from '../state/acti
 import cleanHTML from '../utils/cleanHTML'
 import toDocx from '../to_docx'
 
-import '../styles/Editor.css'
-
 const fs = require('fs')
 const fsPromises = require('fs').promises
 const path = require('path')

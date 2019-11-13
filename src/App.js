@@ -9,7 +9,7 @@ import DashboardScreen from './screens/DashboardScreen'
 import ProjectScreen from './screens/ProjectScreen'
 import InitialRedirect from './InitialRedirect'
 
-import './styles/App.css';
+import './styles/App.scss';
 
 window.location.hash = 'dashboard'
 const { store, persistor } = initStore()

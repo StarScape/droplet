@@ -4,7 +4,7 @@ import Button from './ActionbarButton'
 import WordCount from './WordCount'
 import globalActions from '../globalActions'
 
-import '../styles/Actionbar.css'
+import '../styles/Actionbar.scss'
 
 const buttons = [
   {

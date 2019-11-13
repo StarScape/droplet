@@ -14,8 +14,6 @@
 ## Aesthetics TODO
 
 - Image icons for buttons
-- Move export to top bar in Editor page
-- Style buttons
 - Export status fixed position
 - Fix padding for text area
 - Soften colors

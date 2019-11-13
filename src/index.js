@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './styles/index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import './electronBridge'
-import App from './App';
+import App from './App'
+import './styles/index.scss'
 
 import * as serviceWorker from './serviceWorker';
 

@@ -6,7 +6,7 @@ import AppScreen from '../components/AppScreen'
 import ProjectLink from '../components/ProjectLink'
 import NewProject from '../components/NewProject'
 
-import '../styles/Dashboard.css'
+import '../styles/Dashboard.scss'
 
 class DashboardScreen extends React.Component {
   state = {

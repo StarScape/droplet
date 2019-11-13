@@ -9,6 +9,8 @@ import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
 import ExportStatus from '../components/ExportStatus'
 
+import '../styles/Editor.scss'
+
 function EditorScreen({ store, updateModified, updateLocation, location, history }) {
   const { project, chapter, file } = location.state
 

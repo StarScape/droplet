@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { deleteChapter } from '../state/actions'
 import { connect } from 'react-redux'
 
-import '../styles/Grid.css'
+import '../styles/Grid.scss'
 
 function ChapterLink(props) {
   const { chapter, project, number, deleteChapter, ...rest } = props
