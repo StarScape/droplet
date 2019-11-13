@@ -5,16 +5,15 @@ import { getText, wordCount } from '../utils/wordcount'
 import { makeSiblingOf, moveCaretToElem, getEnclosingP, getSelectedElem, isProperlyEnclosed } from '../utils/other'
 import { setEditorComponent, setCommandState, setWordCount } from '../state/actions'
 import cleanHTML from '../utils/cleanHTML'
+import toDocx from '../to_docx'
 
 import '../styles/Editor.css'
 
 const fs = require('fs')
+const fsPromises = require('fs').promises
 const path = require('path')
-const { app } = require('electron').remote
-
-const classes = {
-  content: 'Editor-content',
-}
+const homedir = require("os").homedir()
+const { app, dialog } = require('electron').remote
 
 // Main application text editor. See globalActions for API
 export default class Editor extends React.Component {
@@ -26,9 +25,6 @@ export default class Editor extends React.Component {
 
     this.inputHistory = new InputHistory(10)
     this.autocompleteActive = true
-
-    // Pass content ref back up to EditorScreen
-    this.props.setContentRef(this.contentRef)
   }
 
   get content() {
@@ -37,6 +33,7 @@ export default class Editor extends React.Component {
 
   set content(content) {
     this.contentRef.current.innerHTML = content
+    this.updateWordCount()
   }
 
   focus = () => this.contentRef.current.focus()
@@ -477,13 +474,43 @@ export default class Editor extends React.Component {
     }, 750)
   }
 
+  // Export as docx
+  exportDocx = async () => {
+    this.props.onExport('Exporting...')
+
+    const pathToSave = dialog.showSaveDialog({
+      title: 'Choose Location To Export',
+      buttonLabel: 'Export',
+      defaultPath: homedir + '/Documents/mydoc.docx',
+    })
+
+    if (pathToSave) {
+      const buffer = await toDocx(this.contentRef.current)
+      let exportStatus = ''
+      try {
+        await fsPromises.writeFile(pathToSave, buffer)
+        exportStatus = 'Export done'
+      } catch (e) {
+        alert('Error exporting document')
+        exportStatus = 'Export failed'
+      }
+      setTimeout(() => {
+        this.props.onExport(exportStatus)
+      }, 200)
+    }
+
+    setTimeout(() => {
+      this.props.onExport('')
+    }, 1500)
+  }
+
   render() {
     return (
       <div className='Editor'>
         <div
           contentEditable='true'
           spellCheck='true'
-          className={classes.content}
+          className='Editor-content'
           ref={this.contentRef}
           onInput={this.handleInput}
           onKeyDown={this.handleKeyDown}

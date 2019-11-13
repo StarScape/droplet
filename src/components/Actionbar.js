@@ -1,5 +1,8 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
+
 import Button from './ActionbarButton'
+import WordCount from './WordCount'
 import globalActions from '../globalActions'
 
 const buttons = [
@@ -60,20 +63,44 @@ const buttons = [
   },
 ]
 
-export default function Actionbar({ store }) {
+function Actionbar({ store, project, saved }) {
   return (
     <div className='Actionbar'>
-      {buttons.map(({ title, icon, action }, i) =>
-        <Button
-          title={title}
-          action={action}
-          icon={icon}
-          onClick={globalActions[action]}
-          isActive={false}
-          dispatch={store.dispatch}
-          key={i}
-        />
-      )}
+      <div class='Actionbar-section'>
+        <span>
+          <Link to={{
+            pathname: '/project',
+            state: { project: project }
+          }}>
+            <Button
+              title='Back to project screen'
+              icon='←'
+            />
+          </Link>
+          <span>{saved ? 'Changes saved' : 'Saving...'}</span>
+        </span>
+      </div>
+
+      <div class='Actionbar-section'>
+        <WordCount store={store} />
+      </div>
+
+      <div class='Actionbar-section'>
+        <span>
+          {buttons.map(({ title, icon, action }, i) =>
+            <Button
+              title={title}
+              icon={icon}
+              onClick={globalActions[action]}
+              isActive={false}
+              dispatch={store.dispatch}
+              key={i}
+            />
+          )}
+        </span>
+      </div>
     </div>
   );
 }
+
+export default withRouter(Actionbar)

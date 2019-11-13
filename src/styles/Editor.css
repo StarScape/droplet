@@ -1,7 +1,26 @@
+@font-family {
+  font-family: "Avenir Next";
+  src: url('./fonts/avenir_next/AvenirNextLTPro-Regular.otf') format('otf');
+}
+
+.Editor-screen {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Editor {
+  flex: 1;
+}
+
 .Editor-content {
   border: 1px solid grey;
-  height: 200px;
+  height: 100%;
   overflow-y: scroll;
+
+  font-size: 18px;
+  font-family: "Times New Roman";
 }
 
 .Editor-content p {
@@ -17,3 +36,25 @@
 .Editor-content h1, h2 {
   text-align: left !important; /* wtf */
 }
+
+.Actionbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ActionbarButton {
+  width: 30px;
+  height: 30px;
+}
+
+.Actionbar-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  /*align-items: center;*/
+}
+
+.Actionbar-section:first-child > span { margin-right: auto; }
+
+.Actionbar-section:last-child > span { margin-left: auto; }

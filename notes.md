@@ -11,8 +11,12 @@
 - More options for each menu
 - Aesthetics!
 
-## Bugs
+## Aesthetics TODO
 
+- Image icons for buttons
+- Move export to top bar in Editor page
+- Style buttons
+- Export status fixed
 
 ## Roadmap
 

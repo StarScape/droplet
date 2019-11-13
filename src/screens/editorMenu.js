@@ -10,10 +10,14 @@ const menu = [
         click: globalActions.saveFile
       },
       {
-        label: 'Open',
-        accelerator: 'CmdOrCtrl+O',
-        click: () => {/* TODO!!! */}
+        label: 'Export as DOCX',
+        click: globalActions.exportDocx,
       },
+      // {
+      //   label: 'Open',
+      //   accelerator: 'CmdOrCtrl+O',
+      //   click: () => {/* TODO!!! */}
+      // },
       { role: 'Quit' }
     ]
   },

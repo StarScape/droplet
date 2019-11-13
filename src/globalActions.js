@@ -51,6 +51,7 @@ const justifyCenter = useEditor((editor) => editor.justifyCenter())
 const justifyRight = useEditor((editor) => editor.justifyRight())
 const saveFile = useEditor((editor) => editor.saveFile())
 const openFile = useEditor((editor) => editor.openFile())
+const exportDocx = useEditor((editor) => editor.exportDocx())
 
 const isActive = command => getState().editorComponent.isActive(command)
 
@@ -74,5 +75,6 @@ export default {
   justifyRight,
   saveFile,
   openFile,
+  exportDocx,
   isActive,
 }

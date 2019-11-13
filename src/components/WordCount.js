@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-function WordCount({ wordCount, store: { dispatch } }) {
+function WordCount({ count, store: { dispatch } }) {
   return (
-    <h6>{ wordCount } { wordCount === 1 ? 'word' : 'words' }</h6>
+    <span className='WordCount'>{ count } { count === 1 ? 'word' : 'words' }</span>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    wordCount: state.wordCount
+    count: state.wordCount
   }
 }
 
