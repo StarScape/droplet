@@ -1,4 +1,11 @@
-const { app, BrowserWindow, Menu, dialog, ipcMain } = require('electron')
+const {
+  app,
+  globalShortcut,
+  dialog,
+  ipcMain,
+  BrowserWindow,
+  Menu
+} = require('electron')
 const windowStateKeeper = require('electron-window-state')
 const path = require('path')
 const isDev = require('electron-is-dev')
@@ -35,6 +42,10 @@ const createWindow = () => {
 
   mainWindow.on('closed', () => mainWindow = null);
   windowState.manage(mainWindow)
+
+  globalShortcut.register('f11', () => {
+    mainWindow.webContents.send('fullscreen')
+  })
 }
 
 app.on('ready', createWindow);

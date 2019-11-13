@@ -27,3 +27,5 @@ ipcRenderer.on('heading2', (event, fname) => globalActions.heading2())
 ipcRenderer.on('justifyLeft', (event, fname) => globalActions.justifyLeft())
 ipcRenderer.on('justifyCenter', (event, fname) => globalActions.justifyCenter())
 ipcRenderer.on('justifyRight', (event, fname) => globalActions.justifyRight())
+
+ipcRenderer.on('fullscreen', (event, fname) => globalActions.fullscreen())
