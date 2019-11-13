@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import DocumentTitle from 'react-document-title'
+import globalActions from '../globalActions'
 const { Menu } = require('electron').remote
 const isDev = require('electron-is-dev')
 
@@ -9,6 +10,17 @@ export default function AppScreen({ title, menu, children }) {
 
   // Prevent menu from being set twice
   if (!menuSet) {
+    menu.push({
+      label: "View",
+      submenu: [
+        {
+          label: 'Fullscreen',
+          accelerator: 'f11',
+          click: globalActions.fullscreen,
+        },
+      ],
+    })
+
     if (isDev) {
       menu.push({
         label: "Dev",

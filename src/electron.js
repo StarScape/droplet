@@ -1,6 +1,5 @@
 const {
   app,
-  globalShortcut,
   dialog,
   ipcMain,
   BrowserWindow,
@@ -42,10 +41,6 @@ const createWindow = () => {
 
   mainWindow.on('closed', () => mainWindow = null);
   windowState.manage(mainWindow)
-
-  globalShortcut.register('f11', () => {
-    mainWindow.webContents.send('fullscreen')
-  })
 }
 
 app.on('ready', createWindow);
