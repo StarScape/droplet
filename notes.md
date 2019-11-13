@@ -15,10 +15,8 @@
 
 - Image icons for buttons
 - Export status fixed position
-- Fix padding for text area
 - Soften colors
 - CAN'T set headings to center-aligned
-- Fullscreen
 
 ## Thoughts
 
