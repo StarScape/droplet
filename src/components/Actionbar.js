@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-
 import Button from './ActionbarButton'
 import WordCount from './WordCount'
 import globalActions from '../globalActions'
+
+import '../styles/Actionbar.css'
 
 const buttons = [
   {
