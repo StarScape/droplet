@@ -17,6 +17,7 @@
 - Move export to top bar in Editor page
 - Style buttons
 - Export status fixed
+- CAN'T set headings to center-aligned
 
 ## Roadmap
 
