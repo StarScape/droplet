@@ -48,7 +48,7 @@ export const getEnclosingP = (elem) => {
 // Ensures that an element in the document is properly wrapped in
 // one of the top level elements
 export const isProperlyEnclosed = (elem) => {
-  const topLevelElems = ['P', 'H1', 'H2', 'UL', 'OL']
+  const topLevelElems = ['P', 'H1', 'H2', /*'UL', 'OL'*/]
 
   let e = elem
   while (e !== null && topLevelElems.includes(e.nodeName)) {

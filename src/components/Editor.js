@@ -79,21 +79,15 @@ export default class Editor extends React.Component {
   // Due to an utterly bizzare bug, sometimes turning the heading on
   // will also turn bold on. As far as I can tell it's a problem with Chrome.
   _heading = (num) => {
-    const boldOnBefore = document.queryCommandState('bold')
-    
     // Toggle heading
     if (this.isActive(`heading${num}`)) {
       this.exec('formatBlock','p')
     }
+    else if (this.isActive('olist') || this.isActive('ulist')) {
+      return;
+    }
     else {
       this.exec('formatBlock', `h${num}`)
-    }
-
-    const boldOnNow = document.queryCommandState('bold')
-
-    // This should be safe to remove now.
-    if (boldOnBefore !== boldOnNow) {
-      this.bold()
     }
   }
 
@@ -116,11 +110,12 @@ export default class Editor extends React.Component {
     // but one that is INSIDE the same <p> element as the <ul> we were previously editing.
     // This solves it by checking if the new <p> is inside another <p> (which should never
     // happen), and shifting it appropriately if so
-    const newParagraph = getEnclosingP(range.startContainer)
-    if (newParagraph.parentNode.nodeName === 'P') {
-      const moved = makeSiblingOf(newParagraph, newParagraph.parentNode)
-      moveCaretToElem(moved)
-    }
+    // const newParagraph = getEnclosingP(range.startContainer)
+    // console.log(newParagraph);
+    // if (newParagraph.parentNode.nodeName === 'P') {
+    //   const moved = makeSiblingOf(newParagraph, newParagraph.parentNode)
+    //   moveCaretToElem(moved)
+    // }
   }
 
   // We keep track of what commands are applied (e.g. bold, italic, heading)

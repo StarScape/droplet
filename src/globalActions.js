@@ -20,9 +20,9 @@ let editor = null
 let mainWindow = null
 
 const action = (f) => () => {
-  if (!editor) {
+  // if (!editor) {
     editor = getState().editorComponent
-  }
+  // }
   if (!mainWindow) {
     mainWindow = getCurrentWindow()
   }

@@ -16,6 +16,7 @@
 }
 
 .Editor-screen {
+  min-height: 100vh;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -31,8 +32,11 @@
 
 .Editor-content {
   flex: 1;
+  width: 60%;
   max-width: 850px;
-  margin: 15px auto 0 auto;
+  min-width: 0px;
+
+  margin: 15px auto 80vh auto;
 
   font-family: Merriweather;
   font-size: 19px;
