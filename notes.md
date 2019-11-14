@@ -16,11 +16,15 @@
 - Image icons for buttons
 - Export status fixed position
 - Soften colors
+- Dark mode
+- Separate colors into file
 - CAN'T set headings to center-aligned
 
 ## Thoughts
 
 Maybe a simple border-less window + some darker contrast for the bottom bar would actually look good in light theme?
+
+Maybe set `<br>` to be a super-thin line?
 
 ## Roadmap
 

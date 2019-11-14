@@ -1,13 +1,15 @@
+@import 'theme.css';
+
 ::-webkit-scrollbar {
   width: 9px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #eeeeee;
+  background-color: var(--scrollbar-track-col);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #cccccc;
+  background-color: var(--scrollbar-thumb-col);
   border-radius: 10px;
 }
 

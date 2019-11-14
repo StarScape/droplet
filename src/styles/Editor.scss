@@ -21,15 +21,12 @@
   flex-direction: column;
 }
 
-$editor-bg: #f9f9f9;
-
 .Editor {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  /*background-color: rgb(250, 250, 250);*/
-  background-color: $editor-bg;
+  background-color: var(--bg-col);
 }
 
 .Editor-content {
@@ -37,17 +34,15 @@ $editor-bg: #f9f9f9;
   max-width: 850px;
   margin: 15px auto 0 auto;
 
-  /*font-family: Muli;*/
   font-family: Merriweather;
-  /*font-family: Avenir, sans-serif;*/
   font-size: 19px;
   line-height: 1.7;
 
-  color: rgba(0, 0, 0, 0.84);
+  color: var(--text-col);
 }
 
 .Editor-content ::selection {
-  background-color: lightblue;
+  background-color: var(--text-highlight);
 }
 
 .Editor-content p {

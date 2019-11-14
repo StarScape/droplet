@@ -1,0 +1,14 @@
+:root {
+  --light-blue: #ADD8E6;
+  
+  --bg-col: #f9f9f9;
+  --bg-col-darker: #efefef;
+  --text-col: rgba(0, 0, 0, 0.84);
+  --text-col-darker: rgba(0, 0, 0, 0.9);
+  --text-highlight: #ADD8E6;
+
+  --button-active-bg: #bbb;
+
+  --scrollbar-track-col: #eee;
+  --scrollbar-thumb-col: #ccc;
+}
