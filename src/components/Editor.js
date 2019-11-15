@@ -110,12 +110,11 @@ export default class Editor extends React.Component {
     // but one that is INSIDE the same <p> element as the <ul> we were previously editing.
     // This solves it by checking if the new <p> is inside another <p> (which should never
     // happen), and shifting it appropriately if so
-    // const newParagraph = getEnclosingP(range.startContainer)
-    // console.log(newParagraph);
-    // if (newParagraph.parentNode.nodeName === 'P') {
-    //   const moved = makeSiblingOf(newParagraph, newParagraph.parentNode)
-    //   moveCaretToElem(moved)
-    // }
+    const newParagraph = getEnclosingP(range.startContainer)
+    if (newParagraph && newParagraph.parentNode.nodeName === 'P') {
+      const moved = makeSiblingOf(newParagraph, newParagraph.parentNode)
+      moveCaretToElem(moved)
+    }
   }
 
   // We keep track of what commands are applied (e.g. bold, italic, heading)
@@ -391,8 +390,8 @@ export default class Editor extends React.Component {
   handleKeyDown = (event) => {
     // Override default ENTER
     if (event.keyCode === 13) {
-      event.preventDefault()
-      this.newParagraph()
+      // event.preventDefault()
+      // this.newParagraph()
     }
 
     this.checkShortcuts(event)

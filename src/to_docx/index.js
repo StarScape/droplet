@@ -67,6 +67,9 @@ const wrapInTag = (elem, innerTags) => {
       </w:p>
     `
   }
+  else  if (elem.tagName === 'SPAN') {
+    return innerTags
+  }
   else  if (elem.tagName === 'H1') {
     return `<w:p>
       <w:pPr>
@@ -121,6 +124,7 @@ const wrapInTag = (elem, innerTags) => {
     return innerTags
   }
   else {
+    console.log(elem);
     throw new Error('Unrecognized element');
   }
 }
