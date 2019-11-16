@@ -1,0 +1,26 @@
+.Notification {
+  position: fixed;
+  min-width: 100px;
+  min-height: 50px;
+  padding: 30px 20px;
+  right: 9px;
+  bottom: 7%;
+
+  background-color: var(--bg-col-medium);
+  color: var(--text-col);
+  box-shadow: -2px 0 10px 2px var(--bg-col-darker);
+  border: 0.5px solid #ddd;
+  border-right: none;
+  border-bottom-left-radius: 15%;
+  border-top-left-radius:    15%;
+
+  transition: transform 0.3s;
+  transform-origin: center right;
+
+  // Position offscreen
+  transform: translateX(calc(100% + 9px));
+}
+
+.Notification-active {
+  transform: translateX(0);
+}

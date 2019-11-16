@@ -47,6 +47,9 @@ const defaultState = {
   },
 
   fullscreen: false,
+
+  // String to be displayed in notification box
+  notification: null,
 }
 
 // Clean up with some { destructuring }
@@ -176,6 +179,13 @@ const reducer = (state = defaultState, action) => {
       return {
         ...state,
         fullscreen: payload
+      }
+    }
+    case Types.SET_NOTIFICATION: {
+      return {
+        ...state,
+        fullscreen: false,
+        notification: payload,
       }
     }
     default:

@@ -1,7 +1,7 @@
 @import 'theme.css';
 
 ::-webkit-scrollbar {
-  width: 9px;
+  width: var(--scollbar-width);
 }
 
 ::-webkit-scrollbar-track {

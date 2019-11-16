@@ -10,6 +10,7 @@ export const Types = {
   DELETE_CHAPTER: "DELETE_CHAPTER",
   SET_LOCATION: "SET_LOCATION",
   SET_FULLSCREEN: "SET_FULLSCREEN",
+  SET_NOTIFICATION: "SET_NOTIFICATION",
 }
 
 // Global editor component
@@ -70,6 +71,12 @@ export const setLocation = (path, state) => ({
 export const setFullscreen = (boolean) => ({
   type: Types.SET_FULLSCREEN,
   payload: boolean
+})
+
+// Used to set the notification box that pops up for exports etc
+export const setNotification = (msg) => ({
+  type: Types.SET_NOTIFICATION,
+  payload: msg
 })
 
 // Update the project last modified date with current date

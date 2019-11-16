@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { setNotification } from '../state/actions'
 import { InputHistory, Inputs } from '../utils/InputHistory'
 import { shortcutSwitch } from '../utils/shortcuts'
 import { getText, wordCount } from '../utils/wordcount'
@@ -14,7 +16,7 @@ const homedir = require("os").homedir()
 const { app, dialog } = require('electron').remote
 
 // Main application text editor. See globalActions for API
-export default class Editor extends React.Component {
+class Editor extends React.Component {
   constructor(props) {
     super(props)
     this.store = props.store
@@ -468,7 +470,7 @@ export default class Editor extends React.Component {
 
   // Export as docx
   exportDocx = async () => {
-    this.props.onExport('Exporting...')
+    this.props.setNotification('Exporting...')
 
     const pathToSave = dialog.showSaveDialog({
       title: 'Choose Location To Export',
@@ -478,7 +480,7 @@ export default class Editor extends React.Component {
 
     if (pathToSave) {
       const buffer = await toDocx(this.contentRef.current)
-      let exportStatus = ''
+      let exportStatus = null
       try {
         await fsPromises.writeFile(pathToSave, buffer)
         exportStatus = 'Export done'
@@ -487,12 +489,12 @@ export default class Editor extends React.Component {
         exportStatus = 'Export failed'
       }
       setTimeout(() => {
-        this.props.onExport(exportStatus)
+        this.props.setNotification(exportStatus)
       }, 200)
     }
 
     setTimeout(() => {
-      this.props.onExport('')
+      this.props.setNotification(null)
     }, 1500)
   }
 
@@ -516,3 +518,9 @@ export default class Editor extends React.Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  setNotification: msg => dispatch(setNotification(msg)),
+})
+
+export default connect(null, mapDispatchToProps)(Editor)

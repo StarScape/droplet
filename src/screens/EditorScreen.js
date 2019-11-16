@@ -7,7 +7,6 @@ import editorMenu from './editorMenu'
 import AppScreen from '../components/AppScreen'
 import Editor from '../components/Editor'
 import Actionbar from '../components/Actionbar'
-import ExportStatus from '../components/ExportStatus'
 
 import '../styles/Editor.scss'
 
@@ -15,7 +14,6 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
   const { project, chapter, file } = location.state
 
   const [saved, setSaved] = useState(true)
-  const [exportStatus, setExportStatus] = useState(false)
 
   useEffect(() => {
     updateLocation()
@@ -30,14 +28,12 @@ function EditorScreen({ store, updateModified, updateLocation, location, history
         <Editor
           store={store}
           file={file}
-          onExport={setExportStatus}
           onUpdate={() => setSaved(false)}
           onSave={() => {
             setSaved(true)
             updateModified()
           }}
         />
-        <ExportStatus status={exportStatus} />
         <Actionbar store={store} project={project} saved={saved} />
       </div>
     </AppScreen>

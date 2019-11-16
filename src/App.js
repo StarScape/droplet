@@ -4,6 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 
 import { initStore } from './state/store'
+import Notification from './components/Notification'
 import EditorScreen from './screens/EditorScreen'
 import DashboardScreen from './screens/DashboardScreen'
 import ProjectScreen from './screens/ProjectScreen'
@@ -22,6 +23,8 @@ function App() {
           <InitialRedirect store={store} />
 
           <div className="App">
+            <Notification />
+
             <Switch>
               <Route
                 exact
