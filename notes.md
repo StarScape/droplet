@@ -14,10 +14,8 @@
 ## Aesthetics TODO
 
 - Image icons for buttons
-- Export status fixed position
 - Soften colors
 - Dark mode
-- Separate colors into file
 - CAN'T set headings to center-aligned
 
 ## Thoughts
