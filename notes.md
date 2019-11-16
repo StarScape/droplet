@@ -14,9 +14,9 @@
 ## Aesthetics TODO
 
 - Image icons for buttons
-- Soften colors
-- Dark mode
-- CAN'T set headings to center-aligned
+- Project Page
+  - Add more info to each project.
+- Chapters Page
 
 ## Thoughts
 
