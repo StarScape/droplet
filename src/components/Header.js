@@ -7,7 +7,7 @@ export default function Header({ children, backPath, backState={} }) {
     <div className='Header'>
       <div className='back'>
         {backPath ?
-          <Link to={{ path: backPath, state:backState }}>
+          <Link to={{ pathname: backPath, state:backState }}>
             <img src='img/left-arrow.svg' width='30px' alt='Back' />
           </Link>
         : null}

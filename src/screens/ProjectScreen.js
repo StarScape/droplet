@@ -4,6 +4,8 @@ import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { reorderChapters, updateProjectModified, setLocation } from '../state/actions'
 import AppScreen from '../components/AppScreen'
+import Header from '../components/Header'
+import HeaderButton from '../components/HeaderButton'
 import ChapterLink from '../components/ChapterLink'
 import NewChapter from '../components/NewChapter'
 
@@ -58,9 +60,13 @@ class ProjectScreen extends React.Component {
     return (
       <AppScreen title={project.name} menu={this.menu}>
         <div>
-          <div>
-            <button onClick={this.handleNewChapter}>CHAPTER +</button>
-          </div>
+          <Header backPath='/dashboard'>
+            <HeaderButton
+              altText='Add Chapter'
+              onClick={this.handleNewChapter}>
+              + CHAPTER
+            </HeaderButton>
+          </Header>
 
           <Sortable
             className='grid-container'

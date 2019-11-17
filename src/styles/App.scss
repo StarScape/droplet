@@ -13,6 +13,9 @@
   border-radius: 10px;
 }
 
+body {
+  background-color: var(--bg-col);
+}
 
 h1, h2, h3, h4, h5, h6 {
   /* Chrome sets h1 to bold by default */
