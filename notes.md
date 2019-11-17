@@ -13,11 +13,12 @@
 
 ## Aesthetics TODO
 
-- Image icons for buttons
-- Header
 - Project Page
   - Add more info to each project.
 - Chapters Page
+- Image icons for buttons
+- Swanky save/saved icon
+- Splash screen
 
 ## Thoughts
 
