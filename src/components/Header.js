@@ -13,7 +13,7 @@ export default function Header({ children, backPath, backState={} }) {
         : null}
       </div>
       <div className='logo-and-title'>
-        <img className='droplet-logo' src='img/drop_blue_small.png' />
+        <img className='droplet-logo' src='img/drop_blue_small.png' alt='droplet' />
         <h3 className='droplet-title'>droplet</h3>
       </div>
       <div className='buttons'>
