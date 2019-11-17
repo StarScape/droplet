@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setLocation } from '../state/actions'
 import AppScreen from '../components/AppScreen'
+import Header from '../components/Header'
+import HeaderButton from '../components/HeaderButton'
 import ProjectLink from '../components/ProjectLink'
 import NewProject from '../components/NewProject'
 
@@ -53,6 +55,14 @@ class DashboardScreen extends React.Component {
     return (
       <AppScreen title='Droplet' menu={this.menu}>
         <div onKeyDown={this.handleKeyDown}>
+          <Header backPath='/'>
+            <HeaderButton
+              altText='Add Project'
+              onClick={this.handleNewProject}>
+              + PROJECT
+            </HeaderButton>
+          </Header>
+
           <div>
             <button onClick={this.handleNewProject}>PROJECT +</button>
           </div>

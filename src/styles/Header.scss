@@ -1,0 +1,69 @@
+.Header {
+  display: flex;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 33.3%);
+  
+  width: 100%;
+  height: 50px;
+  background-color: var(--bg-col-darker);
+  border-bottom: 1px solid var(--border1);
+  margin-bottom: 20px;
+  font-family: Avenir;
+  
+  .back {
+    img {
+      padding: 8px 15px;
+      transition: transform 0.5s, opacity 0.5s;
+      opacity: 0.6;
+    }
+
+    img:hover {
+      cursor: pointer;
+      transform: translate(-3px, 0);
+      opacity: 1;
+    }
+  }
+
+  .logo-and-title {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .droplet-logo {
+      width: 30px;
+      height: 30px;
+      transition: transform 1s;
+      transform-origin: center center;
+    }
+
+    .droplet-logo:hover {
+      transform: rotate(-360deg);
+    }
+
+    .droplet-title {
+      margin: 0;
+      margin-left: 5px;
+    }
+  }
+
+  .buttons {
+    margin-right: 10px;
+    color: var(--text-col-lighter);
+  }
+}
+
+.HeaderButton {
+  float: right;
+  background: transparent;
+  border: none;
+  padding: 12px 10px;
+  border-radius: 3px;
+  transition: background-color 0.25s;
+}
+
+.HeaderButton:hover {
+  background-color: var(--button-active-bg);
+  cursor: pointer;
+}

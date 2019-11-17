@@ -14,6 +14,7 @@
 ## Aesthetics TODO
 
 - Image icons for buttons
+- Header
 - Project Page
   - Add more info to each project.
 - Chapters Page

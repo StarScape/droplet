@@ -5,8 +5,10 @@
   --bg-col-medium: #f6f6f6;
   --bg-col-darker: #efefef;
   --text-col: rgba(0, 0, 0, 0.84);
+  --text-col-lighter: rgba(0, 0, 0, 0.7);
   --text-col-darker: rgba(0, 0, 0, 0.9);
   --text-highlight: #ADD8E6;
+  --border1: #ccc;
 
   --button-active-bg: #bbb;
 
