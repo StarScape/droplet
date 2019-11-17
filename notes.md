@@ -14,6 +14,9 @@
 ## Aesthetics TODO
 
 - Project Page
+  - Add modal for delete
+  - Change on hover
+  - Allow rename project
   - Add more info to each project.
 - Chapters Page
 - Image icons for buttons

@@ -16,3 +16,13 @@
   --scrollbar-thumb-col: #ccc;
   --scollbar-width: 9px;
 }
+
+.hover-button {
+  opacity: 0.6;
+  transition: opacity 0.5s;
+}
+
+.hover-button:hover {
+  cursor: pointer;
+  opacity: 1;
+}

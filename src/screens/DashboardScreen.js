@@ -55,7 +55,7 @@ class DashboardScreen extends React.Component {
     return (
       <AppScreen title='Droplet' menu={this.menu}>
         <div onKeyDown={this.handleKeyDown}>
-          <Header>
+          <Header title='dashboard'>
             <HeaderButton
               altText='Add Project'
               onClick={this.handleNewProject}>

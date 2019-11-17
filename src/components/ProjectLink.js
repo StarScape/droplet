@@ -9,6 +9,11 @@ import '../styles/Grid.scss'
 function ProjectLink({ project, deleteProject, children }) {
   return (
     <div className='grid-item'>
+      <div className='grid-item-header'>
+        <span className='delete hover-button' onClick={deleteProject}>
+          <img src='img/x.svg' width='10px'/>
+        </span>
+      </div>
       <Link to={{
           pathname: '/project',
           state: { project: project }
@@ -20,9 +25,6 @@ function ProjectLink({ project, deleteProject, children }) {
         </div>
       </Link>
 
-      <button onClick={deleteProject}>
-        Delete
-      </button>
     </div>
   )
 }

@@ -14,14 +14,12 @@
   .back {
     img {
       padding: 8px 15px;
-      transition: transform 0.5s, opacity 0.5s;
-      opacity: 0.6;
+      transition: transform 0.5s;
     }
 
     img:hover {
       cursor: pointer;
       transform: translate(-3px, 0);
-      opacity: 1;
     }
   }
 

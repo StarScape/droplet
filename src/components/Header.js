@@ -2,13 +2,18 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/Header.scss'
 
-export default function Header({ children, backPath, backState={} }) {
+export default function Header({ children, title, backPath, backState={} }) {
   return (
     <div className='Header'>
       <div className='back'>
         {backPath ?
           <Link to={{ pathname: backPath, state:backState }}>
-            <img src='img/left-arrow.svg' width='30px' alt='Back' />
+            <img
+              className='hover-button'
+              src='img/left-arrow.svg'
+              width='30px'
+              alt='Back'
+            />
           </Link>
         : null}
       </div>
