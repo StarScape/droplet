@@ -11,6 +11,7 @@ export const Types = {
   SET_LOCATION: "SET_LOCATION",
   SET_FULLSCREEN: "SET_FULLSCREEN",
   SET_NOTIFICATION: "SET_NOTIFICATION",
+  SET_MODAL: "SET_MODAL",
 }
 
 // Global editor component
@@ -77,6 +78,11 @@ export const setFullscreen = (boolean) => ({
 export const setNotification = (msg) => ({
   type: Types.SET_NOTIFICATION,
   payload: msg
+})
+
+export const setModal = (modal) => ({
+  type: Types.SET_MODAL,
+  payload: modal
 })
 
 // Update the project last modified date with current date

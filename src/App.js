@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 
 import { initStore } from './state/store'
 import Notification from './components/Notification'
+import Modal from './components/Modal'
 import EditorScreen from './screens/EditorScreen'
 import DashboardScreen from './screens/DashboardScreen'
 import ProjectScreen from './screens/ProjectScreen'
@@ -24,6 +25,7 @@ function App() {
 
           <div className="App">
             <Notification />
+            <Modal />
 
             <Switch>
               <Route

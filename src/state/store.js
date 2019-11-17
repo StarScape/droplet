@@ -1,7 +1,8 @@
-import { createStore } from 'redux'
+import { createStore, bindActionCreators } from 'redux'
 import { AsyncNodeStorage } from 'redux-persist-node-storage'
 import { persistStore, persistReducer } from 'redux-persist'
 
+import { setModal } from './actions'
 import reducer from './reducer'
 const { app } = require('electron').remote
 
@@ -11,6 +12,8 @@ export let persistor
 export let dispatch
 export let getState
 export let subscribe
+
+export let displayModal
 
 const storage = new AsyncNodeStorage(app.getPath('userData'))
 
@@ -31,6 +34,9 @@ export function initStore() {
   subscribe = store.subscribe
 
   window.getState = getState // For debugging
+
+  // Just don't even ask why this is here. Needs refactor...
+  displayModal = bindActionCreators(setModal, dispatch)
 
   return { store, persistor }
 }

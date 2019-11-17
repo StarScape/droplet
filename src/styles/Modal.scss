@@ -1,0 +1,53 @@
+.Modal-outer {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000055;
+  z-index: 2;
+}
+
+.Modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-width: 300px;
+  min-height: 200px;
+  padding: 20px;
+  background-color: var(--bg-col-darker);
+  color: var(--text-col);
+
+  h3 {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    span {
+      padding: 0 6px;
+      border-bottom: 3px solid var(--light-blue);
+    }
+  }
+
+  button {
+    background-color: var(--light-blue);
+    font-weight: bold;
+    color: rgba(64, 64, 64, 0.84);
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    float: right;
+    transition: color 0.5s;
+  }
+
+  button:hover {
+    cursor: pointer;
+    color: var(--text-col);
+  }
+
+  .confirm {
+  }
+
+  .cancel {
+  }
+}

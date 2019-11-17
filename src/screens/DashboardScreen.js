@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { setLocation } from '../state/actions'
+import { setLocation, setModal } from '../state/actions'
 import AppScreen from '../components/AppScreen'
 import Header from '../components/Header'
 import HeaderButton from '../components/HeaderButton'
@@ -76,10 +75,6 @@ class DashboardScreen extends React.Component {
               <ProjectLink key={project.name} project={project} />
             )}
           </div>
-
-          <div>
-            <Link to='editor'><button>Editor</button></Link>
-          </div>
         </div>
       </AppScreen>
     )
@@ -92,6 +87,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   updateLocation: () => dispatch(setLocation('/dashboard', {})),
+  setModal: modal => dispatch(setModal(modal))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(DashboardScreen)

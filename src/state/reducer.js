@@ -50,6 +50,14 @@ const defaultState = {
 
   // String to be displayed in notification box
   notification: null,
+
+  modal: {
+    show: false,
+    title: '',
+    body: '',
+    onConfirm: null,
+    onCancel: null,
+  }
 }
 
 // Clean up with some { destructuring }
@@ -184,8 +192,13 @@ const reducer = (state = defaultState, action) => {
     case Types.SET_NOTIFICATION: {
       return {
         ...state,
-        fullscreen: false,
         notification: payload,
+      }
+    }
+    case Types.SET_MODAL: {
+      return {
+        ...state,
+        modal: payload,
       }
     }
     default:
