@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { displayModal } from '../state/store'
 import { deleteChapter } from '../state/actions'
 import { connect } from 'react-redux'
 
@@ -7,6 +8,17 @@ import '../styles/Grid.scss'
 
 function ChapterLink(props) {
   const { chapter, project, number, deleteChapter, ...rest } = props
+  const handleDelete = () => {
+    displayModal({
+      title: 'Warning',
+      body: 'Are you sure you want to delete this chapter? Once you do, it cannot be recovered.',
+      onConfirm: () => {
+        deleteChapter()
+      },
+      onCancel: () => {},
+    })
+  }
+
 
   return (
     <div className='grid-item chapter-link' {...rest}>
@@ -26,7 +38,7 @@ function ChapterLink(props) {
         </div>
       </Link>
 
-      <button onClick={deleteChapter}>
+      <button onClick={handleDelete}>
         Delete
       </button>
     </div>

@@ -82,7 +82,7 @@ export const setNotification = (msg) => ({
 
 export const setModal = (modal) => ({
   type: Types.SET_MODAL,
-  payload: modal
+  payload: { show: true, ...modal }
 })
 
 // Update the project last modified date with current date

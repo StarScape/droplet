@@ -10,7 +10,6 @@ import '../styles/Grid.scss'
 function ProjectLink({ project, deleteProject, children }) {
   const handleDelete = () => {
     displayModal({
-      show: true,
       title: 'Warning',
       body: 'Are you sure you want to delete this project? Once you do, it cannot be recovered.',
       onConfirm: () => {
