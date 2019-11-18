@@ -32,6 +32,7 @@ function ProjectLink({ project, deleteProject, children }) {
         <div className='grid-item-content'>
           <GridItemName>{project.name}</GridItemName>
         </div>
+      </Link>
 
         <div className='grid-item-footer'>
           <span className='delete hover-button' onClick={handleDelete}>
@@ -39,7 +40,6 @@ function ProjectLink({ project, deleteProject, children }) {
           </span>
           <p>Modified {formatModifiedDate(project.dateModified)}</p>
         </div>
-      </Link>
 
     </div>
   )

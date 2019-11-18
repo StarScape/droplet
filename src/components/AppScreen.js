@@ -8,9 +8,11 @@ const isDev = require('electron-is-dev')
 export default function AppScreen({ title, menu, children }) {
   const [menuSet, setMenuSet] = useState(false)
 
+  const newMenu = [...menu]
+
   // Prevent menu from being set twice
   if (!menuSet) {
-    menu.push({
+    newMenu.push({
       label: "View",
       submenu: [
         {
@@ -22,7 +24,7 @@ export default function AppScreen({ title, menu, children }) {
     })
 
     if (isDev) {
-      menu.push({
+      newMenu.push({
         label: "Dev",
         submenu: [
           { role: 'reload' },
@@ -32,7 +34,7 @@ export default function AppScreen({ title, menu, children }) {
       })
     }
 
-    const appMenu = Menu.buildFromTemplate(menu)
+    const appMenu = Menu.buildFromTemplate(newMenu)
     Menu.setApplicationMenu(appMenu)
     setMenuSet(true)
   }
