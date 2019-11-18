@@ -30,17 +30,16 @@ function ProjectLink({ project, deleteProject, children }) {
         }}
       >
         <div className='grid-item-content'>
-          <GridItemName>{project.name}</GridItemName>
+          <GridItemName onChange={(v) => console.log(v)}>{project.name}</GridItemName>
         </div>
       </Link>
 
-        <div className='grid-item-footer'>
-          <span className='delete hover-button' onClick={handleDelete}>
-            <img src='img/trash.svg' width='20px' alt='x' title='foo' />
-          </span>
-          <p>Modified {formatModifiedDate(project.dateModified)}</p>
-        </div>
-
+      <div className='grid-item-footer'>
+        <span className='delete hover-button' onClick={handleDelete}>
+          <img src='img/trash.svg' width='20px' alt='x' title='foo' />
+        </span>
+        <p>Modified {formatModifiedDate(project.dateModified)}</p>
+      </div>
     </div>
   )
 }
