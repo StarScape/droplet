@@ -14,11 +14,11 @@
 ## Aesthetics TODO
 
 - Project Page
-  - Add modal for delete
-  - Change on hover
+  - Change appearance on hover
   - Allow rename project
   - Add more info to each project.
 - Chapters Page
+  - Change grid-create-area to modal
 - Image icons for buttons
 - Swanky save/saved icon
 - Splash screen

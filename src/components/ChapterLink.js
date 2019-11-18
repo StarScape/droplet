@@ -19,7 +19,6 @@ function ChapterLink(props) {
     })
   }
 
-
   return (
     <div className='grid-item chapter-link' {...rest}>
       <Link

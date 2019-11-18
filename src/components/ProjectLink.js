@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { displayModal } from '../state/store'
 import { deleteProject } from '../state/actions'
 import { formatModifiedDate } from '../utils/other'
+import GridItemName from '../components/GridItemName'
 
 import '../styles/Grid.scss'
 
@@ -21,19 +22,22 @@ function ProjectLink({ project, deleteProject, children }) {
 
   return (
     <div className='grid-item'>
-      <div className='grid-item-header'>
-        <span className='delete hover-button' onClick={handleDelete}>
-          <img src='img/x.svg' width='10px' alt='x' />
-        </span>
-      </div>
-      <Link to={{
+      <Link
+        className='grid-item-link'
+        to={{
           pathname: '/project',
           state: { project: project }
-        }}>
-
+        }}
+      >
         <div className='grid-item-content'>
-          <h4>{project.name}</h4>
-          <p>{formatModifiedDate(project.dateModified)}</p>
+          <GridItemName>{project.name}</GridItemName>
+        </div>
+
+        <div className='grid-item-footer'>
+          <span className='delete hover-button' onClick={handleDelete}>
+            <img src='img/trash.svg' width='20px' alt='x' title='foo' />
+          </span>
+          <p>Modified {formatModifiedDate(project.dateModified)}</p>
         </div>
       </Link>
 
