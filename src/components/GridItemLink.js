@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import { displayModal } from '../state/store'
 import GridItemName from '../components/GridItemName'
 

@@ -152,14 +152,36 @@ const reducer = (state = defaultState, action) => {
       const { projectID, chapter, ordered } = payload
       const chapterListUpdated = { ...state.chapters[projectID] }
       chapterListUpdated[ordered ? 'ordered' : 'unordered'].push(chapter)
-      console.log(projectID);
-      console.log(chapter);
 
       return {
         ...state,
         chapters: {
           ...state.chapters,
           [projectID]: chapterListUpdated
+        },
+      }
+    }
+    case Types.SET_CHAPTER_NAME: {
+      const { projectID, chapterID, name } = payload
+      const chaptersForProject = state.chapters[projectID].ordered
+      const newOrdered = chaptersForProject.map(chapter => {
+        if (chapter.id === chapterID) {
+          return {
+            ...chapter,
+            title: name,
+          }
+        }
+        return chapter
+      })
+
+      return {
+        ...state,
+        chapters: {
+          ...state.chapters,
+          [projectID]: {
+            ...state.chapters[projectID],
+            ordered: newOrdered
+          }
         },
       }
     }
@@ -181,6 +203,7 @@ const reducer = (state = defaultState, action) => {
       const { projectID, chapterID } = payload
       const chaptersUpdated = { ...state.chapters[projectID] }
 
+      console.log(projectID);
       chaptersUpdated.ordered = chaptersUpdated.ordered.filter(c => c.id !== chapterID)
 
       return {

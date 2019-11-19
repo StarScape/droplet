@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { displayModal } from '../state/store'
 import { deleteProject, updateProjectName } from '../state/actions'
 import { formatModifiedDate } from '../utils/other'
 import GridItemLink from '../components/GridItemLink'

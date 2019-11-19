@@ -7,6 +7,7 @@ export const Types = {
   SET_PROJECT_NAME: "SET_PROJECT_NAME",
   DELETE_PROJECT: "DELETE_PROJECT",
   ADD_CHAPTER: "ADD_CHAPTER",
+  SET_CHAPTER_NAME: "SET_CHAPTER_NAME",
   REORDER_CHAPTERS: "REORDER_CHAPTERS",
   DELETE_CHAPTER: "DELETE_CHAPTER",
   SET_LOCATION: "SET_LOCATION",
@@ -57,14 +58,19 @@ export const addChapter = (projectID, chapter, ordered=true) => ({
   payload: { projectID, chapter, ordered },
 })
 
+export const setChapterName = (projectID, chapterID, name) => ({
+  type: Types.SET_CHAPTER_NAME,
+  payload: { projectID, chapterID, name },
+})
+
 export const reorderChapters = (projectID, reordered) => ({
   type: Types.REORDER_CHAPTERS,
   payload: { projectID, reordered },
 })
 
-export const deleteChapter = (projectName, id) => ({
+export const deleteChapter = (projectID, chapterID ) => ({
   type: Types.DELETE_CHAPTER,
-  payload: { projectName, id },
+  payload: { projectID, chapterID },
 })
 
 export const setLocation = (path, state) => ({
@@ -92,5 +98,5 @@ export const setModal = (modal) => ({
 })
 
 // Update the project last modified date with current date
-export const updateProjectModified = (projectName, date) =>
-  setProjectProperty(projectName, 'dateModified', Date.now())
+export const updateProjectModified = (projectID, date) =>
+  setProjectProperty(projectID, 'dateModified', Date.now())
