@@ -19,7 +19,8 @@ export default class GridItemName extends React.Component {
   }
 
   handleInputClick = (e) => {
-    if (!this.readOnly) {
+    if (!this.state.readOnly) {
+      console.log('readOnly');
       e.preventDefault()
     }
   }

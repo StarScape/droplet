@@ -11,6 +11,10 @@
     font-size: 20px;
   }
 
+  input[readonly] {
+    cursor: pointer;
+  }
+
   img {
     width: 15px;
   }
