@@ -1,8 +1,8 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 
-const selectChapter = (chapters, projectName, cid) =>
-  chapters[projectName].ordered.find(({ id }) => id === cid)
+const selectChapter = (chapters, projectID, cid) =>
+  chapters[projectID].ordered.find(({ id }) => id === cid)
 
 const RedirectEditor = ({ store, location }) => {
   const lastProject = location.state.project
@@ -10,8 +10,8 @@ const RedirectEditor = ({ store, location }) => {
 
   // Update with current version of project and chapter from store
   const { projects, chapters } = store.getState()
-  const project = projects[lastProject.name]
-  const chapter = selectChapter(chapters, project.name, lastChapter.id)
+  const project = projects[lastProject.id]
+  const chapter = selectChapter(chapters, project.id, lastChapter.id)
 
   return (
     <Redirect

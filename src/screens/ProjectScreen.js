@@ -1,6 +1,6 @@
 import React from 'react'
 import Sortable from 'react-sortablejs';
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { reorderChapters, updateProjectModified, setLocation } from '../state/actions'
 import AppScreen from '../components/AppScreen'
@@ -106,7 +106,6 @@ class ProjectScreen extends React.Component {
               />
             )}
           </Sortable>
-          <Link to='/dashboard'>Back</Link>
         </div>
       </AppScreen>
     )
