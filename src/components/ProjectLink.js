@@ -4,43 +4,24 @@ import { connect } from 'react-redux'
 import { displayModal } from '../state/store'
 import { deleteProject, updateProjectName } from '../state/actions'
 import { formatModifiedDate } from '../utils/other'
-import GridItemName from '../components/GridItemName'
+import GridItemLink from '../components/GridItemLink'
 
 import '../styles/Grid.scss'
 
 function ProjectLink({ projectID, project, deleteProject, updateName, children }) {
-  const handleDelete = () => {
-    displayModal({
-      title: 'Warning',
-      body: 'Are you sure you want to delete this project? Once you do, it cannot be recovered.',
-      onConfirm: () => {
-        deleteProject()
-      },
-      onCancel: () => {},
-    })
-  }
+  const footer = <p>Modified {formatModifiedDate(project.dateModified)}</p>
 
   return (
-    <div className='grid-item'>
-      <Link
-        className='grid-item-link'
-        to={{
-          pathname: '/project',
-          state: { project: project }
-        }}
-      >
-        <div className='grid-item-content'>
-          <GridItemName onChange={updateName}>{project.name}</GridItemName>
-        </div>
-      </Link>
-
-      <div className='grid-item-footer'>
-        <span className='delete hover-button' onClick={handleDelete}>
-          <img src='img/trash.svg' width='20px' alt='x' title='foo' />
-        </span>
-        <p>Modified {formatModifiedDate(project.dateModified)}</p>
-      </div>
-    </div>
+    <GridItemLink
+      to={{
+        pathname: '/project',
+        state: { project: project }
+      }}
+      name={project.name}
+      footer={footer}
+      onUpdateName={updateName}
+      onConfirmDelete={deleteProject}
+    />
   )
 }
 
