@@ -44,7 +44,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   const { project, chapter } = ownProps.location.state
   return {
     // Update the modified date each time on the project each time the file is changed
-    updateModified: () => dispatch(updateProjectModified(project.name)),
+    updateModified: () => dispatch(updateProjectModified(project.id)),
     updateLocation: () => dispatch(setLocation('editor', { project, chapter })),
   }
 }

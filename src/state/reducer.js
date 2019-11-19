@@ -7,11 +7,12 @@ const defaultState = {
   editorComponent: {},
 
   // Projects on dashboard
-  projects: [],
+  // Projects are indexed by their UUID
+  projects: {},
 
   // Chapters are structured like:
   // chapters: {
-  //   'Project Title': {
+  //   [project uuid]: {
   //     unordered: [
   //       {...},
   //       {...},
@@ -95,11 +96,13 @@ const reducer = (state = defaultState, action) => {
         ...state,
         projects: {
           ...state.projects,
-          [newProject.name]: newProject
+          [newProject.id]: {
+            ...newProject
+          }
         },
         chapters: {
           ...state.chapters,
-          [newProject.name]: {
+          [newProject.id]: {
             ordered: [],
             unordered: [],
           }
@@ -107,16 +110,29 @@ const reducer = (state = defaultState, action) => {
       }
     }
     case Types.SET_PROJECT_PROPERTY: {
-      const { projectName, prop, val } = payload
-      const projectUpdated = { ...state.projects[projectName] }
-
+      const { projectID, prop, val } = payload
+      const projectUpdated = { ...state.projects[projectID] }
       projectUpdated[prop] = val
 
       return {
         ...state,
         projects: {
           ...state.projects,
-          [projectName]: projectUpdated,
+          [projectID]: projectUpdated,
+        },
+      }
+    }
+    case Types.SET_PROJECT_NAME: {
+      const { projectID, newName } = payload
+
+      return {
+        ...state,
+        projects: {
+          ...state.projects,
+          [projectID]: {
+            ...state.projects[projectID],
+            name: newName
+          }
         },
       }
     }
@@ -133,47 +149,43 @@ const reducer = (state = defaultState, action) => {
       }
     }
     case Types.ADD_CHAPTER: {
-      const { projectName, chapter, ordered } = payload
-      const chapterListUpdated = { ...state.chapters[projectName] }
+      const { projectID, chapter, ordered } = payload
+      const chapterListUpdated = { ...state.chapters[projectID] }
       chapterListUpdated[ordered ? 'ordered' : 'unordered'].push(chapter)
 
       return {
         ...state,
         chapters: {
           ...state.chapters,
-          [projectName]: chapterListUpdated
+          [projectID]: chapterListUpdated
         },
       }
     }
     case Types.REORDER_CHAPTERS: {
-      const { projectName, reordered } = payload
+      const { projectID, reordered } = payload
 
       return {
         ...state,
         chapters: {
           ...state.chapters,
-          [projectName]: {
-            ...state.chapters[projectName],
+          [projectID]: {
+            ...state.chapters[projectID],
             ordered: reordered
           }
         }
       }
     }
     case Types.DELETE_CHAPTER: {
-      const { projectName, id } = payload
-      const chapterListUpdated = {...state.chapters[projectName]}
+      const { projectID, chapterID } = payload
+      const chaptersUpdated = { ...state.chapters[projectID] }
 
-      // const findfn = x => x.uuid === uuid
-      // const oindex = chapterListUpdated.ordered.findIndex(findfn)
-      // const uindex = chapterListUpdated.unordered.findIndex(findfn)
-
-      chapterListUpdated.ordered = chapterListUpdated.ordered.filter(c => c.id !== id)
+      chaptersUpdated.ordered = chaptersUpdated.ordered.filter(c => c.id !== chapterID)
 
       return {
         ...state,
         chapters: {
           ...state.chapters,
-          [projectName]: chapterListUpdated,
+          [projectID]: chaptersUpdated,
         },
       }
     }

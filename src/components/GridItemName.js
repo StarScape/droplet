@@ -15,7 +15,7 @@ export default class GridItemName extends React.Component {
 
   handleEdit = (e) => {
     e.preventDefault()
-    this.flipEditState()
+    this.changeEditState()
   }
 
   handleInputClick = (e) => {
@@ -26,7 +26,7 @@ export default class GridItemName extends React.Component {
 
   handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      this.flipEditState()
+      this.changeEditState()
     }
   }
 
@@ -36,7 +36,7 @@ export default class GridItemName extends React.Component {
     })
   }
 
-  flipEditState = () => {
+  changeEditState = () => {
     this.setState({
       readOnly: !this.state.readOnly
     })

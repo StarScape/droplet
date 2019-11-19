@@ -16,6 +16,8 @@
 - Project Page
   - Change appearance on hover
   - Allow rename project
+  - UUID for each project
+  - Change state.projects to array(or index it by uuid)
   - Add more info to each project.
 - Chapters Page
   - Change grid-create-area to modal

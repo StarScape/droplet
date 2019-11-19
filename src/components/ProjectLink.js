@@ -2,13 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { displayModal } from '../state/store'
-import { deleteProject } from '../state/actions'
+import { deleteProject, updateProjectName } from '../state/actions'
 import { formatModifiedDate } from '../utils/other'
 import GridItemName from '../components/GridItemName'
 
 import '../styles/Grid.scss'
 
-function ProjectLink({ project, deleteProject, children }) {
+function ProjectLink({ projectID, project, deleteProject, updateName, children }) {
   const handleDelete = () => {
     displayModal({
       title: 'Warning',
@@ -30,7 +30,7 @@ function ProjectLink({ project, deleteProject, children }) {
         }}
       >
         <div className='grid-item-content'>
-          <GridItemName onChange={(v) => console.log(v)}>{project.name}</GridItemName>
+          <GridItemName onChange={updateName}>{project.name}</GridItemName>
         </div>
       </Link>
 
@@ -44,8 +44,15 @@ function ProjectLink({ project, deleteProject, children }) {
   )
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  deleteProject: () => { dispatch(deleteProject(ownProps.project.name)) }
+const mapStateToProps = (state, ownProps) => ({
+  project: state.projects[ownProps.projectID],
 })
 
-export default connect(null, mapDispatchToProps)(ProjectLink)
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  deleteProject: () => dispatch(deleteProject(ownProps.projectID)),
+  updateName: newName => {
+    dispatch(updateProjectName(ownProps.projectID, newName))
+  },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectLink)

@@ -56,8 +56,8 @@ class NewChapter extends React.Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addChapter: (title) => {
-    dispatch(addChapter(ownProps.project.name, new Chapter(title)))
-    dispatch(updateProjectModified(ownProps.project.name))
+    dispatch(addChapter(ownProps.project.id, new Chapter(title)))
+    dispatch(updateProjectModified(ownProps.project.id))
   }
 })
 

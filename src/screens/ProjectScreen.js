@@ -114,15 +114,17 @@ class ProjectScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state, { match, location }) => ({
-  chapters: state.chapters[location.state.project.name]
-})
+const mapStateToProps = (state, { match, location }) => {
+  return {
+    chapters: state.chapters[location.state.project.id]
+  }
+}
 
 const mapDispatchToProps = (dispatch, { location }) => {
   const { project } = location.state
   return {
-    reorderChapters: reordered => dispatch(reorderChapters(project.name, reordered)),
-    updateModified: () => dispatch(updateProjectModified(project.name)),
+    reorderChapters: reordered => dispatch(reorderChapters(project.id, reordered)),
+    updateModified: () => dispatch(updateProjectModified(project.id)),
     updateLocation: () => dispatch(setLocation('project', location.state)),
   }
 }

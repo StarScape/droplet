@@ -4,6 +4,7 @@ export const Types = {
   SET_WORD_COUNT: "SET_WORD_COUNT",
   ADD_PROJECT: "ADD_PROJECT",
   SET_PROJECT_PROPERTY: "SET_PROJECT_PROPERTY",
+  SET_PROJECT_NAME: "SET_PROJECT_NAME",
   DELETE_PROJECT: "DELETE_PROJECT",
   ADD_CHAPTER: "ADD_CHAPTER",
   REORDER_CHAPTERS: "REORDER_CHAPTERS",
@@ -36,24 +37,29 @@ export const addProject = (project) => ({
   payload: project,
 })
 
-export const setProjectProperty = (projectName, prop, val) => ({
+export const setProjectProperty = (projectID, prop, val) => ({
   type: Types.SET_PROJECT_PROPERTY,
-  payload: { projectName, prop, val },
+  payload: { projectID, prop, val },
 })
 
-export const deleteProject = (projectName) => ({
+export const updateProjectName = (projectID, newName) => ({
+  type: Types.SET_PROJECT_NAME,
+  payload: { projectID, newName },
+})
+
+export const deleteProject = (projectID) => ({
   type: Types.DELETE_PROJECT,
-  payload: projectName,
+  payload: projectID,
 })
 
-export const addChapter = (projectName, chapter, ordered=true) => ({
+export const addChapter = (projectID, chapter, ordered=true) => ({
   type: Types.ADD_CHAPTER,
-  payload: { projectName, chapter, ordered },
+  payload: { projectID, chapter, ordered },
 })
 
-export const reorderChapters = (projectName, reordered) => ({
+export const reorderChapters = (projectID, reordered) => ({
   type: Types.REORDER_CHAPTERS,
-  payload: { projectName, reordered },
+  payload: { projectID, reordered },
 })
 
 export const deleteChapter = (projectName, id) => ({
