@@ -152,6 +152,8 @@ const reducer = (state = defaultState, action) => {
       const { projectID, chapter, ordered } = payload
       const chapterListUpdated = { ...state.chapters[projectID] }
       chapterListUpdated[ordered ? 'ordered' : 'unordered'].push(chapter)
+      console.log(projectID);
+      console.log(chapter);
 
       return {
         ...state,

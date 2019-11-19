@@ -3,44 +3,32 @@ import { Link } from 'react-router-dom'
 import { displayModal } from '../state/store'
 import { deleteChapter } from '../state/actions'
 import { connect } from 'react-redux'
+import GridItemLink from '../components/GridItemLink'
 
-import '../styles/Grid.scss'
+const deleteMessage = 'Are you sure you want to delete this chapter? Once you do, it cannot be recovered.'
 
 function ChapterLink(props) {
   const { chapter, project, number, deleteChapter, ...rest } = props
-  const handleDelete = () => {
-    displayModal({
-      title: 'Warning',
-      body: 'Are you sure you want to delete this chapter? Once you do, it cannot be recovered.',
-      onConfirm: () => {
-        deleteChapter()
-      },
-      onCancel: () => {},
-    })
-  }
 
+    // <div className='grid-item chapter-link' {...rest}>
+    // </div>
   return (
-    <div className='grid-item chapter-link' {...rest}>
-      <Link
-        key={`chapter-${number}`}
-        to={{
-          pathname: '/editor',
-          state: {
-            file: chapter.id,
-            project: project,
-            chapter: chapter,
-          }
-        }}>
-
-        <div className='grid-item-content'>
-          <h4>{chapter.title}</h4>
-        </div>
-      </Link>
-
-      <button onClick={handleDelete}>
-        Delete
-      </button>
-    </div>
+    <GridItemLink
+      to={{
+        pathname: '/editor',
+        state: {
+          file: chapter.id,
+          project: project,
+          chapter: chapter,
+        }
+      }}
+      className='chapter-link'
+      name={chapter.title}
+      deleteMessage={deleteMessage}
+      onUpdateName={() => console.log('ummm')}
+      onConfirmDelete={deleteChapter}
+      {...rest}
+    />
   )
 }
 

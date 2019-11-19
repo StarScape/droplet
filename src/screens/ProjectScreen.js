@@ -106,7 +106,6 @@ class ProjectScreen extends React.Component {
               />
             )}
           </Sortable>
-
           <Link to='/dashboard'>Back</Link>
         </div>
       </AppScreen>

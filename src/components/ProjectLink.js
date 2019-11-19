@@ -6,10 +6,12 @@ import { deleteProject, updateProjectName } from '../state/actions'
 import { formatModifiedDate } from '../utils/other'
 import GridItemLink from '../components/GridItemLink'
 
-import '../styles/Grid.scss'
+const deleteMessage = 'Are you sure you want to delete this project? Once you do, it cannot be recovered.'
 
 function ProjectLink({ projectID, project, deleteProject, updateName, children }) {
-  const footer = <p>Modified {formatModifiedDate(project.dateModified)}</p>
+  const footer = (
+    <p>Modified {formatModifiedDate(project.dateModified)}</p>
+  )
 
   return (
     <GridItemLink
@@ -18,6 +20,7 @@ function ProjectLink({ projectID, project, deleteProject, updateName, children }
         state: { project: project }
       }}
       name={project.name}
+      deleteMessage={deleteMessage}
       footer={footer}
       onUpdateName={updateName}
       onConfirmDelete={deleteProject}

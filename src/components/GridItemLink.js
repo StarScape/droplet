@@ -9,16 +9,19 @@ import '../styles/Grid.scss'
 function GridItemLink(props) {
   const {
     to,
+    className,
     name,
     footer,
+    deleteMessage,
     onUpdateName,
     onConfirmDelete,
+    ...rest
   } = props
 
   const handleDelete = () => {
     displayModal({
       title: 'Warning',
-      body: 'Are you sure you want to delete this project? Once you do, it cannot be recovered.',
+      body: deleteMessage,
       onConfirm: () => {
         onConfirmDelete()
       },
@@ -27,7 +30,7 @@ function GridItemLink(props) {
   }
 
   return (
-    <div className='grid-item'>
+    <div className={`grid-item ${className}`} {...rest}>
       <Link
         className='grid-item-link'
         to={to}
