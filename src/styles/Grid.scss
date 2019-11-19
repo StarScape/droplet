@@ -76,3 +76,27 @@
 .grid-create-error {
   color: red;
 }
+
+.grid-input {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 20px;
+}
+
+.grid-input[readonly] {
+  cursor: pointer;
+}
+
+.grid-new-item-form {
+  flex-direction: column;
+  justify-content: space-between;
+
+  .grid-input {
+    margin-bottom: 10px;
+  }
+
+  .blue-button {
+    margin: 5px;
+  }
+}

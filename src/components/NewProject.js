@@ -45,14 +45,34 @@ class NewProject extends React.Component {
     return (
       <div className='grid-item' onKeyDown={this.handleKeyDown}>
         <div className='grid-item-content'>
-          <form onSubmit={this.handleSave}>
-            <input autoFocus type='text' size='15' value={this.state.title} onChange={this.handleTitleChange} />
-            <input
-              type='button'
-              onClick={this.props.handleCancel}
-              value='Cancel'
-            />
-            <input type='submit' value='Save' />
+          <form
+            className='grid-new-item-form'
+            onSubmit={this.handleSave}
+          >
+            <div className='top-buttons'>
+              <input
+                className='grid-input'
+                autoFocus
+                type='text'
+                size='15'
+                placeholder='Enter name...'
+                value={this.state.title}
+                onChange={this.handleTitleChange}
+              />
+            </div>
+            <div className='buttom-buttons'>
+              <input
+                className='blue-button'
+                type='submit'
+                value='Save'
+              />
+              <input
+                className='blue-button'
+                type='button'
+                onClick={this.props.handleCancel}
+                value='Cancel'
+              />
+            </div>
           </form>
 
           {this.state.error ?

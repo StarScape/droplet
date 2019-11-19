@@ -36,3 +36,19 @@ textarea:focus, input:focus, button:focus, [contenteditable] {
 
 .App {
 }
+
+.blue-button {
+  background-color: var(--light-blue);
+  font-weight: bold;
+  color: rgba(64, 64, 64, 0.84);
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  float: right;
+  transition: color 0.5s;
+}
+
+.blue-button:hover {
+  cursor: pointer;
+  color: var(--text-col);
+}

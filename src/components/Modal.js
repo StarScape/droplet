@@ -22,7 +22,7 @@ function Modal(props) {
         </section>
         <section>
           <button
-            className='confirm'
+            className='confirm blue-button'
             onClick={() => {
               onConfirm()
               close()
@@ -32,7 +32,7 @@ function Modal(props) {
           </button>
           {onCancel ? (
             <button
-              className='cancel'
+              className='cancel blue-button'
               onClick={() => {
                 onCancel()
                 close()

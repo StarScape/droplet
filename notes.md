@@ -15,11 +15,10 @@
 
 - Project Page
   - Change appearance on hover
-  - UUID for each project
   - Make input scale dynamically and wrap
-  - Add more info to each project.
+  - Change project header to something other than grid-item-content, fix new project buttons 
 - Chapters Page
-  - Change grid-create-area to modal
+  - Change grid-create-error to modal
 - Image icons for buttons
 - Swanky save/saved icon
 - Splash screen
