@@ -98,7 +98,7 @@
   },
   "devDependencies": {
     "concurrently": "^4.1.1",
-    "electron": "^5.0.6",
+    "electron": "^7.2.4",
     "electron-builder": "^20.44.4",
     "electron-rebuild": "^1.8.5",
     "node-pandoc": "^0.3.0",
